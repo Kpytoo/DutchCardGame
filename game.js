@@ -844,6 +844,6 @@ const game_engine = () => {
     }
 };
 //Launch the game
-game_engine();
+// game_engine();
 
 
