@@ -48,6 +48,7 @@ const deck_of_cards = [
 const computer = {
     hand: [], //Actual hand of the computer
     known_hand: [], //Known hand by the computer, meaning only the cards that are revealed
+    visual_hand: [], //Visual hand which holds card <img>s of the respective card in the hand 
     num_of_cards: 0, //Number of cards
     dutch: false, //If dutch was called
 };
@@ -55,6 +56,7 @@ const computer = {
 //Create player object
 const player = {
     hand: [], //Actual hand of the player
+    visual_hand: [], //Visual hand which holds card <img>s of the respective card in the hand
     num_of_cards: 0, //Number of cards
     dutch: false, //If dutch was called
 };
@@ -83,6 +85,11 @@ const start_game = () => {
             let chosen_card_index = random_number(deck_of_cards.length); //Generate a random number to get a random card type
             let chosen_card = deck_of_cards[chosen_card_index]; //Retrieve a random card from the deck
 
+            const computer_hand_div = document.querySelector(".computer_hand"); //NEW
+            const player_hand_div = document.querySelector(".player_hand"); //NEW
+            let visual_card; //NEW
+            let card_name_visual; //NEW
+
             if(chosen_card[1].length != 0){ //If suits of the chosen card are still available in the deck
                 let card_type = chosen_card[0][0]; //Retrieve the card type
                 let card_suit_index = random_number(chosen_card[1].length); //Generate a random number to get a random card suit
@@ -91,19 +98,33 @@ const start_game = () => {
                 let card_ability = chosen_card[2][1]; //Retrieve the ability, if any, of the chosen card
                 chosen_card[1].splice(card_suit_index, 1); //Removes the card suit from the card 2d array
 
+
+                card_name_visual = ("CARDS\\" + card_suit + "_" + card_type + ".png"); //NEW
+                visual_card = document.createElement("img"); //NEW
+                visual_card.setAttribute("src", card_name_visual); //NEW 
+                visual_card.setAttribute("width", "100px"); //NEW
+                visual_card.setAttribute("height", "45%"); //NEW
+                
                 if(computer.num_of_cards < 4){ //Give the computer 4 random cards
                     computer.hand.push(new Card(card_type, card_suit, card_point, card_ability)); //Create a card object using the card type and card suit and add it to their hand
-                    if(computer.num_of_cards < 2){
-                        computer.known_hand.push(new Card(undefined, undefined, undefined, undefined)); //The first 2 cards, the computer doesn't know about them
+                    
+                    computer.visual_hand.push(visual_card); //NEW
+                    computer_hand_div.appendChild(visual_card); //NEW
+
+                    if(computer.num_of_cards == 1 || computer.num_of_cards == 3){
+                        computer.known_hand.push(new Card(card_type, card_suit, card_point, card_ability)); //The bottom 2 cards, (index 1 and 3) the computer DOES know about them
                     }
                     else{
-                        computer.known_hand.push(new Card(card_type, card_suit, card_point, card_ability)); //The last 2 cards, the computer DOES know about them
+                        computer.known_hand.push(new Card(undefined, undefined, undefined, undefined)); //The top 2 cards, (index 0 and 2) the computer doesn't know about them
                     }
                     computer.num_of_cards++; //Increment the number of cards in the computer's hand
                 }
                 else if(player.num_of_cards < 4){ //Give the player 4 random cards
                     player.hand.push(new Card(card_type, card_suit, card_point, card_ability)); //Create a card object using the card type and card suit and add it to their hand
                     player.num_of_cards++; //Increment the number of cards in the player's hand
+
+                    player.visual_hand.push(visual_card); //NEW
+                    player_hand_div.appendChild(visual_card); //NEW
                 }
             }
             else { //If there are no more suits of the random card type (all suits of that card were drawn)
@@ -114,13 +135,13 @@ const start_game = () => {
 
     //Display starting hand to player (reveals only 2 cards)
     for(let i = 0; i < player.num_of_cards; i++){
-        if(i < 2){
-            console.log("-----\n|CARD "+ (i+1) +"|\n-----");
+        if(i == 1 || i == 3){
+            console.log("-----\n|"+player.hand[i].card_type+"|\n|"+player.hand[i].card_suit+"|\n-----\n"+
+            "Points: "+player.hand[i].card_point+"\n"+
+            "Ability: "+player.hand[i].card_ability); 
         }
         else{
-            console.log("-----\n|"+player.hand[i].card_type+"|\n|"+player.hand[i].card_suit+"|\n-----\n"+
-                        "Points: "+player.hand[i].card_point+"\n"+
-                        "Ability: "+player.hand[i].card_ability); 
+            console.log("-----\n|CARD "+ (i+1) +"|\n-----");
         }
     }
 };
@@ -159,9 +180,19 @@ const display_full_hand = (computer, player, pile) => {
 //This function is the game loop
 const game_engine = () => {
     start_game(); //Starts the game by giving each player 4 cards
+    let pile = new Card(undefined, undefined, undefined, undefined);
+    display_full_hand(computer, player, pile);
+
+    //Implement function that allows the player to see the two bottom cards, then the game starts. (Do it at the end)
+
     
 };
 
 //Launch the game
 game_engine();
+
+
+//*************TESTING AREA
+
+
 
