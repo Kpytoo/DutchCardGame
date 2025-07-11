@@ -574,12 +574,6 @@ const game_engine = () => {
     // display_hidden_hand(computer, player, pile); //Display the computer's and player's hands, cards facing down
     
 
-    //STUFF TO DO
-    //
-    //-Figure out the gameplay (draw, play a card, implement each card ability, 
-    // call dutch (auto dutch), maybe reshuffle if all cards are gone from the deck?)
-    // -Play opponent's card/cards (after drawing OR before drawing)
-    //
     let dutch_called = false; //Keep track if someone has called "Dutch"
     let player_turn = true; //Keep track if player's turn
     let player_has_drawn = false; //Keep track if player has drawn during their turn

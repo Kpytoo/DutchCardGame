@@ -5,17 +5,26 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <!-- <script src="game.js"></script> -->
+    <script src="game_utils.js" defer></script>
+    <script src="game_functions.js" defer></script>
     <script src="game_tryout.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
     <div class="table">
-        <div class="computer_hand"></div>
-        <div class="middle_board">
-            <div class="deck"><span>deck</span></div>
-            <div class="pile"><span>pile</span></div>
+        <div class="computer_hand">
         </div>
-        <div class="player_hand"></div>
+        <div class="middle_board">
+            <div class="deck">
+                <span>deck</span>
+                <span class="display_number_of_cards_in_deck">Cards: </span>
+            </div>
+            <div class="pile">
+                <span>pile</span>
+            </div>
+        </div>
+        <div class="player_hand">
+        </div>
     </div>
 </body>
 </html>
