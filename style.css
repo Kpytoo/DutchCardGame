@@ -5,9 +5,11 @@
 body {
     display:flex;
     justify-content: center;
+    /* filter: blur(8px); */
 }
 
 .table {
+    position:relative;
     flex: 0 0 auto;
     border-radius: 5px;
     border-style: solid;
@@ -19,6 +21,55 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+.table > .container_player_card_action_prompt {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 37%;
+    right: 5%;
+    display: none;
+    border-width: 0;
+}
+
+.player_card_action_prompt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player_card_action_prompt > img {
+    animation-name: draw_card_from_deck;
+    animation-duration: 3s;
+    animation-timing-function: ease;
+}
+
+.container_button {
+    display: flex;
+    flex-direction: column;
+    /* border-color: black;
+    border-style: solid; */
+    width: 30%;
+    height: 100px;
+    gap: 13%;
+    justify-content: center;
+}
+
+.container_button > button {
+    width: 95%;
+    height: 35px;
+    font-size: 1.25rem;
+}
+
+button.play {
+    background-color: rgb(96, 255, 96);
+    border-color: rgb(33, 255, 33);
+}
+
+button.switch {
+    background-color: rgb(255, 184, 77);
+    border-color: rgb(255, 153, 0);
 }
 
 .table > div, .middle_board > div {
@@ -129,4 +180,14 @@ div.pile {
     border-radius: 2px;
     border-style: solid;
     cursor: pointer;
+}
+
+@keyframes draw_card_from_deck {
+    from{
+        transform: translateX(-500px);
+    }
+    
+    to{
+        transform: translateX(0px);
+    }
 }

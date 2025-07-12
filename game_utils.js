@@ -61,6 +61,9 @@ const player = {
     dutch: false, //If dutch was called
 };
 
+let visual_card; //NEW
+let card_name_visual; //NEW
+
 const computer_hand_div = document.querySelector(".computer_hand"); //Where we are adding/removing visual cards
 const player_hand_div = document.querySelector(".player_hand"); //Where we are adding/removing visual cards
 const deck_div = document.querySelector(".deck");
@@ -70,16 +73,5 @@ const display_number_of_cards_in_deck = document.querySelector("span.display_num
 const deck_visual_card = document.createElement("img");
 deck_visual_card.setAttribute("src", "CARDS\\back_side_.png");
 
-
-
-//<---- Event listeners ---->
-
-//**Drawing from the deck**
-deck_div.addEventListener("click", (e)=>{
-    if(num_of_cards_in_deck() == 46){
-        alert("Nuh uh");
-    }
-    else{
-        alert(num_of_cards_in_deck());
-    }
-});
+const container_player_card_action_prompt = document.querySelector(".container_player_card_action_prompt");
+const player_card_action_prompt = document.querySelector(".player_card_action_prompt");

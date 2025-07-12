@@ -52,9 +52,6 @@ const start_game = () => {
             let chosen_card_index = random_number(deck_of_cards.length); //Generate a random number to get a random card type
             let chosen_card = deck_of_cards[chosen_card_index]; //Retrieve a random card from the deck
 
-            let visual_card; //NEW
-            let card_name_visual; //NEW
-
             if(chosen_card[1].length != 0){ //If suits of the chosen card are still available in the deck
                 let card_type = chosen_card[0][0]; //Retrieve the card type
                 let card_suit_index = random_number(chosen_card[1].length); //Generate a random number to get a random card suit

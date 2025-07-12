@@ -14,9 +14,18 @@ const game_engine = () => {
     
 
     //Player turn
-    
-    let drawn_card = new Card (); //Create a new card object that will be assigned the random drawn card
-    draw_card(drawn_card); //Draw a random card and assign to drawn_card
+    //**Drawing from the deck**
+    deck_div.addEventListener("click", (e)=>{
+        let drawn_card = new Card (); //Create a new card object that will be assigned the random drawn card
+        draw_card(drawn_card);
+        console.log(drawn_card);
+        visual_card = document.createElement("img");
+        visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+        container_player_card_action_prompt.style.display = "initial";
+        player_card_action_prompt.appendChild(visual_card);
+    });
+    // let drawn_card = new Card (); //Create a new card object that will be assigned the random drawn card
+    // draw_card(drawn_card); //Draw a random card and assign to drawn_card
 
 
 };
