@@ -41,8 +41,8 @@ body {
 
 .player_card_action_prompt > img {
     animation-name: draw_card_from_deck;
-    animation-duration: 3s;
-    animation-timing-function: ease;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
 }
 
 .container_button {
@@ -162,6 +162,11 @@ div.pile {
     flex-wrap: wrap;
     align-content: center;
     gap: 1%;
+    /* background-color: rgba(255, 221, 0, 0); */
+    animation-name: none;
+    animation-timing-function: linear;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
 }
 
 .player_hand > img, .computer_hand > img { /*Cards*/
@@ -184,10 +189,37 @@ div.pile {
 
 @keyframes draw_card_from_deck {
     from{
-        transform: translateX(-500px);
+        transform: translateX(-500px) rotate(0deg);
     }
     
     to{
-        transform: translateX(0px);
+        transform: translateX(0px) rotate(360deg);
+    }
+}
+
+@keyframes user_flashing_turn {
+    0% {
+        background-color: rgba(255, 221, 0, 0);
+    }
+    20% {
+        background-color: rgba(255, 221, 0, 0.1);
+    }
+
+    40% {
+        background-color: rgba(255, 221, 0, 0.2);
+    }
+    50%{
+        background-color: rgba(255, 221, 0, 0.25);
+    }
+    60%{
+        background-color: rgba(255, 221, 0, 0.2);
+    }
+
+    80%{
+        background-color: rgba(255, 221, 0, 0.1);
+    }
+
+    100%{
+        background-color: rgba(255, 221, 0, 0);
     }
 }
