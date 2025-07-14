@@ -139,3 +139,253 @@ const draw_card = (drawn_card) => {
         alert("Deck is empty! Game finished. Reveal your cards!");
     }
 };
+
+//Function that plays a card by placing it on the pile and using its ability
+// played_by_opp (bool val) --> if it was played by the opponent, if yes, don't use the abilities
+const play_card_on_pile = (user, card, pile, played_by_opp) => {
+    //Switch the pile card with the played card
+    // alert(card.card_type + " of " + card.card_suit + " was played!");
+    pile.card_type = card.card_type;
+    pile.card_suit = card.card_suit;
+    pile.card_point = card.card_point;
+    pile.card_ability = card.card_ability;
+
+    // if(played_by_opp != true){ //If the opponent didn't play your card, or vice versa
+    //     if(user == player){ //If the user is playing the card.
+    //         if(card.card_type == "seven"){ //If the player is playing a seven.
+    //             if(!(user.num_of_cards == 0)){ //Check if user's hand isn't empty
+    //                 while(true){ //Make sure the user is entering a valid number
+    //                     let peek_card_number = +String(prompt("You've played a seven!\n----- Choose which card you would like to take a peek -----\n"+
+    //                                                 "(Enter the card number)\n"));
+    //                     if(Number.isNaN(peek_card_number)){ //Check if user entered a number
+    //                         alert("Please enter a number!");
+    //                     }
+    //                     else if(peek_card_number > user.hand.length){ //Check if user entered a number above the total of their hand
+    //                         alert("You only have "+user.hand.length+" card(s), "+peek_card_number+" is too high!");
+    //                     }
+    //                     else if(peek_card_number < 1){ //Check if user entered a number below 1
+    //                         alert("Please choose a number above 0! (There's no CARD "+peek_card_number+")");
+    //                     }
+    //                     else{ //If the user enters a valid number
+    //                         let peek_card = user.hand[peek_card_number-1] //Retrieve the card the user wants to look at
+    //                         alert("Card "+ peek_card_number +" is a:\n"+
+    //                             "-----\n|"+peek_card.card_type+"|\n|"+peek_card.card_suit+"|\n-----\n"+
+    //                             "Points: "+peek_card.card_point+"\n"+
+    //                             "Ability: "+peek_card.card_ability+"\n")
+    //                         break;
+    //                     }    
+    //                 }    
+    //             }
+    //             else{
+    //                 alert("You've played a seven!\n Can't peek if you have no more cards in hand!");
+    //             }
+    //         }
+    //         else if(card.card_type == "eight"){ //If the player is playing an eight.
+    //             if(!(computer.num_of_cards == 0)){ //Check if computer's hand isn't empty
+    //                 while(true){ //Make sure the user is entering a valid number
+    //                     let peek_card_number = +String(prompt("You've played an eight!\n----- Choose which card you would like to take a peek from the computer's hand -----\n"+
+    //                                                 "(Enter the card number)\n"));
+    //                     if(Number.isNaN(peek_card_number)){ //Check if user entered a number
+    //                         alert("Please enter a number!");
+    //                     }
+    //                     else if(peek_card_number > computer.hand.length){ //Check if user entered a number above the total of the computer's hand
+    //                         alert("The computer only has "+computer.hand.length+" card(s), "+peek_card_number+" is too high!");
+    //                     }
+    //                     else if(peek_card_number < 1){ //Check if user entered a number below 1
+    //                         alert("Please choose a number above 0! (There's no CARD "+peek_card_number+")");
+    //                     }
+    //                     else{ //If the user enters a valid number
+    //                         let peek_card = computer.hand[peek_card_number-1] //Retrieve the card the user wants to look at
+    //                         alert("Card "+ peek_card_number +" is a:\n"+
+    //                             "-----\n|"+peek_card.card_type+"|\n|"+peek_card.card_suit+"|\n-----\n"+
+    //                             "Points: "+peek_card.card_point+"\n"+
+    //                             "Ability: "+peek_card.card_ability+"\n")
+    //                         break;
+    //                     }    
+    //                 }    
+    //             }
+    //             else{
+    //                 alert("You've played an eight!\n Can't peek if the computer has no more cards in its hand!");
+    //             }
+    //         }
+    //         else if(card.card_type == "ten"){ //If the player is playing a ten.
+    //             if(!(computer.num_of_cards == 0)){ //Check if computer's hand isn't empty
+    //                 if(!(player.num_of_cards == 0)){ //Also check if the player's hand isn't empty
+    //                     while(true){ //Make sure the user is entering a valid number
+    //                         let player_choice = +String(prompt("You've played a ten!\n----- Would you like to switch a card with the computer? -----\n"+
+    //                                                     "(Enter a number)\n"+
+    //                                                     "1. Yes\n"+
+    //                                                     "2. No"));
+    //                         if(Number.isNaN(player_choice)){ //Check if user entered a number
+    //                             alert("Please enter a number!");
+    //                         }
+    //                         else if(player_choice == 1){ //If the player decides to switch a card with the computer.
+    //                             while(true){ //Make sure the user is entering a valid number
+    //                                 let user_card_number = +String(prompt("----- Which card would you like to switch from your hand? -----\n"+
+    //                                                                     "(Enter the card number)\n"));
+    //                                 if(Number.isNaN(user_card_number)){ //Check if user entered a number
+    //                                     alert("Please enter a number!");
+    //                                 }
+    //                                 else if(user_card_number > user.hand.length){ //Check if user entered a number above the total of their hand
+    //                                     alert("You only have "+user.hand.length+" cards, "+user_card_number+" is too high!");
+    //                                 }
+    //                                 else if(user_card_number < 1){ //Check if user entered a number below 1
+    //                                     alert("Please choose a number above 0! (There's no CARD "+user_card_number+")");
+    //                                 }
+    //                                 else{ //If the user enters a valid number
+    //                                     while(true){ //Make sure the user is entering a valid number
+    //                                         let computer_card_number = +String(prompt("----- Which card would you like to switch with the computer? -----\n"+
+    //                                                                             "(Enter the card number)\n"));
+    //                                         if(Number.isNaN(computer_card_number)){ //Check if user entered a number
+    //                                             alert("Please enter a number!");
+    //                                         }
+    //                                         else if(computer_card_number > computer.hand.length){ //Check if user entered a number above the total of the computer's hand
+    //                                             alert("The computer has "+computer.hand.length+" cards, "+computer_card_number+" is too high!");
+    //                                         }
+    //                                         else if(computer_card_number < 1){ //Check if user entered a number below 1
+    //                                             alert("Please choose a number above 0! (There's no CARD "+computer_card_number+")");
+    //                                         }
+    //                                         else{ //If the user enters a valid number
+    //                                             alert("Switching.....");
+    //                                             alert("You've switched a "+ player.hand[user_card_number-1].card_type + " " + player.hand[user_card_number-1].card_suit
+    //                                                 +" with a "+ computer.hand[computer_card_number-1].card_type + " " + computer.hand[computer_card_number-1].card_suit);
+
+    //                                             let placeholder_card = new Card(player.hand[user_card_number-1].card_type, //Make a place holder card during the switch.
+    //                                                                             player.hand[user_card_number-1].card_suit,
+    //                                                                             player.hand[user_card_number-1].card_point,
+    //                                                                             player.hand[user_card_number-1].card_ability);
+                                                
+    //                                             //Assign to the player's card the computer's card
+    //                                             player.hand[user_card_number-1].card_type = computer.hand[computer_card_number-1].card_type;
+    //                                             player.hand[user_card_number-1].card_suit = computer.hand[computer_card_number-1].card_suit;
+    //                                             player.hand[user_card_number-1].card_point = computer.hand[computer_card_number-1].card_point;
+    //                                             player.hand[user_card_number-1].card_ability = computer.hand[computer_card_number-1].card_ability;
+
+    //                                             //Assign to the computer's card the placeholder_card (player card)
+    //                                             //**For the known hand, we assign undefined because the computer won't know its new changed card.
+    //                                             computer.hand[computer_card_number-1].card_type = placeholder_card.card_type;
+    //                                             computer.hand[computer_card_number-1].card_suit = placeholder_card.card_suit;
+    //                                             computer.hand[computer_card_number-1].card_point = placeholder_card.card_point;
+    //                                             computer.hand[computer_card_number-1].card_ability = placeholder_card.card_ability;
+    //                                             computer.known_hand[computer_card_number-1].card_type = undefined;
+    //                                             computer.known_hand[computer_card_number-1].card_suit = undefined;
+    //                                             computer.known_hand[computer_card_number-1].card_point = undefined;
+    //                                             computer.known_hand[computer_card_number-1].card_ability = undefined;
+    //                                             break;
+    //                                         }
+    //                                     }
+    //                                     break;
+    //                                 }
+    //                             }
+    //                             break;
+    //                         }
+    //                         else if(player_choice == 2){ //Do nothing if the player doesn't want to switch.
+    //                             break;
+    //                         }
+    //                         else{ //Ask the player to enter a proper number (1 or 2).
+    //                             alert("Please enter a proper action!");
+    //                         }    
+    //                     }
+    //                 }
+    //                 else{ //Can't switch cards after playing a ten if the player has no cards in hand.
+    //                     alert("You've played a ten!\n Can't switch cards if you don't have anymore cards in your hand!")
+    //                 }   
+    //             }
+    //             else{ //Can't switch cards after playing a ten if the computer has no cards in hand.
+    //                 alert("You've played a ten!\n Can't switch cards if the computer has no more cards in its hand!");
+    //             }
+    //         }
+    //         else{} //Else do nothing
+    //     }
+    //     else{ //If the computer is playing the card.
+    //         if(card.card_type == "seven"){ //If the computer is playing a seven.
+    //             alert("seven was used by the computer");
+    //             if(computer.num_of_cards != 0){//If the computer's hand isn't empty
+    //                 for(let card_index = 0; card_index < computer.num_of_cards; card_index++){ //Check for cards that are unknown to the comp in the known hand (values are undefined)
+    //                     if(computer.known_hand[card_index].card_type == undefined){ //If found, make the card known to the card computer
+    //                         alert(card_index + " " + computer.known_hand[card_index].card_type + " " + computer.known_hand[card_index].card_suit);
+    //                         computer.known_hand[card_index].card_type = computer.hand[card_index].card_type;
+    //                         computer.known_hand[card_index].card_suit = computer.hand[card_index].card_suit;
+    //                         computer.known_hand[card_index].card_point = computer.hand[card_index].card_point;
+    //                         computer.known_hand[card_index].card_ability = computer.hand[card_index].card_ability;
+    //                         alert(card_index + " " + computer.known_hand[card_index].card_type + " " + computer.known_hand[card_index].card_suit);
+    //                         break; //Break out of the for loop
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         else if(card.card_type == "eight"){ //If the computer is playing an eight, it doesn't do anything --- dumb computer :(
+    //             alert("eight was used by the computer, nothing happens :(");
+                
+    //         }
+    //         else if(card.card_type == "ten"){ //If the computer is playing a ten.
+    //             alert("ten was used by the computer");
+    //             if(!(player.num_of_cards == 0)){ //Check if the player's hand isn't empty
+    //                 if(!(computer.num_of_cards == 0)){ //also check if computer's hand isn't empty
+    //                     let player_card_index = random_number(player.num_of_cards); //Get a random index based on the player's hand
+    //                     let computer_card_index = random_number(computer.num_of_cards); //Get a random index based on the computer's hand
+
+    //                     let placeholder_card = new Card(player.hand[player_card_index].card_type, //Make a place holder card during the switch.
+    //                                                     player.hand[player_card_index].card_suit,
+    //                                                     player.hand[player_card_index].card_point,
+    //                                                     player.hand[player_card_index].card_ability);
+                                                
+    //                     //Assign to the player's card the computer's card
+    //                     player.hand[player_card_index].card_type = computer.hand[computer_card_index].card_type;
+    //                     player.hand[player_card_index].card_suit = computer.hand[computer_card_index].card_suit;
+    //                     player.hand[player_card_index].card_point = computer.hand[computer_card_index].card_point;
+    //                     player.hand[player_card_index].card_ability = computer.hand[computer_card_index].card_ability;
+
+    //                     //Assign to the computer's card the placeholder_card (player card)
+    //                     //**For the known hand, we assign undefined because the computer won't know its new changed card.
+    //                     computer.hand[computer_card_index].card_type = placeholder_card.card_type;
+    //                     computer.hand[computer_card_index].card_suit = placeholder_card.card_suit;
+    //                     computer.hand[computer_card_index].card_point = placeholder_card.card_point;
+    //                     computer.hand[computer_card_index].card_ability = placeholder_card.card_ability;
+    //                     computer.known_hand[computer_card_index].card_type = undefined;
+    //                     computer.known_hand[computer_card_index].card_suit = undefined;
+    //                     computer.known_hand[computer_card_index].card_point = undefined;
+    //                     computer.known_hand[computer_card_index].card_ability = undefined;
+    //                     alert("The computer has switched your Card "+(player_card_index+1)+" with one of its own!");
+    //                 }
+    //             }
+    //         }
+    //         else{} //Else do nothing
+    //     }
+    // }
+};
+
+//Function that switches one card from the user's hand with the drawn card, and plays the switched card
+const switch_card = (user, drawn_card, switched_card_index, pile) => {
+    if(user == computer){ //If the computer calls the function
+        alert("Computer is switching!");
+        let random_card = random_number(user.hand.length);
+        let switched_card = new Card(user.hand[random_card].card_type, //Get the card from the user's hand that will be switched
+                                     user.hand[random_card].card_suit,
+                                     user.hand[random_card].card_point,
+                                     user.hand[random_card].card_ability);
+        //Assign the drawn card to the actual hand  
+        user.hand[random_card].card_type = drawn_card.card_type;
+        user.hand[random_card].card_suit = drawn_card.card_suit;
+        user.hand[random_card].card_point = drawn_card.card_point;
+        user.hand[random_card].card_ability = drawn_card.card_ability;
+        //Assign the drawn card to the known hand
+        user.known_hand[random_card].card_type = drawn_card.card_type;
+        user.known_hand[random_card].card_suit = drawn_card.card_suit;
+        user.known_hand[random_card].card_point = drawn_card.card_point;
+        user.known_hand[random_card].card_ability = drawn_card.card_ability;
+        play_card_on_pile(user, switched_card, pile, false); //Play the switched card   
+    }
+    else{ //If user calls the function
+        let card_number;
+        let switched_card = new Card(user.hand[switched_card_index].card_type, //Get the card from the user's hand that will be switched
+                                     user.hand[switched_card_index].card_suit,
+                                     user.hand[switched_card_index].card_point,
+                                     user.hand[switched_card_index].card_ability);   
+        user.hand[switched_card_index].card_type = drawn_card.card_type;
+        user.hand[switched_card_index].card_suit = drawn_card.card_suit;
+        user.hand[switched_card_index].card_point = drawn_card.card_point;
+        user.hand[switched_card_index].card_ability = drawn_card.card_ability;
+        play_card_on_pile(user, switched_card, pile, false); //Play the switched card
+    }
+};

@@ -77,6 +77,8 @@ button.switch {
     border-style: solid;
 }
 
+/* <<<<<<<<<<<<<<<< Computer Board >>>>>>>>>>>>>>>> */
+
 .computer_hand {
     width: 100%;
     height: 35%;
@@ -87,6 +89,10 @@ button.switch {
     align-content: center;
     gap: 1%;
 }
+
+/* <<<<<<<<<<<<<<<< Computer Board - END >>>>>>>>>>>>>>>> */
+
+/* <<<<<<<<<<<<<<<< Middle Board >>>>>>>>>>>>>>>> */
 
 .middle_board {
     width: 100%;
@@ -152,6 +158,18 @@ div.pile {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+div.pile > img {
+    position: absolute;
+    width: 100px;
+    height: 200px;
+    animation-name: none;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+}
+
+/* <<<<<<<<<<<<<<<< Middle Board - END >>>>>>>>>>>>>>>> */
+
+/* <<<<<<<<<<<<<<<< Player Board >>>>>>>>>>>>>>>> */
 
 .player_hand {
     width: 100%;
@@ -176,6 +194,14 @@ div.pile {
     transition-property: transform;
     transition-duration: 0.4s;
     transition-timing-function: ease;
+
+}
+
+.player_hand > img {
+    animation-name: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;    
 }
 
 .player_hand > img:hover, .computer_hand > img:hover { /*Cards transitions*/
@@ -186,6 +212,10 @@ div.pile {
     border-style: solid;
     cursor: pointer;
 }
+
+/* <<<<<<<<<<<<<<<< Player Board - END >>>>>>>>>>>>>>>> */
+
+/* <<<<<<<<<<<<<<<< Animations >>>>>>>>>>>>>>>> */
 
 @keyframes draw_card_from_deck {
     from{
@@ -202,24 +232,48 @@ div.pile {
         background-color: rgba(255, 221, 0, 0);
     }
     20% {
-        background-color: rgba(255, 221, 0, 0.1);
+        background-color: rgba(255, 221, 0, 0.15);
     }
 
     40% {
-        background-color: rgba(255, 221, 0, 0.2);
+        background-color: rgba(255, 221, 0, 0.3);
     }
     50%{
-        background-color: rgba(255, 221, 0, 0.25);
+        background-color: rgba(255, 221, 0, 0.4);
     }
     60%{
-        background-color: rgba(255, 221, 0, 0.2);
+        background-color: rgba(255, 221, 0, 0.3);
     }
 
     80%{
-        background-color: rgba(255, 221, 0, 0.1);
+        background-color: rgba(255, 221, 0, 0.15);
     }
 
     100%{
         background-color: rgba(255, 221, 0, 0);
     }
 }
+
+@keyframes player_playing_card {
+    from{
+        transform: translateY(200px) skew(15deg,15deg) rotate(90deg);
+    }
+    
+    to{
+        transform: translateY(0px);
+    }   
+}
+
+@keyframes switching_shaking_cards {
+    0%{
+        transform: rotate(-5deg);
+    }
+    50%{
+        transform: rotate(5deg);
+    }
+    100%{
+        transform: rotate(-5deg);
+    }
+}
+
+/* <<<<<<<<<<<<<<<< Animations - END >>>>>>>>>>>>>>>> */
