@@ -23,7 +23,7 @@ body {
     justify-content: space-evenly;
 }
 
-.table > .container_player_card_action_prompt {
+.table > .container_player_card_action_prompt, .table > .container_computer_card_action{
     position: absolute;
     width: 300px;
     height: 300px;
@@ -33,13 +33,13 @@ body {
     border-width: 0;
 }
 
-.player_card_action_prompt {
+.player_card_action_prompt, .computer_card_action {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.player_card_action_prompt > img {
+.player_card_action_prompt > img, .computer_card_action > img {
     animation-name: draw_card_from_deck;
     animation-duration: 1s;
     animation-timing-function: ease-out;
@@ -72,6 +72,8 @@ button.switch {
     border-color: rgb(255, 153, 0);
 }
 
+
+
 .table > div, .middle_board > div {
     border-width: 5px;
     border-style: solid;
@@ -102,6 +104,7 @@ button.switch {
     align-items: center;
     justify-content: space-evenly;
     padding-right: 32%;
+    /* position:relative; */
 }
 
 div.deck {
@@ -144,6 +147,7 @@ div.deck > span.display_number_of_cards_in_deck {
     border-radius: 50px;
     background-color: rgba(240, 248, 255, 0.662);
     font-size: 1.15rem;
+    /* pointer-events: none; */
 }
 
 div.pile {
@@ -165,6 +169,23 @@ div.pile > img {
     animation-name: none;
     animation-duration: 1s;
     animation-timing-function: ease;
+}
+
+button.button_end_turn {
+    position: absolute;
+    top: 650px;
+    left: 190px;
+    width: 100px;
+    height: 60px;
+    background-color: rgb(238, 165, 61);
+    border-radius: 1px;
+    border-color: rgb(208, 126, 10);
+    border-width: 3px;
+    display: none;
+    animation-name: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
 }
 
 /* <<<<<<<<<<<<<<<< Middle Board - END >>>>>>>>>>>>>>>> */
@@ -276,4 +297,38 @@ div.pile > img {
     }
 }
 
+@keyframes button_end_turn_pop_in {
+    0%{
+        transform: scale(0);
+    }
+    80%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@keyframes button_end_turn_pop_out {
+    0%{
+        transform: scale(1);
+    }
+    80%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(0);
+        display: none;
+    }
+}
+
+@keyframes computer_playing_card {
+    from{
+        transform: translateY(-200px) skew(15deg,15deg);
+    }
+    
+    to{
+        transform: translateY(0px) rotate(180deg);
+    }   
+}
 /* <<<<<<<<<<<<<<<< Animations - END >>>>>>>>>>>>>>>> */

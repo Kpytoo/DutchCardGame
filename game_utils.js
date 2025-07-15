@@ -68,6 +68,7 @@ const computer_hand_div = document.querySelector(".computer_hand"); //Where we a
 const player_hand_div = document.querySelector(".player_hand"); //Where we are adding/removing visual cards
 const deck_div = document.querySelector(".deck");
 const pile_div = document.querySelector(".pile");
+const button_end_turn = document.querySelector(".button_end_turn");
 
 const display_number_of_cards_in_deck = document.querySelector("span.display_number_of_cards_in_deck");
 
@@ -76,3 +77,5 @@ deck_visual_card.setAttribute("src", "CARDS\\back_side_.png");
 
 const container_player_card_action_prompt = document.querySelector(".container_player_card_action_prompt");
 const player_card_action_prompt = document.querySelector(".player_card_action_prompt");
+const container_computer_card_action = document.querySelector(".container_computer_card_action");
+const computer_card_action = document.querySelector(".computer_card_action");

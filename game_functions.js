@@ -358,7 +358,7 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
 //Function that switches one card from the user's hand with the drawn card, and plays the switched card
 const switch_card = (user, drawn_card, switched_card_index, pile) => {
     if(user == computer){ //If the computer calls the function
-        alert("Computer is switching!");
+        // alert("Computer is switching!");
         let random_card = random_number(user.hand.length);
         let switched_card = new Card(user.hand[random_card].card_type, //Get the card from the user's hand that will be switched
                                      user.hand[random_card].card_suit,
@@ -377,7 +377,6 @@ const switch_card = (user, drawn_card, switched_card_index, pile) => {
         play_card_on_pile(user, switched_card, pile, false); //Play the switched card   
     }
     else{ //If user calls the function
-        let card_number;
         let switched_card = new Card(user.hand[switched_card_index].card_type, //Get the card from the user's hand that will be switched
                                      user.hand[switched_card_index].card_suit,
                                      user.hand[switched_card_index].card_point,
@@ -388,4 +387,119 @@ const switch_card = (user, drawn_card, switched_card_index, pile) => {
         user.hand[switched_card_index].card_ability = drawn_card.card_ability;
         play_card_on_pile(user, switched_card, pile, false); //Play the switched card
     }
+};
+
+//Computer logic
+//0. Computer has a 2% chance of randomly calling Dutch whenever it is its turn.
+//      CHECKING: Check if computer's hand is empty. (Automatic Dutch)
+//1. Computer will check if it can play anything from its KNOWN HAND, looking at the pile card.
+//      CHECKING: Check if computer's hand is empty. (Automatic Dutch)
+//2. Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
+//3. Computer will check again if it can play, reference (1.).
+//4. Computer will end its turn.
+let computer_playing_turn = () =>{
+    //Every turn, the computer has 2% chance of randomly calling Dutch, except if the player has already called Dutch
+
+    // if(!player.dutch){ //Check if player hasn't called Dutch
+    //     if(random_number(100) < 2){ //Get a random number between 0-99, if the number is between 0-4, computer calls Dutch
+    //         alert("Computer has called Dutch!");
+    //         computer.dutch = true; //Notate that the computer has called Dutch
+    //         computer_turn = false; //Set the computer's turn to false
+    //         player_turn = true; //Set the player's turn to true
+    //         return;
+    //     }
+    // }
+    // else{
+    //     dutch_called = true;
+    // }
+
+    //CHECKING: If computer's hand is empty at the start of its turn, automatic Dutch and skip turn.
+    if(computer.num_of_cards == 0){
+        computer.dutch = true; //Notate that the computer has called Dutch
+        computer_turn = false; //Set the computer's turn to false
+        player_turn = true; //Set the player's turn to true
+        alert("No cards in computer's hand, automatically calling Dutch! Skipping turn.");
+        return;
+    }
+
+    // //1. Computer will check if it can play anything from its KNOWN HAND, looking at the pile card.
+    // for(let c_type = 0; c_type < computer.known_hand.length; c_type++){ //"c_type" abbv. "Card Type"
+    //     if(computer.known_hand[c_type].card_type == undefined){ //Looking at its "unknown" cards
+    //         continue;
+    //     }
+    //     else if(computer.known_hand[c_type].card_type == pile.card_type){ //Checking with its "known" cards
+    //         play_card_on_pile(computer, computer.known_hand[c_type], pile, false); //Play the corresponding card on the pile
+    //         computer.known_hand.splice(c_type, 1); //Remove played card from the known hand
+    //         computer.hand.splice(c_type, 1); //Remove played card from the actual hand
+    //         computer.num_of_cards -= 1; //Decrement the number of cards from the hand
+    //     }
+    //     else{ //Else, play nothing
+    //         continue;
+    //     }
+    // }
+
+    //CHECKING: If computer's hand is empty after playing, can't draw, skip turn.
+    if(computer.num_of_cards == 0){ 
+        computer_turn = false; //Set the computer's turn to false
+        player_turn = true; //Set the player's turn to true
+        if(player.dutch){
+            alert("No cards in computer's hand. Skipping turn.");
+        }
+        else{
+            alert("No cards in computer's hand, automatically calling Dutch! Skipping turn.");
+        }
+        return;
+    }
+
+    //2. Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
+    draw_card(drawn_card); //Draw a random card from the deck
+    // alert("Computer is drawing a card...");
+    // alert("The computer has drawn a \n-----\n|"+drawn_card.card_type+"|\n|"+drawn_card.card_suit+"|\n-----\n"+
+    // "Points: "+drawn_card.card_point+"\n"+
+    // "Ability: "+drawn_card.card_ability);
+    visual_card = document.createElement("img");
+    visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+    container_computer_card_action.style.display = "initial";
+    computer_card_action.appendChild(visual_card);
+    if(random_number(100) < 50){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
+        alert("Computer is switching a card from its hand.");
+        switch_card(computer, drawn_card, undefined, pile); //Switch the drawn card with a random card from the computer's hand.
+        setTimeout(()=>{
+            computer_card_action.removeChild(visual_card);
+            container_computer_card_action.style.display = "none";
+        }, 2000);
+        
+    }
+    else { //Play the drawn card
+        // alert("Computer is playing the drawn card.");
+        play_card_on_pile(computer, drawn_card, pile, false); //Play the drawn card
+        setTimeout(()=>{
+            computer_card_action.removeChild(visual_card);
+            container_computer_card_action.style.display = "none";
+            visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
+            visual_card.style.animationName = "computer_playing_card";
+            pile_div.appendChild(visual_card);
+        }, 2000);
+    }
+
+    // //3. Computer will check again if it can play, reference (1.).
+    // for(let c_type = 0; c_type < computer.known_hand.length; c_type++){ //"c_type" abb. "Card Type"
+    //     if(computer.known_hand[c_type].card_type == undefined){ //Looking at it's "unknown" cards
+    //         continue;
+    //     }
+    //     else if(computer.known_hand[c_type].card_type == pile.card_type){ //Checking with its "known" cards
+    //         play_card_on_pile(computer, computer.known_hand[c_type], pile, false); //Play the corresponding card on the pile
+    //         computer.known_hand.splice(c_type, 1); //Remove played card from the known hand
+    //         computer.hand.splice(c_type, 1); //Remove played card from the actual hand
+    //         computer.num_of_cards -= 1; //Decrement the number of cards from the hand
+    //     }
+    //     else{ //Else, play nothing
+    //         continue;
+    //     }
+    // }
+
+    //4. Computer will end its turn.
+    // alert("Computer's turn ended.");
+    computer_turn = false; 
+    player_turn = true;
 };
