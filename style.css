@@ -90,6 +90,16 @@ button.switch {
     flex-wrap: wrap-reverse;
     align-content: center;
     gap: 1%;
+    animation-name: none;
+    animation-timing-function: linear;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+}
+
+.computer_hand > img {
+    animation-name: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.5s;   
 }
 
 /* <<<<<<<<<<<<<<<< Computer Board - END >>>>>>>>>>>>>>>> */
@@ -147,7 +157,7 @@ div.deck > span.display_number_of_cards_in_deck {
     border-radius: 50px;
     background-color: rgba(240, 248, 255, 0.662);
     font-size: 1.15rem;
-    /* pointer-events: none; */
+    pointer-events: none;
 }
 
 div.pile {
@@ -330,5 +340,17 @@ button.button_end_turn {
     to{
         transform: translateY(0px) rotate(180deg);
     }   
+}
+
+@keyframes switching_cards_in_hand {
+    0%{
+        transform: scale(0);
+    }
+    80%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
 }
 /* <<<<<<<<<<<<<<<< Animations - END >>>>>>>>>>>>>>>> */

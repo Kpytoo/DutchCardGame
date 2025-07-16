@@ -356,10 +356,19 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
 };
 
 //Function that switches one card from the user's hand with the drawn card, and plays the switched card
-const switch_card = (user, drawn_card, switched_card_index, pile) => {
+const switch_card = (user, drawn_card, switched_card_index, pile) => { //switched_card_index is "undefined" if the computer calls the function
     if(user == computer){ //If the computer calls the function
         // alert("Computer is switching!");
         let random_card = random_number(user.hand.length);
+        setTimeout(()=>{
+            let card_src = user.visual_hand[random_card].getAttribute("src");
+            user.visual_hand[random_card].setAttribute("src", visual_card.getAttribute("src"));
+            user.visual_hand[random_card].style.animationName = "switching_cards_in_hand";
+            visual_card.setAttribute("src", card_src);
+        }, 2000);
+        setTimeout(()=>{
+            user.visual_hand[random_card].style.animationName = "none";
+        }, 4000);
         let switched_card = new Card(user.hand[random_card].card_type, //Get the card from the user's hand that will be switched
                                      user.hand[random_card].card_suit,
                                      user.hand[random_card].card_point,
@@ -450,7 +459,6 @@ let computer_playing_turn = () =>{
         }
         return;
     }
-
     //2. Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
     draw_card(drawn_card); //Draw a random card from the deck
     // alert("Computer is drawing a card...");
@@ -462,11 +470,14 @@ let computer_playing_turn = () =>{
     container_computer_card_action.style.display = "initial";
     computer_card_action.appendChild(visual_card);
     if(random_number(100) < 50){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
-        alert("Computer is switching a card from its hand.");
+        // alert("Computer is switching a card from its hand.");
         switch_card(computer, drawn_card, undefined, pile); //Switch the drawn card with a random card from the computer's hand.
         setTimeout(()=>{
             computer_card_action.removeChild(visual_card);
             container_computer_card_action.style.display = "none";
+            visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
+            visual_card.style.animationName = "computer_playing_card";
+            pile_div.appendChild(visual_card);
         }, 2000);
         
     }

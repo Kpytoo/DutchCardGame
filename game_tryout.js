@@ -48,7 +48,6 @@ start_game(); //Starts the game by giving each player 4 cards
 let pile = new Card(undefined, undefined, undefined, undefined); //Create an object "pile" card, which is the last played card in the pile (starts empty - undefined)
 let drawn_card = new Card (); //Create a new card object that will be assigned the random drawn card
 display_full_hand(computer, player, pile);
-
 //********Implement function that allows the player to see the two bottom cards, then the game starts. (Do it at the end)
 
 let dutch_called = false; //Keep track if someone has called "Dutch"
@@ -100,9 +99,13 @@ player_card_action_prompt.addEventListener("click", (e) => {
     };
     if(e.target.getAttribute("class") == "switch"){
         document.querySelectorAll(".player_hand > img").forEach(e => {
+            e.style.animationIterationCount = "infinite";
             e.style.animationName = "switching_shaking_cards";
         });
         player_hand_div.addEventListener("click", (event) =>{
+            document.querySelectorAll(".player_hand > img").forEach(e => {
+                e.style.animationName = "none";
+            });
             let card_src = event.target.getAttribute("src");
             let switched_card_index = 0;
             if(card_src != null){
@@ -114,6 +117,8 @@ player_card_action_prompt.addEventListener("click", (e) => {
                 switch_card(player, drawn_card, switched_card_index, pile);
                 let temp_src = event.target.getAttribute("src");
                 event.target.setAttribute("src", visual_card.getAttribute("src"));
+                event.target.style.animationIterationCount = "1";
+                event.target.style.animationName = "switching_cards_in_hand";
                 visual_card.setAttribute("src", temp_src);
                 player_card_action_prompt.removeChild(visual_card);
                 container_player_card_action_prompt.style.display = "none";
@@ -123,9 +128,6 @@ player_card_action_prompt.addEventListener("click", (e) => {
                 button_end_turn.style.display = "initial";
                 button_end_turn.style.animationName = "button_end_turn_pop_in";
             }
-            document.querySelectorAll(".player_hand > img").forEach(e => {
-                e.style.animationName = "none";
-            });
         }, { once: true });
     };
     display_full_hand(computer, player, pile);
@@ -142,7 +144,14 @@ button_end_turn.addEventListener("click", (e) => {
         computer_turn = true;
         player_hand_div.style.animationName = "none";
         button_end_turn.style.animationName = "button_end_turn_pop_out";
+        deck_div.style.pointerEvents = "none";
+        computer_hand_div.style.animationName = "user_flashing_turn";
         computer_playing_turn();
+        setTimeout(()=>{
+            deck_div.style.pointerEvents = "initial";
+            player_hand_div.style.animationName = "user_flashing_turn";
+            computer_hand_div.style.animationName = "none";
+        }, 3500);
         display_full_hand(computer, player, pile);
     }
 });
