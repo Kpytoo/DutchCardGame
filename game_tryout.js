@@ -155,3 +155,43 @@ button_end_turn.addEventListener("click", (e) => {
         display_full_hand(computer, player, pile);
     }
 });
+
+//Player playing a card from their hand
+player_hand_div.addEventListener("dblclick", (e) =>{
+    if(pile.card_type == undefined){
+        return;
+    }
+    if(!player_turn){
+        return;
+    }
+    let following_cards_translation = false;
+    let player_hand = document.querySelectorAll(".player_hand > img");
+    for(let i = 0; i < player_hand.length; i++){
+        if(player_hand[i].getAttribute("src") == e.target.getAttribute("src")){
+            following_cards_translation = true;
+            setTimeout(()=>{
+                player_hand_div.removeChild(e.target);
+            }, 500);
+            player_hand[i].style.animationIterationCount = "1";
+            player_hand[i].style.animationName = "player_playing_card";
+            continue;
+        }
+        if(!following_cards_translation){
+            continue;
+        }
+        else if(i%2 == 0){
+            player_hand[i].style.animationIterationCount = "1";
+            player_hand[i].style.animationName = "card_top_row_translation";
+        }
+        else{
+            player_hand[i].style.animationIterationCount = "1";
+            player_hand[i].style.animationName = "card_bottom_row_translation";
+        }
+    }
+    // document.querySelectorAll(".player_hand > img").forEach(img => {
+    //     img.style.animationIterationCount = "1";
+    //     img.style.animationName = "card_top_row_translation";
+    //     img.firstChild
+    // });
+    // player_hand_div.removeChild(e.target);
+});

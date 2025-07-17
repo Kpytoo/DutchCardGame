@@ -511,6 +511,9 @@ let computer_playing_turn = () =>{
 
     //4. Computer will end its turn.
     // alert("Computer's turn ended.");
-    computer_turn = false; 
-    player_turn = true;
+    setTimeout(()=>{
+        computer_turn = false; 
+        player_turn = true;
+    }, 3000);
+
 };

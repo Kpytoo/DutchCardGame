@@ -353,4 +353,22 @@ button.button_end_turn {
         transform: scale(1);
     }
 }
+
+@keyframes card_top_row_translation {
+    from{
+        transform: translateY(0px) translateX(0px);
+    }
+    to{
+        transform: translateY(180px) translateX(-100px);
+    }
+}
+
+@keyframes card_bottom_row_translation {
+    from{
+        transform: translateY(0px);
+    }
+    to{
+        transform: translateY(-180px);
+    }
+}
 /* <<<<<<<<<<<<<<<< Animations - END >>>>>>>>>>>>>>>> */
