@@ -371,4 +371,40 @@ button.button_end_turn {
         transform: translateY(-180px);
     }
 }
+
+@keyframes wrong_card_played_vibration {
+    0%{
+        transform: rotate(0deg);
+    }
+    10%{
+        transform: rotate(-5deg);
+    }
+    20%{
+        transform: rotate(+5deg);
+    }
+    30%{
+        transform: rotate(-5deg);
+    }
+    40%{
+        transform: rotate(+5deg);
+    }
+    50%{
+        transform: rotate(-5deg);
+    }
+    60%{
+        transform: rotate(+5deg);
+    }
+    70%{
+        transform: rotate(-5deg);
+    }
+    80%{
+        transform: rotate(+5deg);
+    }
+    90%{
+        transform: rotate(-5deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
 /* <<<<<<<<<<<<<<<< Animations - END >>>>>>>>>>>>>>>> */

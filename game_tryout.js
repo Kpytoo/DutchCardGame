@@ -53,6 +53,7 @@ display_full_hand(computer, player, pile);
 let dutch_called = false; //Keep track if someone has called "Dutch"
 let player_turn = true; //Keep track if player's turn
 let player_has_drawn = false; //Keep track if player has drawn during their turn
+let player_is_currently_drawing = false;
 let player_has_played = false; //Keep track if player has played during their turn
 let computer_turn = false; //Keep track if computer's turn
 let player_has_switched_cards = false;
@@ -65,16 +66,18 @@ player_hand_div.style.animationName = "user_flashing_turn";
 deck_div.addEventListener("click", (e)=>{
     if(!player_turn){
         alert("Not your turn!");
+        return;
     }
     else if(player.num_of_cards == 0){
         alert("Can't draw while empty handed!");
+        return;
     }
     else if(player_has_drawn){
         alert("You already drew!");
     }
     else{
+        player_is_currently_drawing = true;
         draw_card(drawn_card);
-        // console.log(drawn_card);
         visual_card = document.createElement("img");
         visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
         container_player_card_action_prompt.style.display = "initial";
@@ -86,7 +89,6 @@ deck_div.addEventListener("click", (e)=>{
 
 //**Playing or switching the drawn card**
 player_card_action_prompt.addEventListener("click", (e) => {
-
     if(e.target.getAttribute("class") == "play"){
         play_card_on_pile(player, drawn_card, pile, false);
         player_card_action_prompt.removeChild(visual_card);
@@ -96,6 +98,7 @@ player_card_action_prompt.addEventListener("click", (e) => {
         pile_div.appendChild(visual_card);
         button_end_turn.style.display = "initial";
         button_end_turn.style.animationName = "button_end_turn_pop_in";
+        player_is_currently_drawing = false;
     };
     if(e.target.getAttribute("class") == "switch"){
         document.querySelectorAll(".player_hand > img").forEach(e => {
@@ -127,6 +130,7 @@ player_card_action_prompt.addEventListener("click", (e) => {
                 pile_div.appendChild(visual_card);
                 button_end_turn.style.display = "initial";
                 button_end_turn.style.animationName = "button_end_turn_pop_in";
+                player_is_currently_drawing = false;
             }
         }, { once: true });
     };
@@ -164,16 +168,46 @@ player_hand_div.addEventListener("dblclick", (e) =>{
     if(!player_turn){
         return;
     }
+    if(player_is_currently_drawing){
+        return;
+    }
     let following_cards_translation = false;
     let player_hand = document.querySelectorAll(".player_hand > img");
     for(let i = 0; i < player_hand.length; i++){
         if(player_hand[i].getAttribute("src") == e.target.getAttribute("src")){
+            if(player.hand[i].card_type != pile.card_type){
+                player_hand[i].style.animationIterationCount = "1";
+                player_hand[i].style.animationName = "wrong_card_played_vibration";
+                setTimeout(()=>{
+                    draw_card(drawn_card);
+                    player.hand.push(new Card(drawn_card.card_type, drawn_card.card_suit, drawn_card.card_point, drawn_card.card_ability));
+                    player.num_of_cards++;
+                    visual_card = document.createElement("img");
+                    visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+                    player.visual_hand.push(visual_card);
+                    player_hand_div.appendChild(visual_card);
+                    player_hand[i].style.animationName = "none";
+                    visual_card.style.animationIterationCount = "1";
+                    visual_card.style.animationName = "switching_cards_in_hand";
+                }, 500);
+                setTimeout(()=>{
+                    visual_card.style.animationIterationCount = "infinite";
+                    visual_card.style.animationName = "none";
+                }, 1000);
+                break;
+            }
             following_cards_translation = true;
             setTimeout(()=>{
                 player_hand_div.removeChild(e.target);
             }, 500);
-            player_hand[i].style.animationIterationCount = "1";
-            player_hand[i].style.animationName = "player_playing_card";
+                player.visual_hand.splice(i, 1);
+                player.hand.splice(i, 1);
+                player.num_of_cards -= 1;
+                visual_card = document.createElement("img");
+                visual_card.setAttribute("src", e.target.getAttribute("src"));
+                visual_card.style.transform = "rotate("+(45 - random_number(91))+"deg)";
+                visual_card.style.animationName = "player_playing_card";
+                pile_div.appendChild(visual_card);
             continue;
         }
         if(!following_cards_translation){
@@ -188,10 +222,4 @@ player_hand_div.addEventListener("dblclick", (e) =>{
             player_hand[i].style.animationName = "card_bottom_row_translation";
         }
     }
-    // document.querySelectorAll(".player_hand > img").forEach(img => {
-    //     img.style.animationIterationCount = "1";
-    //     img.style.animationName = "card_top_row_translation";
-    //     img.firstChild
-    // });
-    // player_hand_div.removeChild(e.target);
 });
