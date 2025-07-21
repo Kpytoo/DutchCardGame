@@ -398,6 +398,63 @@ const switch_card = (user, drawn_card, switched_card_index, pile) => { //switche
     }
 };
 
+//Function that let's the user play one of their own cards, whether right or wrong
+let play_card = (pile, e) =>{
+    let following_cards_translation = false;
+    let player_hand = document.querySelectorAll(".player_hand > img");
+    for(let i = 0; i < player_hand.length; i++){
+        if(player_hand[i].getAttribute("src") == e.target.getAttribute("src")){
+            if(player.hand[i].card_type != pile.card_type){ //If wrong card was played
+                player_hand[i].style.animationIterationCount = "1";
+                player_hand[i].style.animationName = "wrong_card_played_vibration";
+                setTimeout(()=>{
+                    draw_card(drawn_card);
+                    player.hand.push(new Card(drawn_card.card_type, drawn_card.card_suit, drawn_card.card_point, drawn_card.card_ability));
+                    player.num_of_cards++;
+                    visual_card = document.createElement("img");
+                    visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+                    player.visual_hand.push(visual_card);
+                    player_hand_div.appendChild(visual_card);
+                    player_hand[i].style.animationName = "none";
+                    visual_card.style.animationIterationCount = "1";
+                    visual_card.style.animationName = "switching_cards_in_hand";
+                }, 500);
+                setTimeout(()=>{
+                    visual_card.style.animationIterationCount = "infinite";
+                    visual_card.style.animationName = "none";
+                }, 1000);
+                break;
+            } //If right card was played
+            following_cards_translation = true;
+            setTimeout(()=>{
+                player_hand_div.removeChild(e.target);
+            }, 500);
+            play_card_on_pile(player, player.hand[i], pile, false);
+            player.visual_hand.splice(i, 1);
+            player.hand.splice(i, 1);
+            player.num_of_cards -= 1;
+            visual_card = document.createElement("img");
+            visual_card.setAttribute("src", e.target.getAttribute("src"));
+            visual_card.style.transform = "rotate("+(45 - random_number(91))+"deg)";
+            visual_card.style.animationName = "player_playing_card";
+            pile_div.appendChild(visual_card);
+            display_full_hand(computer, player, pile);
+            continue;
+        }
+        if(!following_cards_translation){
+            continue;
+        }
+        else if(i%2 == 0){
+            player_hand[i].style.animationIterationCount = "1";
+            player_hand[i].style.animationName = "card_top_row_translation";
+        }
+        else{
+            player_hand[i].style.animationIterationCount = "1";
+            player_hand[i].style.animationName = "card_bottom_row_translation";
+        }
+    }
+};
+
 //Computer logic
 //0. Computer has a 2% chance of randomly calling Dutch whenever it is its turn.
 //      CHECKING: Check if computer's hand is empty. (Automatic Dutch)
@@ -431,21 +488,31 @@ let computer_playing_turn = () =>{
         return;
     }
 
-    // //1. Computer will check if it can play anything from its KNOWN HAND, looking at the pile card.
-    // for(let c_type = 0; c_type < computer.known_hand.length; c_type++){ //"c_type" abbv. "Card Type"
-    //     if(computer.known_hand[c_type].card_type == undefined){ //Looking at its "unknown" cards
-    //         continue;
-    //     }
-    //     else if(computer.known_hand[c_type].card_type == pile.card_type){ //Checking with its "known" cards
-    //         play_card_on_pile(computer, computer.known_hand[c_type], pile, false); //Play the corresponding card on the pile
-    //         computer.known_hand.splice(c_type, 1); //Remove played card from the known hand
-    //         computer.hand.splice(c_type, 1); //Remove played card from the actual hand
-    //         computer.num_of_cards -= 1; //Decrement the number of cards from the hand
-    //     }
-    //     else{ //Else, play nothing
-    //         continue;
-    //     }
-    // }
+    //1. Computer will check if it can play anything from its KNOWN HAND, looking at the pile card.
+    for(let c_type = 0; c_type < computer.known_hand.length; c_type++){ //"c_type" abbv. "Card Type"
+        if(computer.known_hand[c_type].card_type == undefined){ //Looking at its "unknown" cards
+            continue;
+        }
+        else if(computer.known_hand[c_type].card_type == pile.card_type){ //Checking with its "known" cards
+            play_card_on_pile(computer, computer.known_hand[c_type], pile, false); //Play the corresponding card on the pile
+            setTimeout(()=>{
+                computer_hand_div.removeChild(computer.visual_hand[c_type]);
+                computer.visual_hand.splice(c_type, 1);
+            }, 500);
+            visual_card = document.createElement("img");
+            visual_card.setAttribute("src", ("CARDS\\" + computer.known_hand[c_type].card_suit + "_" + computer.known_hand[c_type].card_type + ".png"));
+            visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
+            visual_card.style.animationName = "computer_playing_card";
+            pile_div.appendChild(visual_card);
+            computer.known_hand.splice(c_type, 1); //Remove played card from the known hand
+            computer.hand.splice(c_type, 1); //Remove played card from the actual hand
+            computer.num_of_cards -= 1; //Decrement the number of cards from the hand
+            display_full_hand(computer, player, pile);
+        }
+        else{ //Else, play nothing
+            continue;
+        }
+    }
 
     //CHECKING: If computer's hand is empty after playing, can't draw, skip turn.
     if(computer.num_of_cards == 0){ 

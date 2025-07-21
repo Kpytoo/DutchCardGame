@@ -58,7 +58,6 @@ let player_has_played = false; //Keep track if player has played during their tu
 let computer_turn = false; //Keep track if computer's turn
 let player_has_switched_cards = false;
 
-
 //Player turn
 player_hand_div.style.animationName = "user_flashing_turn";
 
@@ -171,55 +170,5 @@ player_hand_div.addEventListener("dblclick", (e) =>{
     if(player_is_currently_drawing){
         return;
     }
-    let following_cards_translation = false;
-    let player_hand = document.querySelectorAll(".player_hand > img");
-    for(let i = 0; i < player_hand.length; i++){
-        if(player_hand[i].getAttribute("src") == e.target.getAttribute("src")){
-            if(player.hand[i].card_type != pile.card_type){
-                player_hand[i].style.animationIterationCount = "1";
-                player_hand[i].style.animationName = "wrong_card_played_vibration";
-                setTimeout(()=>{
-                    draw_card(drawn_card);
-                    player.hand.push(new Card(drawn_card.card_type, drawn_card.card_suit, drawn_card.card_point, drawn_card.card_ability));
-                    player.num_of_cards++;
-                    visual_card = document.createElement("img");
-                    visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
-                    player.visual_hand.push(visual_card);
-                    player_hand_div.appendChild(visual_card);
-                    player_hand[i].style.animationName = "none";
-                    visual_card.style.animationIterationCount = "1";
-                    visual_card.style.animationName = "switching_cards_in_hand";
-                }, 500);
-                setTimeout(()=>{
-                    visual_card.style.animationIterationCount = "infinite";
-                    visual_card.style.animationName = "none";
-                }, 1000);
-                break;
-            }
-            following_cards_translation = true;
-            setTimeout(()=>{
-                player_hand_div.removeChild(e.target);
-            }, 500);
-                player.visual_hand.splice(i, 1);
-                player.hand.splice(i, 1);
-                player.num_of_cards -= 1;
-                visual_card = document.createElement("img");
-                visual_card.setAttribute("src", e.target.getAttribute("src"));
-                visual_card.style.transform = "rotate("+(45 - random_number(91))+"deg)";
-                visual_card.style.animationName = "player_playing_card";
-                pile_div.appendChild(visual_card);
-            continue;
-        }
-        if(!following_cards_translation){
-            continue;
-        }
-        else if(i%2 == 0){
-            player_hand[i].style.animationIterationCount = "1";
-            player_hand[i].style.animationName = "card_top_row_translation";
-        }
-        else{
-            player_hand[i].style.animationIterationCount = "1";
-            player_hand[i].style.animationName = "card_bottom_row_translation";
-        }
-    }
+    play_card(pile, e);
 });
