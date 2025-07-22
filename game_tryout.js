@@ -60,7 +60,7 @@ let player_has_switched_cards = false;
 
 //Player turn
 player_hand_div.style.animationName = "user_flashing_turn";
-
+console.log(computer.known_hand);
 //**Drawing from the deck**
 deck_div.addEventListener("click", (e)=>{
     if(!player_turn){
@@ -83,6 +83,8 @@ deck_div.addEventListener("click", (e)=>{
         player_card_action_prompt.appendChild(visual_card);
         player_has_drawn = true;
     }
+    button_dutch.style.animationName = "button_pop_out";
+    button_dutch.style.pointerEvents = "none";
     display_full_hand(computer, player, pile);
 });
 
@@ -96,15 +98,17 @@ player_card_action_prompt.addEventListener("click", (e) => {
         visual_card.style.animationName = "player_playing_card";
         pile_div.appendChild(visual_card);
         button_end_turn.style.display = "initial";
-        button_end_turn.style.animationName = "button_end_turn_pop_in";
+        button_end_turn.style.animationName = "button_pop_in";
         player_is_currently_drawing = false;
     };
     if(e.target.getAttribute("class") == "switch"){
+        document.querySelector(".container_button").style.display = "none";
         document.querySelectorAll(".player_hand > img").forEach(e => {
             e.style.animationIterationCount = "infinite";
             e.style.animationName = "switching_shaking_cards";
         });
         player_hand_div.addEventListener("click", (event) =>{
+            document.querySelector(".container_button").style.display = "flex";
             document.querySelectorAll(".player_hand > img").forEach(e => {
                 e.style.animationName = "none";
             });
@@ -128,7 +132,7 @@ player_card_action_prompt.addEventListener("click", (e) => {
                 visual_card.style.animationName = "player_playing_card";
                 pile_div.appendChild(visual_card);
                 button_end_turn.style.display = "initial";
-                button_end_turn.style.animationName = "button_end_turn_pop_in";
+                button_end_turn.style.animationName = "button_pop_in";
                 player_is_currently_drawing = false;
             }
         }, { once: true });
@@ -146,7 +150,7 @@ button_end_turn.addEventListener("click", (e) => {
         player_turn = false;
         computer_turn = true;
         player_hand_div.style.animationName = "none";
-        button_end_turn.style.animationName = "button_end_turn_pop_out";
+        button_end_turn.style.animationName = "button_pop_out";
         deck_div.style.pointerEvents = "none";
         computer_hand_div.style.animationName = "user_flashing_turn";
         computer_playing_turn();
@@ -154,6 +158,8 @@ button_end_turn.addEventListener("click", (e) => {
             deck_div.style.pointerEvents = "initial";
             player_hand_div.style.animationName = "user_flashing_turn";
             computer_hand_div.style.animationName = "none";
+            button_dutch.style.animationName = "button_pop_in";
+            button_dutch.style.pointerEvents = "initial";
         }, 4000);
         display_full_hand(computer, player, pile);
     }
@@ -171,4 +177,9 @@ player_hand_div.addEventListener("dblclick", (e) =>{
         return;
     }
     play_card(pile, e);
+});
+
+//Player pressing the "Dutch!" button
+button_dutch.addEventListener("click", (e) =>{
+    alert("DUTCH!");
 });

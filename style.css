@@ -198,6 +198,24 @@ button.button_end_turn {
     animation-fill-mode: forwards;
 }
 
+button.dutch {
+    position: absolute;
+    top: 536px;
+    left: 35px;
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    background-color: rgb(140, 242, 144);
+    border-color: rgb(134, 228, 119);
+    border-width: 3px;
+    pointer-events: initial;
+    display: initial;
+    animation-name: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
 /* <<<<<<<<<<<<<<<< Middle Board - END >>>>>>>>>>>>>>>> */
 
 /* <<<<<<<<<<<<<<<< Player Board >>>>>>>>>>>>>>>> */
@@ -307,7 +325,7 @@ button.button_end_turn {
     }
 }
 
-@keyframes button_end_turn_pop_in {
+@keyframes button_pop_in {
     0%{
         transform: scale(0);
     }
@@ -319,7 +337,7 @@ button.button_end_turn {
     }
 }
 
-@keyframes button_end_turn_pop_out {
+@keyframes button_pop_out {
     0%{
         transform: scale(1);
     }

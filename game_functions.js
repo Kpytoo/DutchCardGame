@@ -456,7 +456,7 @@ let play_card = (pile, e) =>{
 };
 
 //Computer will check if it can play anything from its KNOWN HAND, looking at the pile card.
-let computer_play_card = (computer_hand, pile, computer_playing_time_ms) => {
+let computer_play_card = (computer_hand, pile) => {
     for(let c_type = 0; c_type < computer.known_hand.length; c_type++){ //"c_type" abbv. "Card Type"
         if(computer.known_hand[c_type].card_type == undefined){ //Looking at its "unknown" cards
             continue;
@@ -486,7 +486,6 @@ let computer_play_card = (computer_hand, pile, computer_playing_time_ms) => {
                 computer.hand.splice(c_type, 1); //Remove played card from the actual hand
                 computer.num_of_cards -= 1; //Decrement the number of cards from the hand
                 display_full_hand(computer, player, pile);
-                computer_playing_time_ms = 1000;
         }
         else{ //Else, play nothing
             continue;
@@ -503,7 +502,6 @@ let computer_play_card = (computer_hand, pile, computer_playing_time_ms) => {
 //4. Computer will end its turn.
 let computer_playing_turn = () =>{
     let computer_hand = document.querySelectorAll(".computer_hand > img");
-    let computer_playing_time_ms = 0;
     //Every turn, the computer has 2% chance of randomly calling Dutch, except if the player has already called Dutch
 
     // if(!player.dutch){ //Check if player hasn't called Dutch
@@ -529,7 +527,7 @@ let computer_playing_turn = () =>{
     }
 
     //1. Computer will check if it can play anything from its KNOWN HAND, looking at the pile card.
-    computer_play_card(computer_hand, pile, computer_playing_time_ms);
+    computer_play_card(computer_hand, pile);
 
     //CHECKING: If computer's hand is empty after playing, can't draw, skip turn.
     if(computer.num_of_cards == 0){ 
@@ -560,7 +558,7 @@ let computer_playing_turn = () =>{
                 visual_card.style.animationName = "computer_playing_card";
                 pile_div.appendChild(visual_card);
             }, 2000);
-            
+            console.log(computer.known_hand);
         }
         else { //Play the drawn card
             // alert("Computer is playing the drawn card.");
@@ -572,19 +570,24 @@ let computer_playing_turn = () =>{
                 visual_card.style.animationName = "computer_playing_card";
                 pile_div.appendChild(visual_card);
             }, 2000);
+            console.log(computer.known_hand);
         }
-    }, computer_playing_time_ms);
+
+                
+    }, 1000);
 
     
+    setTimeout(() =>{
+        //3. Computer will check again if it can play, reference (1.).
+        computer_play_card(computer_hand, pile);        
+    }, 4000);
 
-    //3. Computer will check again if it can play, reference (1.).
-    computer_play_card(computer_hand, pile, computer_playing_time_ms);
 
     //4. Computer will end its turn.
     // alert("Computer's turn ended.");
     setTimeout(()=>{
         computer_turn = false; 
         player_turn = true;
-    }, 3000);
+    }, 4000);
 
 };

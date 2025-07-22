@@ -69,6 +69,7 @@ const player_hand_div = document.querySelector(".player_hand"); //Where we are a
 const deck_div = document.querySelector(".deck");
 const pile_div = document.querySelector(".pile");
 const button_end_turn = document.querySelector(".button_end_turn");
+const button_dutch = document.querySelector("button.dutch");
 
 const display_number_of_cards_in_deck = document.querySelector("span.display_number_of_cards_in_deck");
 
