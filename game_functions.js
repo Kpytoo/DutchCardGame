@@ -455,6 +455,44 @@ let play_card = (pile, e) =>{
     }
 };
 
+//Computer will check if it can play anything from its KNOWN HAND, looking at the pile card.
+let computer_play_card = (computer_hand, pile, computer_playing_time_ms) => {
+    for(let c_type = 0; c_type < computer.known_hand.length; c_type++){ //"c_type" abbv. "Card Type"
+        if(computer.known_hand[c_type].card_type == undefined){ //Looking at its "unknown" cards
+            continue;
+        }
+        else if(computer.known_hand[c_type].card_type == pile.card_type){ //Checking with its "known" cards
+            play_card_on_pile(computer, computer.known_hand[c_type], pile, false); //Play the corresponding card on the pile
+            setTimeout(()=>{
+                computer_hand_div.removeChild(computer.visual_hand[c_type]);
+                computer.visual_hand.splice(c_type, 1);
+            }, 500);
+                visual_card = document.createElement("img");
+                visual_card.setAttribute("src", ("CARDS\\" + computer.known_hand[c_type].card_suit + "_" + computer.known_hand[c_type].card_type + ".png"));
+                visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
+                visual_card.style.animationName = "computer_playing_card";
+                for(let i = (c_type+1); i < computer.known_hand.length; i++){
+                    if(i%2 == 0){
+                        computer_hand[i].style.animationIterationCount = "1";
+                        computer_hand[i].style.animationName = "card_bottom_row_translation_computer";
+                    }
+                    else{
+                        computer_hand[i].style.animationIterationCount = "1";
+                        computer_hand[i].style.animationName = "card_top_row_translation_computer";
+                    }
+                }
+                pile_div.appendChild(visual_card);
+                computer.known_hand.splice(c_type, 1); //Remove played card from the known hand
+                computer.hand.splice(c_type, 1); //Remove played card from the actual hand
+                computer.num_of_cards -= 1; //Decrement the number of cards from the hand
+                display_full_hand(computer, player, pile);
+                computer_playing_time_ms = 1000;
+        }
+        else{ //Else, play nothing
+            continue;
+        }
+    }
+};
 //Computer logic
 //0. Computer has a 2% chance of randomly calling Dutch whenever it is its turn.
 //      CHECKING: Check if computer's hand is empty. (Automatic Dutch)
@@ -464,6 +502,8 @@ let play_card = (pile, e) =>{
 //3. Computer will check again if it can play, reference (1.).
 //4. Computer will end its turn.
 let computer_playing_turn = () =>{
+    let computer_hand = document.querySelectorAll(".computer_hand > img");
+    let computer_playing_time_ms = 0;
     //Every turn, the computer has 2% chance of randomly calling Dutch, except if the player has already called Dutch
 
     // if(!player.dutch){ //Check if player hasn't called Dutch
@@ -489,30 +529,7 @@ let computer_playing_turn = () =>{
     }
 
     //1. Computer will check if it can play anything from its KNOWN HAND, looking at the pile card.
-    for(let c_type = 0; c_type < computer.known_hand.length; c_type++){ //"c_type" abbv. "Card Type"
-        if(computer.known_hand[c_type].card_type == undefined){ //Looking at its "unknown" cards
-            continue;
-        }
-        else if(computer.known_hand[c_type].card_type == pile.card_type){ //Checking with its "known" cards
-            play_card_on_pile(computer, computer.known_hand[c_type], pile, false); //Play the corresponding card on the pile
-            setTimeout(()=>{
-                computer_hand_div.removeChild(computer.visual_hand[c_type]);
-                computer.visual_hand.splice(c_type, 1);
-            }, 500);
-            visual_card = document.createElement("img");
-            visual_card.setAttribute("src", ("CARDS\\" + computer.known_hand[c_type].card_suit + "_" + computer.known_hand[c_type].card_type + ".png"));
-            visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
-            visual_card.style.animationName = "computer_playing_card";
-            pile_div.appendChild(visual_card);
-            computer.known_hand.splice(c_type, 1); //Remove played card from the known hand
-            computer.hand.splice(c_type, 1); //Remove played card from the actual hand
-            computer.num_of_cards -= 1; //Decrement the number of cards from the hand
-            display_full_hand(computer, player, pile);
-        }
-        else{ //Else, play nothing
-            continue;
-        }
-    }
+    computer_play_card(computer_hand, pile, computer_playing_time_ms);
 
     //CHECKING: If computer's hand is empty after playing, can't draw, skip turn.
     if(computer.num_of_cards == 0){ 
@@ -526,55 +543,42 @@ let computer_playing_turn = () =>{
         }
         return;
     }
-    //2. Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
-    draw_card(drawn_card); //Draw a random card from the deck
-    // alert("Computer is drawing a card...");
-    // alert("The computer has drawn a \n-----\n|"+drawn_card.card_type+"|\n|"+drawn_card.card_suit+"|\n-----\n"+
-    // "Points: "+drawn_card.card_point+"\n"+
-    // "Ability: "+drawn_card.card_ability);
-    visual_card = document.createElement("img");
-    visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
-    container_computer_card_action.style.display = "initial";
-    computer_card_action.appendChild(visual_card);
-    if(random_number(100) < 50){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
-        // alert("Computer is switching a card from its hand.");
-        switch_card(computer, drawn_card, undefined, pile); //Switch the drawn card with a random card from the computer's hand.
-        setTimeout(()=>{
-            computer_card_action.removeChild(visual_card);
-            container_computer_card_action.style.display = "none";
-            visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
-            visual_card.style.animationName = "computer_playing_card";
-            pile_div.appendChild(visual_card);
-        }, 2000);
-        
-    }
-    else { //Play the drawn card
-        // alert("Computer is playing the drawn card.");
-        play_card_on_pile(computer, drawn_card, pile, false); //Play the drawn card
-        setTimeout(()=>{
-            computer_card_action.removeChild(visual_card);
-            container_computer_card_action.style.display = "none";
-            visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
-            visual_card.style.animationName = "computer_playing_card";
-            pile_div.appendChild(visual_card);
-        }, 2000);
-    }
 
-    // //3. Computer will check again if it can play, reference (1.).
-    // for(let c_type = 0; c_type < computer.known_hand.length; c_type++){ //"c_type" abb. "Card Type"
-    //     if(computer.known_hand[c_type].card_type == undefined){ //Looking at it's "unknown" cards
-    //         continue;
-    //     }
-    //     else if(computer.known_hand[c_type].card_type == pile.card_type){ //Checking with its "known" cards
-    //         play_card_on_pile(computer, computer.known_hand[c_type], pile, false); //Play the corresponding card on the pile
-    //         computer.known_hand.splice(c_type, 1); //Remove played card from the known hand
-    //         computer.hand.splice(c_type, 1); //Remove played card from the actual hand
-    //         computer.num_of_cards -= 1; //Decrement the number of cards from the hand
-    //     }
-    //     else{ //Else, play nothing
-    //         continue;
-    //     }
-    // }
+    //2. Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
+    setTimeout(() =>{
+        draw_card(drawn_card); //Draw a random card from the deck
+        visual_card = document.createElement("img");
+        visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+        container_computer_card_action.style.display = "initial";
+        computer_card_action.appendChild(visual_card);
+        if(random_number(100) < 50){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
+            switch_card(computer, drawn_card, undefined, pile); //Switch the drawn card with a random card from the computer's hand.
+            setTimeout(()=>{
+                computer_card_action.removeChild(visual_card);
+                container_computer_card_action.style.display = "none";
+                visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
+                visual_card.style.animationName = "computer_playing_card";
+                pile_div.appendChild(visual_card);
+            }, 2000);
+            
+        }
+        else { //Play the drawn card
+            // alert("Computer is playing the drawn card.");
+            play_card_on_pile(computer, drawn_card, pile, false); //Play the drawn card
+            setTimeout(()=>{
+                computer_card_action.removeChild(visual_card);
+                container_computer_card_action.style.display = "none";
+                visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
+                visual_card.style.animationName = "computer_playing_card";
+                pile_div.appendChild(visual_card);
+            }, 2000);
+        }
+    }, computer_playing_time_ms);
+
+    
+
+    //3. Computer will check again if it can play, reference (1.).
+    computer_play_card(computer_hand, pile, computer_playing_time_ms);
 
     //4. Computer will end its turn.
     // alert("Computer's turn ended.");

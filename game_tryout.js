@@ -154,7 +154,7 @@ button_end_turn.addEventListener("click", (e) => {
             deck_div.style.pointerEvents = "initial";
             player_hand_div.style.animationName = "user_flashing_turn";
             computer_hand_div.style.animationName = "none";
-        }, 3500);
+        }, 4000);
         display_full_hand(computer, player, pile);
     }
 });

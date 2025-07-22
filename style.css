@@ -407,4 +407,22 @@ button.button_end_turn {
         transform: rotate(0deg);
     }
 }
+
+@keyframes card_top_row_translation_computer {
+    from{
+        transform: translateY(0px);
+    }
+    to{
+        transform: translateY(180px);
+    }
+}
+
+@keyframes card_bottom_row_translation_computer {
+    from{
+        transform: translateY(0px) translateX(0px);
+    }
+    to{
+        transform: translateY(-180px) translateX(100px);
+    }
+}
 /* <<<<<<<<<<<<<<<< Animations - END >>>>>>>>>>>>>>>> */
