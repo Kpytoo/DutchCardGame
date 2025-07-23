@@ -205,8 +205,8 @@ button.dutch {
     width: 80px;
     height: 80px;
     border-radius: 100px;
-    background-color: rgb(140, 242, 144);
-    border-color: rgb(134, 228, 119);
+    background-color: rgb(255, 215, 0);
+    border-color: rgb(203, 173, 0);
     border-width: 3px;
     pointer-events: initial;
     display: initial;
@@ -214,6 +214,32 @@ button.dutch {
     animation-timing-function: ease-in-out;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
+}
+
+div.player_dutch {
+    position: absolute;
+    border-width: 0px;
+    top: 675px;
+    left: 437px;
+    font-size: 4rem;
+    font-weight: bolder;
+    display: none;
+    animation-name: dutch_called;
+    animation-timing-function: ease-in;
+    animation-duration: 0.4s;   
+}
+
+div.computer_dutch {
+    position: absolute;
+    border-width: 0px;
+    top: 400px;
+    left: 437px;
+    font-size: 4rem;
+    font-weight: bolder;
+    display: none;
+    animation-name: dutch_called;
+    animation-timing-function: ease-in;
+    animation-duration: 0.4s; 
 }
 
 /* <<<<<<<<<<<<<<<< Middle Board - END >>>>>>>>>>>>>>>> */
@@ -441,6 +467,15 @@ button.dutch {
     }
     to{
         transform: translateY(-180px) translateX(100px);
+    }
+}
+
+@keyframes dutch_called {
+    from{
+        transform: scale(4);
+    }
+    to{
+        transform: scale(1);
     }
 }
 /* <<<<<<<<<<<<<<<< Animations - END >>>>>>>>>>>>>>>> */

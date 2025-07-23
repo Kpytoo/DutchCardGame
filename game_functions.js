@@ -504,18 +504,16 @@ let computer_playing_turn = () =>{
     let computer_hand = document.querySelectorAll(".computer_hand > img");
     //Every turn, the computer has 2% chance of randomly calling Dutch, except if the player has already called Dutch
 
-    // if(!player.dutch){ //Check if player hasn't called Dutch
-    //     if(random_number(100) < 2){ //Get a random number between 0-99, if the number is between 0-4, computer calls Dutch
-    //         alert("Computer has called Dutch!");
-    //         computer.dutch = true; //Notate that the computer has called Dutch
-    //         computer_turn = false; //Set the computer's turn to false
-    //         player_turn = true; //Set the player's turn to true
-    //         return;
-    //     }
-    // }
-    // else{
-    //     dutch_called = true;
-    // }
+    if(!player.dutch){ //Check if player hasn't called Dutch
+        if(random_number(100) < 99){ //Get a random number between 0-99, if the number is between 0-2, computer calls Dutch
+            document.querySelector("div.computer_dutch").style.display = "initial";
+            computer.dutch = true; //Notate that the computer has called Dutch
+            computer_turn = false; //Set the computer's turn to false
+            player_turn = true; //Set the player's turn to true
+            return;
+        }
+    }
+
 
     //CHECKING: If computer's hand is empty at the start of its turn, automatic Dutch and skip turn.
     if(computer.num_of_cards == 0){
@@ -590,4 +588,34 @@ let computer_playing_turn = () =>{
         player_turn = true;
     }, 4000);
 
+};
+
+let total_score_count = () => {
+    let total_player_score = 0;
+    let total_computer_score = 0;
+
+    if(player.num_of_cards != 0){
+        for(let i = 0; i < player.num_of_cards; i++){
+            total_player_score += player.hand[i].card_point;
+        }
+    }
+    if(computer.num_of_cards != 0){
+        for(let i = 0; i < computer.num_of_cards; i++){
+            total_computer_score += computer.hand[i].card_point;
+        }
+    }
+
+    alert("Final Score\n\n"+"Player's score: " + total_player_score +"\nComputer's score: " + total_computer_score);
+
+    if(total_computer_score > total_player_score){
+        alert("The player won!");
+    }
+    else if(total_computer_score < total_player_score){
+        alert("The computer won!");
+    }
+    else{
+        alert("The game is a tie!");
+    }
+
+    
 };
