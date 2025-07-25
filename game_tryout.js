@@ -14,6 +14,7 @@ let player_has_switched_cards = false;
 //Player turn
 player_hand_div.style.animationName = "user_flashing_turn";
 console.log(computer.known_hand);
+
 //**Drawing from the deck**
 deck_div.addEventListener("click", (e)=>{
     if(!player_turn){
@@ -28,6 +29,7 @@ deck_div.addEventListener("click", (e)=>{
         alert("You already drew!");
     }
     else{
+        deck_div.style.pointerEvents = "none";
         player_is_currently_drawing = true;
         draw_card(drawn_card);
         visual_card = document.createElement("img");
@@ -135,6 +137,20 @@ player_hand_div.addEventListener("dblclick", (e) =>{
         return;
     }
     play_card(pile, e);
+});
+
+//Player playing a card from the computer's hand
+computer_hand_div.addEventListener("dblclick", (e) =>{
+    if(pile.card_type == undefined){
+        return;
+    }
+    if(!player_turn){
+        return;
+    }
+    if(player_is_currently_drawing){
+        return;
+    }
+    play_card_from_computer(pile, e);
 });
 
 //Player pressing the "Dutch!" button

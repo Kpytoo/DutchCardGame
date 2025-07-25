@@ -99,7 +99,8 @@ button.switch {
 .computer_hand > img {
     animation-name: none;
     animation-timing-function: ease-in-out;
-    animation-duration: 0.5s;   
+    animation-duration: 0.5s;
+    pointer-events: initial;   
 }
 
 /* <<<<<<<<<<<<<<<< Computer Board - END >>>>>>>>>>>>>>>> */
@@ -128,6 +129,7 @@ div.deck {
     align-items: center;
     font-size: 1.5rem;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    pointer-events: initial;
 }
 
 div.deck > img {
