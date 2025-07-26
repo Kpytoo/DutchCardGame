@@ -400,6 +400,18 @@ div.computer_dutch {
     }
 }
 
+@keyframes switching_cards_in_hand_from_playing_ten {
+    0%{
+        transform: scale(0) rotate(360deg);
+    }
+    80%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
 @keyframes card_top_row_translation {
     from{
         transform: translateY(0px) translateX(0px);
