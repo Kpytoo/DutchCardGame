@@ -1,5 +1,5 @@
 start_game(); //Starts the game by giving each player 4 cards
-let me = "sorry"; //Create an object "pile" card, which is the last played card in the pile (starts empty - undefined)
+let pile = new Card(undefined, undefined, undefined, undefined); //Create an object "pile" card, which is the last played card in the pile (starts empty - undefined)
 let drawn_card = new Card (); //Create a new card object that will be assigned the random drawn card
 display_full_hand(computer, player, pile);
 //********Implement function that allows the player to see the two bottom cards, then the game starts. (Do it at the end)
