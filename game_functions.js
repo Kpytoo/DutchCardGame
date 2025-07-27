@@ -45,51 +45,42 @@ const random_number = (max_num) => {
 const start_game = () => {
     deck_div.appendChild(deck_visual_card);
     while(true){ //Loop function to draw cards until condition below is met
-        if (computer.num_of_cards == 4 && player.num_of_cards == 4){//Checks if the computer and the player have 4 cards
+        if(computer.num_of_cards == 4 && player.num_of_cards == 4){//Checks if the computer and the player have 4 cards
             break; //Break from the while loop
         } 
-        else{//If both the computer and player don't have 4 cards, give them cards!!!
-            let chosen_card_index = random_number(deck_of_cards.length); //Generate a random number to get a random card type
-            let chosen_card = deck_of_cards[chosen_card_index]; //Retrieve a random card from the deck
-
-            if(chosen_card[1].length != 0){ //If suits of the chosen card are still available in the deck
-                let card_type = chosen_card[0][0]; //Retrieve the card type
-                let card_suit_index = random_number(chosen_card[1].length); //Generate a random number to get a random card suit
-                let card_suit = chosen_card[1][card_suit_index]; //Retrieve the suit of the card type, or color if it's a joker (card type 14)
-                let card_point = chosen_card[2][0]; //Retrieve the point of the chosen card
-                let card_ability = chosen_card[2][1]; //Retrieve the ability, if any, of the chosen card
-                chosen_card[1].splice(card_suit_index, 1); //Removes the card suit from the card 2d array
-
-
-                card_name_visual = ("CARDS\\" + card_suit + "_" + card_type + ".png"); //NEW
-                visual_card = document.createElement("img"); //NEW
-                visual_card.setAttribute("src", card_name_visual); //NEW 
-                
-                if(computer.num_of_cards < 4){ //Give the computer 4 random cards
-                    computer.hand.push(new Card(card_type, card_suit, card_point, card_ability)); //Create a card object using the card type and card suit and add it to their hand
-                    
-                    computer.visual_hand.push(visual_card); //NEW
-                    computer_hand_div.appendChild(visual_card); //NEW
-
-                    if(computer.num_of_cards == 1 || computer.num_of_cards == 3){
-                        computer.known_hand.push(new Card(card_type, card_suit, card_point, card_ability)); //The bottom 2 cards, (index 1 and 3) the computer DOES know about them
-                    }
-                    else{
-                        computer.known_hand.push(new Card(undefined, undefined, undefined, undefined)); //The top 2 cards, (index 0 and 2) the computer doesn't know about them
-                    }
-                    computer.num_of_cards++; //Increment the number of cards in the computer's hand
-                }
-                else if(player.num_of_cards < 4){ //Give the player 4 random cards
-                    player.hand.push(new Card(card_type, card_suit, card_point, card_ability)); //Create a card object using the card type and card suit and add it to their hand
-                    player.num_of_cards++; //Increment the number of cards in the player's hand
-
-                    player.visual_hand.push(visual_card); //NEW
-                    player_hand_div.appendChild(visual_card); //NEW
-                }
+        //If both the computer and player don't have 4 cards, give them cards!!!
+        let chosen_card_index = random_number(deck_of_cards.length); //Generate a random number to get a random card type
+        let chosen_card = deck_of_cards[chosen_card_index]; //Retrieve a random card from the deck
+        if(chosen_card[1].length == 0){ //If there are no more suits of the random card type (all suits of that card were drawn)
+            deck_of_cards.splice(chosen_card_index, 1); //Remove the card type from the deck (because all suits of that card were drawn)
+            continue;
+        } //If suits of the chosen card are still available in the deck
+        let card_type = chosen_card[0][0]; //Retrieve the card type
+        let card_suit_index = random_number(chosen_card[1].length); //Generate a random number to get a random card suit
+        let card_suit = chosen_card[1][card_suit_index]; //Retrieve the suit of the card type, or color if it's a joker (card type 14)
+        let card_point = chosen_card[2][0]; //Retrieve the point of the chosen card
+        let card_ability = chosen_card[2][1]; //Retrieve the ability, if any, of the chosen card
+        chosen_card[1].splice(card_suit_index, 1); //Removes the card suit from the card 2d array
+        card_name_visual = ("CARDS\\" + card_suit + "_" + card_type + ".png"); //NEW
+        visual_card = document.createElement("img"); //NEW
+        visual_card.setAttribute("src", card_name_visual); //NEW 
+        if(computer.num_of_cards < 4){ //Give the computer 4 random cards
+            computer.hand.push(new Card(card_type, card_suit, card_point, card_ability)); //Create a card object using the card type and card suit and add it to their hand
+            computer.visual_hand.push(visual_card); //NEW
+            computer_hand_div.appendChild(visual_card); //NEW
+            if(computer.num_of_cards == 1 || computer.num_of_cards == 3){
+                computer.known_hand.push(new Card(card_type, card_suit, card_point, card_ability)); //The bottom 2 cards, (index 1 and 3) the computer DOES know about them
             }
-            else { //If there are no more suits of the random card type (all suits of that card were drawn)
-                deck_of_cards.splice(chosen_card_index, 1); //Remove the card type from the deck (because all suits of that card were drawn)
+            else{
+                computer.known_hand.push(new Card(undefined, undefined, undefined, undefined)); //The top 2 cards, (index 0 and 2) the computer doesn't know about them
             }
+            computer.num_of_cards++; //Increment the number of cards in the computer's hand
+        }
+        else if(player.num_of_cards < 4){ //Give the player 4 random cards
+            player.hand.push(new Card(card_type, card_suit, card_point, card_ability)); //Create a card object using the card type and card suit and add it to their hand
+            player.num_of_cards++; //Increment the number of cards in the player's hand
+            player.visual_hand.push(visual_card); //NEW
+            player_hand_div.appendChild(visual_card); //NEW
         }
     } //End while loop
 
@@ -111,32 +102,29 @@ const start_game = () => {
 //Function that draws a card for a user (computer or player)
 //Takes a card object as input
 const draw_card = (drawn_card) => {
-
-    if(deck_of_cards.length != 0){ //If the deck isn't empty
-        while(deck_of_cards.length != 0){
-            let chosen_card_index = random_number(deck_of_cards.length); //Generate a random number to get a random card type
-            let chosen_card = deck_of_cards[chosen_card_index]; //Retrieve a random card from the deck
-            if(chosen_card[1].length != 0){ //If suits of the chosen card are still available in the deck 
-                let card_type = chosen_card[0][0]; //Retrieve the card type
-                let card_suit_index = random_number(chosen_card[1].length); //Generate a random number to get a random card suit
-                let card_suit = chosen_card[1][card_suit_index]; //Retrieve the suit of the card type, or color if it's a joker (card type 14)
-                let card_point = chosen_card[2][0]; //Retrieve the point of the chosen card
-                let card_ability = chosen_card[2][1]; //Retrieve the ability, if any, of the chosen card
-                chosen_card[1].splice(card_suit_index, 1); //Removes the card suit from the card 2d array
-                drawn_card.card_type = card_type;
-                drawn_card.card_suit = card_suit;
-                drawn_card.card_point = card_point;
-                drawn_card.card_ability = card_ability;
-                display_number_of_cards_in_deck.textContent = "Cards: "+num_of_cards_in_deck();
-                break;
-            }
-            else { //If there are no more suits of the random card type (all suits of that card were drawn)
-                deck_of_cards.splice(chosen_card_index, 1); //Remove the card type from the deck (because all suits of that card were drawn)
-            }
-        }
-    }
-    else {
+    if(deck_of_cards.length == 0){
         alert("Deck is empty! Game finished. Reveal your cards!");
+        return;
+    } //If the deck isn't empty
+    while(deck_of_cards.length != 0){ //If there are no more suits of the random card type (all suits of that card were drawn)
+        let chosen_card_index = random_number(deck_of_cards.length); //Generate a random number to get a random card type
+        let chosen_card = deck_of_cards[chosen_card_index]; //Retrieve a random card from the deck
+        if(chosen_card[1].length == 0){
+            deck_of_cards.splice(chosen_card_index, 1); //Remove the card type from the deck (because all suits of that card were drawn)
+            continue;
+        } //If suits of the chosen card are still available in the deck 
+        let card_type = chosen_card[0][0]; //Retrieve the card type
+        let card_suit_index = random_number(chosen_card[1].length); //Generate a random number to get a random card suit
+        let card_suit = chosen_card[1][card_suit_index]; //Retrieve the suit of the card type, or color if it's a joker (card type 14)
+        let card_point = chosen_card[2][0]; //Retrieve the point of the chosen card
+        let card_ability = chosen_card[2][1]; //Retrieve the ability, if any, of the chosen card
+        chosen_card[1].splice(card_suit_index, 1); //Removes the card suit from the card 2d array
+        drawn_card.card_type = card_type;
+        drawn_card.card_suit = card_suit;
+        drawn_card.card_point = card_point;
+        drawn_card.card_ability = card_ability;
+        display_number_of_cards_in_deck.textContent = "Cards: "+num_of_cards_in_deck();
+        break;  
     }
 };
 
@@ -298,57 +286,57 @@ const switch_card = (user, drawn_card, switched_card_index, pile) => { //switche
 //Function that let's the user play one of their own cards, whether right or wrong
 let play_card = (pile, e) =>{
     let following_cards_translation = false;
-    let player_hand = document.querySelectorAll(".player_hand > img");
-    for(let i = 0; i < player_hand.length; i++){
-        if(player_hand[i].getAttribute("src") == e.target.getAttribute("src")){
-            if(player.hand[i].card_type != pile.card_type){ //If wrong card was played
-                player_hand[i].style.animationIterationCount = "1";
-                player_hand[i].style.animationName = "wrong_card_played_vibration";
-                setTimeout(()=>{
-                    draw_card(drawn_card);
-                    player.hand.push(new Card(drawn_card.card_type, drawn_card.card_suit, drawn_card.card_point, drawn_card.card_ability));
-                    player.num_of_cards++;
-                    visual_card = document.createElement("img");
-                    visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
-                    player.visual_hand.push(visual_card);
-                    player_hand_div.appendChild(visual_card);
-                    player_hand[i].style.animationName = "none";
-                    visual_card.style.animationIterationCount = "1";
-                    visual_card.style.animationName = "switching_cards_in_hand";
-                }, 500);
-                setTimeout(()=>{
-                    visual_card.style.animationIterationCount = "infinite";
-                    visual_card.style.animationName = "none";
-                }, 1000);
-                break;
-            } //If right card was played
-            following_cards_translation = true;
+    for(let i = 0; i < player.num_of_cards; i++){
+        if(player.visual_hand[i].getAttribute("src") != e.target.getAttribute("src")){ //Check which card was clicked on
+            continue;
+        }
+        if(player.hand[i].card_type != pile.card_type){ //If wrong card was played
+            player.visual_hand[i].style.animationIterationCount = "1";
+            player.visual_hand[i].style.animationName = "wrong_card_played_vibration";
             setTimeout(()=>{
-                player_hand_div.removeChild(e.target);
+                draw_card(drawn_card);
+                player.hand.push(new Card(drawn_card.card_type, drawn_card.card_suit, drawn_card.card_point, drawn_card.card_ability));
+                player.num_of_cards++;
+                visual_card = document.createElement("img");
+                visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+                player.visual_hand.push(visual_card);
+                player_hand_div.appendChild(visual_card);
+                player.visual_hand[i].style.animationName = "none";
+                visual_card.style.animationIterationCount = "1";
+                visual_card.style.animationName = "switching_cards_in_hand";
             }, 500);
-            play_card_on_pile(player, player.hand[i], pile, false);
-            player.visual_hand.splice(i, 1);
-            player.hand.splice(i, 1);
-            player.num_of_cards -= 1;
-            visual_card = document.createElement("img");
-            visual_card.setAttribute("src", e.target.getAttribute("src"));
-            visual_card.style.transform = "rotate("+(45 - random_number(91))+"deg)";
-            visual_card.style.animationName = "player_playing_card";
-            pile_div.appendChild(visual_card);
-            display_full_hand(computer, player, pile);
-            continue;
+            setTimeout(()=>{
+                visual_card.style.animationIterationCount = "infinite";
+                visual_card.style.animationName = "none";
+            }, 1000);
+            break;
+        } //If right card was played
+        following_cards_translation = true;
+        setTimeout(()=>{
+            player_hand_div.removeChild(e.target);
+        }, 500);
+        play_card_on_pile(player, player.hand[i], pile, false);
+        if(following_cards_translation){
+            for(let j = (i+1); j < player.num_of_cards; j++){
+                if(j%2 == 0){
+                    player.visual_hand[j].style.animationIterationCount = "1";
+                    player.visual_hand[j].style.animationName = "card_top_row_translation";
+                }
+                else{
+                    player.visual_hand[j].style.animationIterationCount = "1";
+                    player.visual_hand[j].style.animationName = "card_bottom_row_translation";
+                }
+            }
         }
-        if(!following_cards_translation){
-            continue;
-        }
-        else if(i%2 == 0){
-            player_hand[i].style.animationIterationCount = "1";
-            player_hand[i].style.animationName = "card_top_row_translation";
-        }
-        else{
-            player_hand[i].style.animationIterationCount = "1";
-            player_hand[i].style.animationName = "card_bottom_row_translation";
-        }
+        player.visual_hand.splice(i, 1);
+        player.hand.splice(i, 1);
+        player.num_of_cards -= 1;
+        visual_card = document.createElement("img");
+        visual_card.setAttribute("src", e.target.getAttribute("src"));
+        visual_card.style.transform = "rotate("+(45 - random_number(91))+"deg)";
+        visual_card.style.animationName = "player_playing_card";
+        pile_div.appendChild(visual_card);
+        display_full_hand(computer, player, pile);   
     }
 };
 
@@ -636,5 +624,35 @@ let player_choosing_own_card_to_give_to_computer = (event) =>{
         }
         player.num_of_cards -= 1;
         
+    }
+};
+
+let player_choosing_switching_drawn_card = (event) => {
+    document.querySelector(".container_button").style.display = "flex";
+    for(let i = 0; i < player.num_of_cards; i++){
+        player.visual_hand[i].style.animationName = "none";
+    }
+    let card_src = event.target.getAttribute("src");
+    let switched_card_index = 0;
+    if(card_src != null){
+        for(let i = 0; i < player.num_of_cards; i++){
+            if(player.visual_hand[i].getAttribute("src") == card_src){
+                switched_card_index = i;
+            }
+        }
+        switch_card(player, drawn_card, switched_card_index, pile);
+        let temp_src = event.target.getAttribute("src");
+        event.target.setAttribute("src", visual_card.getAttribute("src"));
+        event.target.style.animationIterationCount = "1";
+        event.target.style.animationName = "switching_cards_in_hand";
+        visual_card.setAttribute("src", temp_src);
+        player_card_action_prompt.removeChild(visual_card);
+        container_player_card_action_prompt.style.display = "none";
+        visual_card.style.transform = "rotate("+(45 - random_number(91))+"deg)";
+        visual_card.style.animationName = "player_playing_card";
+        pile_div.appendChild(visual_card);
+        button_end_turn.style.display = "initial";
+        button_end_turn.style.animationName = "button_pop_in";
+        player_is_currently_drawing = false;
     }
 };
