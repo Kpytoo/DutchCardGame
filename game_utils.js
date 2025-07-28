@@ -72,6 +72,7 @@ let player_has_played = false; //Keep track if player has played during their tu
 let computer_turn = false; //Keep track if computer's turn
 let player_has_switched_cards = false;
 
+
 const computer_hand_div = document.querySelector(".computer_hand"); //Where we are adding/removing visual cards
 const player_hand_div = document.querySelector(".player_hand"); //Where we are adding/removing visual cards
 const deck_div = document.querySelector(".deck");

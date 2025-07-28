@@ -73,13 +73,13 @@ button_end_turn.addEventListener("click", (e) => {
         computer_hand_div.style.animationName = "user_flashing_turn";
         computer_playing_turn();
 
-        setTimeout(()=>{
-            deck_div.style.pointerEvents = "initial";
-            player_hand_div.style.animationName = "user_flashing_turn";
-            computer_hand_div.style.animationName = "none";
-            button_dutch.style.animationName = "button_pop_in";
-            button_dutch.style.pointerEvents = "initial";
-        }, 4000);
+        // setTimeout(()=>{
+        //     deck_div.style.pointerEvents = "initial";
+        //     player_hand_div.style.animationName = "user_flashing_turn";
+        //     computer_hand_div.style.animationName = "none";
+        //     button_dutch.style.animationName = "button_pop_in";
+        //     button_dutch.style.pointerEvents = "initial";
+        // }, 4000);
 
         display_full_hand(computer, player, pile);
     }
