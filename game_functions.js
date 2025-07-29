@@ -328,7 +328,7 @@ let play_card = (pile, e) =>{
             }
         }
         //We make sure the animations have ended before continuing
-        player.visual_hand[player.num_of_cards-1].addEventListener("animationend", (animationEvent) =>{
+        visual_card.addEventListener("animationend", (animationEvent) =>{
             player_hand_div.removeChild(e.target);
             player.visual_hand.splice(i, 1);
             player.hand.splice(i, 1);
@@ -415,36 +415,38 @@ let play_card_from_computer = (pile, e) =>{
 
 //Computer will check if it can play anything from its KNOWN HAND, looking at the pile card.
 let computer_play_card = (pile) => {
-    for(let c_type = 0; c_type < computer.num_of_cards; c_type++){ //"c_type" abbv. "Card Type"
-        if(computer.known_hand[c_type].card_type == undefined){ //Looking at its "unknown" cards
+    for(let i = 0; i < computer.num_of_cards; i++){
+        if(computer.known_hand[i].card_type == undefined){ //Looking at its "unknown" cards
             continue;
         }
-        else if(computer.known_hand[c_type].card_type == pile.card_type){ //Checking with its "known" cards
-            play_card_on_pile(computer, computer.known_hand[c_type], pile, false); //Play the corresponding card on the pile
-            computer.visual_hand[c_type].style.visibility = "hidden";
-            for(let i = (c_type+1); i < computer.num_of_cards; i++){
-                if(i%2 == 0){
-                    computer.visual_hand[i].style.animationIterationCount = "1";
-                    computer.visual_hand[i].style.animationName = "card_bottom_row_translation_computer";
-                }
-                else{
-                    computer.visual_hand[i].style.animationIterationCount = "1";
-                    computer.visual_hand[i].style.animationName = "card_top_row_translation_computer";
-                }
-            }
+        else if(computer.known_hand[i].card_type == pile.card_type){ //Checking with its "known" cards
+            computer.visual_hand[i].style.visibility = "hidden";
             visual_card = document.createElement("img");
-            visual_card.setAttribute("src", ("CARDS\\" + computer.known_hand[c_type].card_suit + "_" + computer.known_hand[c_type].card_type + ".png"));
+            visual_card.setAttribute("src", ("CARDS\\" + computer.known_hand[i].card_suit + "_" + computer.known_hand[i].card_type + ".png"));
             visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
             visual_card.style.animationName = "computer_playing_card";
             pile_div.appendChild(visual_card);
-            setTimeout(()=>{
-                computer_hand_div.removeChild(computer.visual_hand[c_type]); //Visuals of the cards
-                computer.visual_hand.splice(c_type, 1); //Actual imgs
-                computer.known_hand.splice(c_type, 1); //Remove played card from the known hand
-                computer.hand.splice(c_type, 1); //Remove played card from the actual hand
+            play_card_on_pile(computer, computer.known_hand[i], pile, false); //Play the corresponding card on the pile
+            for(let j = (i+1); j < computer.num_of_cards; j++){
+                if(j%2 == 0){
+                    computer.visual_hand[j].style.animationIterationCount = "1";
+                    computer.visual_hand[j].style.animationName = "card_bottom_row_translation_computer";
+                }
+                else{
+                    computer.visual_hand[j].style.animationIterationCount = "1";
+                    computer.visual_hand[j].style.animationName = "card_top_row_translation_computer";
+                }
+            }
+            visual_card.addEventListener("animationend", (animationEvent) => {
+                computer_hand_div.removeChild(computer.visual_hand[i]); //Visuals of the cards
+                computer.visual_hand.splice(i, 1); //Actual imgs
+                computer.known_hand.splice(i, 1); //Remove played card from the known hand
+                computer.hand.splice(i, 1); //Remove played card from the actual hand
                 computer.num_of_cards -= 1; //Decrement the number of cards from the hand
-            }, 500);
-            display_full_hand(computer, player, pile);
+                display_full_hand(computer, player, pile);
+                computer_play_card(pile);
+            }, {once: true});
+            break;
         }
         else{ //Else, play nothing
             continue;
@@ -500,7 +502,7 @@ let computer_playing_turn = () =>{
         visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
         container_computer_card_action.style.display = "initial";
         computer_card_action.appendChild(visual_card);
-        if(random_number(100) < 50){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
+        if(random_number(100) < 0){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
             switch_card(computer, drawn_card, undefined, pile); //Switch the drawn card with a random card from the computer's hand.
             setTimeout(()=>{
                 computer_card_action.removeChild(visual_card);
@@ -532,7 +534,7 @@ let computer_playing_turn = () =>{
     }, 4000);
 
 
-    //4. Computer will end its turn.
+    // 4. Computer will end its turn.
     setTimeout(()=>{
         computer_end_turn();
         if(player.dutch){
