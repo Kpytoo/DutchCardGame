@@ -239,36 +239,38 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
 //Function that switches one card from the user's hand with the drawn card, and plays the switched card
 const switch_card = (user, drawn_card, switched_card_index, pile) => { //switched_card_index is "undefined" if the computer calls the function
     if(user == computer){ //If computer is switching
-        // alert("Computer is switching!");
         let random_card = random_number(user.num_of_cards);
-        setTimeout(()=>{
+        visual_card.addEventListener("animationend", (animationEvent) => {
+            let switched_card = new Card(user.hand[random_card].card_type, //Get the card from the user's hand that will be switched
+                                         user.hand[random_card].card_suit,
+                                         user.hand[random_card].card_point,
+                                         user.hand[random_card].card_ability);
+            //Assign the drawn card to the actual hand  
+            user.hand[random_card].card_type = drawn_card.card_type;
+            user.hand[random_card].card_suit = drawn_card.card_suit;
+            user.hand[random_card].card_point = drawn_card.card_point;
+            user.hand[random_card].card_ability = drawn_card.card_ability;
+            //Assign the drawn card to the known hand
+            user.known_hand[random_card].card_type = drawn_card.card_type;
+            user.known_hand[random_card].card_suit = drawn_card.card_suit;
+            user.known_hand[random_card].card_point = drawn_card.card_point;
+            user.known_hand[random_card].card_ability = drawn_card.card_ability;
+            play_card_on_pile(user, switched_card, pile, false); //Play the switched card     
             let card_src = user.visual_hand[random_card].getAttribute("src");
             user.visual_hand[random_card].setAttribute("src", visual_card.getAttribute("src"));
             user.visual_hand[random_card].style.animationName = "switching_cards_in_hand";
+            computer_card_action.removeChild(visual_card);
+            container_computer_card_action.style.display = "none";
             visual_card.setAttribute("src", card_src);
-        }, 2000);
-        setTimeout(()=>{
-            if(user.visual_hand[random_card] != undefined){
-                user.visual_hand[random_card].style.animationName = "none"; 
-            }
-        }, 4000);
-        let switched_card = new Card(user.hand[random_card].card_type, //Get the card from the user's hand that will be switched
-                                     user.hand[random_card].card_suit,
-                                     user.hand[random_card].card_point,
-                                     user.hand[random_card].card_ability);
-        //Assign the drawn card to the actual hand  
-        user.hand[random_card].card_type = drawn_card.card_type;
-        user.hand[random_card].card_suit = drawn_card.card_suit;
-        user.hand[random_card].card_point = drawn_card.card_point;
-        user.hand[random_card].card_ability = drawn_card.card_ability;
-        //Assign the drawn card to the known hand
-        user.known_hand[random_card].card_type = drawn_card.card_type;
-        user.known_hand[random_card].card_suit = drawn_card.card_suit;
-        user.known_hand[random_card].card_point = drawn_card.card_point;
-        user.known_hand[random_card].card_ability = drawn_card.card_ability;
-        setTimeout(()=>{
-            play_card_on_pile(user, switched_card, pile, false); //Play the switched card     
-        }, 2100);
+            visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
+            visual_card.style.animationName = "computer_playing_card";
+            pile_div.appendChild(visual_card);
+            user.visual_hand[random_card].addEventListener("animationend", (animationEvent2) => {
+                if(user.visual_hand[random_card] != undefined){
+                    user.visual_hand[random_card].style.animationName = "none"; 
+                }
+            }, {once: true});
+        }, {once: true});
     }
     else{ //If player is switching
         let switched_card = new Card(user.hand[switched_card_index].card_type, //Get the card from the user's hand that will be switched
@@ -462,88 +464,33 @@ let computer_play_card = (pile) => {
 //3. Computer will check again if it can play, reference (1.).
 //4. Computer will end its turn.
 let computer_playing_turn = () =>{
+    
     //Every turn, the computer has 2% chance of randomly calling Dutch, except if the player has already called Dutch
-    if(!player.dutch){ //Check if player hasn't called Dutch
-        if(random_number(100) < 2){ //Get a random number between 0-99, if the number is between 0-2, computer calls Dutch
-            document.querySelector("div.computer_dutch").style.display = "initial";
-            computer.dutch = true; //Notate that the computer has called Dutch
-            computer_end_turn();
-            return;
-        }
-    }
+    if(computer_dutch_call_chance() == true) return;
 
-    //CHECKING: If computer's hand is empty at the start of its turn, automatic Dutch and skip turn.
-    if(computer.num_of_cards == 0){
-        computer_end_turn()
-        if(!player.dutch){ //Automatic dutch if empty handed
-            document.querySelector("div.computer_dutch").style.display = "initial";
-            computer.dutch = true;
-        }
-        return;
-    }
+    //CHECKING: If computer's hand is empty at the start of its turn, automatic Dutch (if player didn't dutch) and skip turn.
+    if(computer_empty_hand_check() == true) return;
 
     //1. Computer will check if it can play anything from its KNOWN HAND, looking at the pile card.
     computer_play_card(pile);
 
-    //CHECKING: If computer's hand is empty after playing, can't draw, skip turn.
-    if(computer.num_of_cards == 0){ 
-        computer_end_turn()
-        if(!player.dutch){ //Automatic dutch if empty handed
-            document.querySelector("div.computer_dutch").style.display = "initial";
-            computer.dutch = true;
-        }
-        return;
-    }
+    //CHECKING: If computer's hand is empty after playing, automatic Dutch (if player didn't dutch) and skip turn.
+    if(computer_empty_hand_check() == true) return;
 
     //2. Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
     setTimeout(() =>{
-        draw_card(drawn_card); //Draw a random card from the deck
-        visual_card = document.createElement("img");
-        visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
-        container_computer_card_action.style.display = "initial";
-        computer_card_action.appendChild(visual_card);
-        if(random_number(100) < 0){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
-            switch_card(computer, drawn_card, undefined, pile); //Switch the drawn card with a random card from the computer's hand.
-            setTimeout(()=>{
-                computer_card_action.removeChild(visual_card);
-                container_computer_card_action.style.display = "none";
-                visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
-                visual_card.style.animationName = "computer_playing_card";
-                pile_div.appendChild(visual_card);
-            }, 2000);
-            console.log(computer.known_hand);
-        }
-        else { //Play the drawn card
-            // alert("Computer is playing the drawn card.");
-            play_card_on_pile(computer, drawn_card, pile, false); //Play the drawn card
-            setTimeout(()=>{
-                computer_card_action.removeChild(visual_card);
-                container_computer_card_action.style.display = "none";
-                visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
-                visual_card.style.animationName = "computer_playing_card";
-                pile_div.appendChild(visual_card);
-            }, 2000);
-            console.log(computer.known_hand);
-        }           
+        computer_drawing_card();           
     }, 1500);
 
-    
+    //3. Computer will check again if it can play, reference (1.).
     setTimeout(() =>{
-        //3. Computer will check again if it can play, reference (1.).
         computer_play_card(pile);        
     }, 4000);
 
 
     // 4. Computer will end its turn.
     setTimeout(()=>{
-        computer_end_turn();
-        if(player.dutch){
-            alert("Showing hands and total!");
-            total_score_count();
-            return;
-        }
-        button_dutch.style.animationName = "button_pop_in";
-        button_dutch.style.pointerEvents = "initial";
+        computer_ending_its_turn();
     }, 5000);
 
 };
@@ -630,7 +577,8 @@ let player_choosing_own_card_to_give_to_computer = (event) =>{
             player_hand_div.removeChild(event.target);
             player.hand.splice(index, 1);
             player.visual_hand.splice(index, 1);
-            player.num_of_cards -= 1; 
+            player.num_of_cards -= 1;
+            added_visual_card.style.animationName = "none";
         }, {once: true}); 
     }
 };
@@ -665,10 +613,70 @@ let player_choosing_switching_drawn_card = (event) => {
     }
 };
 
-let computer_end_turn = () => {
+let computer_end_turn_set_variables = () => {
     computer_turn = false; 
     player_turn = true;
     deck_div.style.pointerEvents = "initial";
     player_hand_div.style.animationName = "user_flashing_turn";
     computer_hand_div.style.animationName = "none";
+};
+
+//Every turn, the computer has 2% chance of randomly calling Dutch, except if the player has already called Dutch
+let computer_dutch_call_chance = () => {
+    if(!player.dutch && (random_number(100) < 2)){ //Check if player hasn't called Dutch and Get a random number between 0-99, if the number is between 0-2, computer calls Dutch
+        document.querySelector("div.computer_dutch").style.display = "initial";
+        computer.dutch = true; //Notate that the computer has called Dutch
+        computer_end_turn_set_variables();
+        return true;
+    }
+    return false;
+};
+
+//If computer's hand is empty at the start of its turn, automatic Dutch and skip turn.
+let computer_empty_hand_check = () => {
+    if(computer.num_of_cards == 0){
+        computer_end_turn_set_variables()
+        if(!player.dutch){ //Automatic dutch if empty handed
+            document.querySelector("div.computer_dutch").style.display = "initial";
+            computer.dutch = true;
+        }
+        return true;
+    }
+    return false;
+};
+
+//Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
+let computer_drawing_card = () => {
+    draw_card(drawn_card); //Draw a random card from the deck
+    visual_card = document.createElement("img");
+    visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+    container_computer_card_action.style.display = "initial";
+    computer_card_action.appendChild(visual_card);
+    if(random_number(100) < 100){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
+        switch_card(computer, drawn_card, undefined, pile); //Switch the drawn card with a random card from the computer's hand.
+        console.log(computer.known_hand);
+    }
+    else { //Play the drawn card
+        play_card_on_pile(computer, drawn_card, pile, false); //Play the drawn card
+        visual_card.addEventListener("animationend", (animationEvent) => {
+            computer_card_action.removeChild(visual_card);
+            container_computer_card_action.style.display = "none";
+            visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
+            visual_card.style.animationName = "computer_playing_card";
+            pile_div.appendChild(visual_card);
+        }, {once: true});
+        console.log(computer.known_hand);
+    }
+};
+
+//Computer will end its turn.
+let computer_ending_its_turn = () => {
+    computer_end_turn_set_variables();
+    if(player.dutch){
+        alert("Showing hands and total!");
+        total_score_count();
+        location.reload();
+    }
+    button_dutch.style.animationName = "button_pop_in";
+    button_dutch.style.pointerEvents = "initial";
 };
