@@ -406,7 +406,7 @@ div.computer_dutch {
         transform: scale(0) rotate(360deg);
     }
     80%{
-        transform: scale(1.2);
+        transform: scale(1.5);
     }
     100%{
         transform: scale(1);

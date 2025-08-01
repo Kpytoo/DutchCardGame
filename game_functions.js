@@ -137,103 +137,108 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
     pile.card_point = card.card_point;
     pile.card_ability = card.card_ability;
 
-    // if(played_by_opp != true){ //If the opponent didn't play your card, or vice versa
-    //     if(user == player){ //If the user is playing the card.
-    //         if(card.card_type == "seven"){ //If the player is playing a seven.
-    //             if(user.num_of_cards != 0){ //Check if user's hand isn't empty
-    //                 alert("Checking from playing seven!");  
-    //             }
-    //             else{
-    //                 alert("You've played a seven!\n Can't peek if you have no more cards in hand!");
-    //             }
-    //         }
-    //         else if(card.card_type == "eight"){ //If the player is playing an eight.
-    //             if(computer.num_of_cards != 0){ //Check if computer's hand isn't empty
-    //                 alert("Checking computer's hand from playing an eight!");
-    //             }
-    //             else{
-    //                 alert("You've played an eight!\n Can't peek if the computer has no more cards in its hand!");
-    //             }
-    //         }
-    //         else if(card.card_type == "ten"){ //If the player is playing a ten.
-    //             if(computer.num_of_cards != 0){ //Check if computer's hand isn't empty
-    //                 if(player.num_of_cards != 0){ //Also check if the player's hand isn't empty
-    //                     alert("Played a ten! Deciding to switch or not... Then proceeding with the chosen action");
-    //                 }
-    //                 else{ //Can't switch cards after playing a ten if the player has no cards in hand.
-    //                     alert("You've played a ten!\n Can't switch cards if you don't have anymore cards in your hand!")
-    //                 }   
-    //             }
-    //             else{ //Can't switch cards after playing a ten if the computer has no cards in hand.
-    //                 alert("You've played a ten!\n Can't switch cards if the computer has no more cards in its hand!");
-    //             }
-    //         }
-    //         else{} //Else do nothing
-    //     }
-    //     else{ //If the computer is playing the card.
-    //         if(card.card_type == "seven"){ //If the computer is playing a seven.
-    //             if(computer.num_of_cards != 0){//If the computer's hand isn't empty
-    //                 for(let card_index = 0; card_index < computer.num_of_cards; card_index++){ //Check for cards that are unknown to the comp in the known hand (values are undefined)
-    //                     if(computer.known_hand[card_index].card_type == undefined){ //If found, make the card known to the card computer
-    //                         alert(card_index + " " + computer.known_hand[card_index].card_type + " " + computer.known_hand[card_index].card_suit);
-    //                         computer.known_hand[card_index].card_type = computer.hand[card_index].card_type;
-    //                         computer.known_hand[card_index].card_suit = computer.hand[card_index].card_suit;
-    //                         computer.known_hand[card_index].card_point = computer.hand[card_index].card_point;
-    //                         computer.known_hand[card_index].card_ability = computer.hand[card_index].card_ability;
-    //                         alert(card_index + " " + computer.known_hand[card_index].card_type + " " + computer.known_hand[card_index].card_suit);
-    //                         break; //Break out of the for loop
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         else if(card.card_type == "eight"){ //If the computer is playing an eight, it doesn't do anything --- dumb computer :(
-    //         }
-    //         else if(card.card_type == "ten"){ //If the computer is playing a ten.
-    //             // alert("ten was used by the computer");
-    //             if(player.num_of_cards != 0){ //Check if the player's hand isn't empty
-    //                 if(computer.num_of_cards != 0){ //also check if computer's hand isn't empty
-    //                     let player_card_index = random_number(player.num_of_cards); //Get a random index based on the player's hand
-    //                     let computer_card_index = random_number(computer.num_of_cards); //Get a random index based on the computer's hand
+    if(played_by_opp == true) return; //If the opponent didn't play your card, or vice versa
+    
+    if(user == player){ //If the user is playing the card.
+        if(card.card_type == "seven"){ //If the player is playing a seven.
+            if(user.num_of_cards != 0){ //Check if user's hand isn't empty
+                alert("Checking from playing seven!");  
+            }
+            else{
+                alert("You've played a seven!\n Can't peek if you have no more cards in hand!");
+            }
+        }
+        else if(card.card_type == "eight"){ //If the player is playing an eight.
+            if(computer.num_of_cards != 0){ //Check if computer's hand isn't empty
+                alert("Checking computer's hand from playing an eight!");
+            }
+            else{
+                alert("You've played an eight!\n Can't peek if the computer has no more cards in its hand!");
+            }
+        }
+        else if(card.card_type == "ten"){ //If the player is playing a ten.
+            if(computer.num_of_cards != 0){ //Check if computer's hand isn't empty
+                if(player.num_of_cards != 0){ //Also check if the player's hand isn't empty
+                    alert("Played a ten! Deciding to switch or not... Then proceeding with the chosen action");
+                }
+                else{ //Can't switch cards after playing a ten if the player has no cards in hand.
+                    alert("You've played a ten!\n Can't switch cards if you don't have anymore cards in your hand!")
+                }   
+            }
+            else{ //Can't switch cards after playing a ten if the computer has no cards in hand.
+                alert("You've played a ten!\n Can't switch cards if the computer has no more cards in its hand!");
+            }
+        }
+        else{} //Else do nothing
+    }
+    else{ //If the computer is playing the card.
+        if(card.card_type == "seven"){ //If the computer is playing a seven.
+            if(computer.num_of_cards != 0){//If the computer's hand isn't empty
+                for(let card_index = 0; card_index < computer.num_of_cards; card_index++){ //Check for cards that are unknown to the comp in the known hand (values are undefined)
+                    if(computer.known_hand[card_index].card_type == undefined){ //If found, make the card known to the card computer
+                        alert(card_index + " " + computer.known_hand[card_index].card_type + " " + computer.known_hand[card_index].card_suit);
+                        computer.known_hand[card_index].card_type = computer.hand[card_index].card_type;
+                        computer.known_hand[card_index].card_suit = computer.hand[card_index].card_suit;
+                        computer.known_hand[card_index].card_point = computer.hand[card_index].card_point;
+                        computer.known_hand[card_index].card_ability = computer.hand[card_index].card_ability;
+                        alert(card_index + " " + computer.known_hand[card_index].card_type + " " + computer.known_hand[card_index].card_suit);
+                        break; //Break out of the for loop
+                    }
+                }
+            }
+        }
+        else if(card.card_type == "eight"){ //If the computer is playing an eight, it doesn't do anything --- dumb computer :(
+        }
+        else if(card.card_type == "ten"){ //If the computer is playing a ten.
+            // alert("ten was used by the computer");
+            if(player.num_of_cards != 0 && computer.num_of_cards != 0){ //Check if the player's hand isn't empty and also check if computer's hand isn't empty
+                let player_card_index = random_number(player.num_of_cards); //Get a random index based on the player's hand
+                let computer_card_index = random_number(computer.num_of_cards); //Get a random index based on the computer's hand
 
-    //                     let placeholder_card = new Card(player.hand[player_card_index].card_type, //Make a place holder card during the switch.
-    //                                                     player.hand[player_card_index].card_suit,
-    //                                                     player.hand[player_card_index].card_point,
-    //                                                     player.hand[player_card_index].card_ability);
+                let placeholder_card = new Card(player.hand[player_card_index].card_type, //Make a place holder card during the switch.
+                                                player.hand[player_card_index].card_suit,
+                                                player.hand[player_card_index].card_point,
+                                                player.hand[player_card_index].card_ability);
 
-    //                     let placeholder_card_src = player.visual_hand[player_card_index].getAttribute("src");
+                let placeholder_card_src = player.visual_hand[player_card_index].getAttribute("src");
 
-    //                     //Assign to the player's card the computer's card
-    //                     player.hand[player_card_index].card_type = computer.hand[computer_card_index].card_type;
-    //                     player.hand[player_card_index].card_suit = computer.hand[computer_card_index].card_suit;
-    //                     player.hand[player_card_index].card_point = computer.hand[computer_card_index].card_point;
-    //                     player.hand[player_card_index].card_ability = computer.hand[computer_card_index].card_ability;
+                //Assign to the player's card the computer's card
+                player.hand[player_card_index].card_type = computer.hand[computer_card_index].card_type;
+                player.hand[player_card_index].card_suit = computer.hand[computer_card_index].card_suit;
+                player.hand[player_card_index].card_point = computer.hand[computer_card_index].card_point;
+                player.hand[player_card_index].card_ability = computer.hand[computer_card_index].card_ability;
 
-    //                     player.visual_hand[player_card_index].setAttribute("src", computer.visual_hand[computer_card_index].getAttribute("src"));
-    //                     player.visual_hand[player_card_index].style.animationIterationCount = "1";
-    //                     player.visual_hand[player_card_index].style.animationName = "switching_cards_in_hand_from_playing_ten";
+                player.visual_hand[player_card_index].setAttribute("src", computer.visual_hand[computer_card_index].getAttribute("src"));
+                player.visual_hand[player_card_index].style.animationIterationCount = "1";
+                player.visual_hand[player_card_index].style.animationName = "switching_cards_in_hand_from_playing_ten";
 
-    //                     //Assign to the computer's card the placeholder_card (player card)
-    //                     //**For the known hand, we assign undefined because the computer won't know its new changed card.
-    //                     computer.hand[computer_card_index].card_type = placeholder_card.card_type;
-    //                     computer.hand[computer_card_index].card_suit = placeholder_card.card_suit;
-    //                     computer.hand[computer_card_index].card_point = placeholder_card.card_point;
-    //                     computer.hand[computer_card_index].card_ability = placeholder_card.card_ability;
-    //                     computer.known_hand[computer_card_index].card_type = undefined;
-    //                     computer.known_hand[computer_card_index].card_suit = undefined;
-    //                     computer.known_hand[computer_card_index].card_point = undefined;
-    //                     computer.known_hand[computer_card_index].card_ability = undefined;
+                //Assign to the computer's card the placeholder_card (player card)
+                //**For the known hand, we assign undefined because the computer won't know its new changed card.
+                computer.hand[computer_card_index].card_type = placeholder_card.card_type;
+                computer.hand[computer_card_index].card_suit = placeholder_card.card_suit;
+                computer.hand[computer_card_index].card_point = placeholder_card.card_point;
+                computer.hand[computer_card_index].card_ability = placeholder_card.card_ability;
+                computer.known_hand[computer_card_index].card_type = undefined;
+                computer.known_hand[computer_card_index].card_suit = undefined;
+                computer.known_hand[computer_card_index].card_point = undefined;
+                computer.known_hand[computer_card_index].card_ability = undefined;
 
-    //                     computer.visual_hand[computer_card_index].setAttribute("src", placeholder_card_src);
-    //                     computer.visual_hand[computer_card_index].style.animationIterationCount = "1";
-    //                     computer.visual_hand[computer_card_index].style.animationName = "switching_cards_in_hand_from_playing_ten";
+                computer.visual_hand[computer_card_index].setAttribute("src", placeholder_card_src);
+                computer.visual_hand[computer_card_index].style.animationIterationCount = "1";
+                computer.visual_hand[computer_card_index].style.animationName = "switching_cards_in_hand_from_playing_ten";
 
-    //                     // alert("The computer has switched your Card "+(player_card_index+1)+" with one of its own!");
-    //                 }
-    //             }
-    //         }
-    //         else{} //Else do nothing
-    //     }
-    // }
+                computer.visual_hand[computer_card_index].addEventListener("animationend", (animationEnd3) => {
+                    if(player.visual_hand[player_card_index] != undefined){
+                        player.visual_hand[player_card_index].style.animationName = "none";
+                    }
+                    if(computer.visual_hand[computer_card_index] != undefined){
+                        computer.visual_hand[computer_card_index].style.animationName = "none"; 
+                    }
+                }, {once: true});
+            }
+        }
+        else{} //Else do nothing
+    }
 };
 
 //Function that switches one card from the user's hand with the drawn card, and plays the switched card
@@ -254,8 +259,7 @@ const switch_card = (user, drawn_card, switched_card_index, pile) => { //switche
             user.known_hand[random_card].card_type = drawn_card.card_type;
             user.known_hand[random_card].card_suit = drawn_card.card_suit;
             user.known_hand[random_card].card_point = drawn_card.card_point;
-            user.known_hand[random_card].card_ability = drawn_card.card_ability;
-            play_card_on_pile(user, switched_card, pile, false); //Play the switched card     
+            user.known_hand[random_card].card_ability = drawn_card.card_ability;   
             let card_src = user.visual_hand[random_card].getAttribute("src");
             user.visual_hand[random_card].setAttribute("src", visual_card.getAttribute("src"));
             user.visual_hand[random_card].style.animationName = "switching_cards_in_hand";
@@ -269,6 +273,7 @@ const switch_card = (user, drawn_card, switched_card_index, pile) => { //switche
                 if(user.visual_hand[random_card] != undefined){
                     user.visual_hand[random_card].style.animationName = "none"; 
                 }
+                play_card_on_pile(user, switched_card, pile, false); //Play the switched card
             }, {once: true});
         }, {once: true});
     }
@@ -428,7 +433,6 @@ let computer_play_card = (pile) => {
             visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
             visual_card.style.animationName = "computer_playing_card";
             pile_div.appendChild(visual_card);
-            play_card_on_pile(computer, computer.known_hand[i], pile, false); //Play the corresponding card on the pile
             for(let j = (i+1); j < computer.num_of_cards; j++){
                 if(j%2 == 0){
                     computer.visual_hand[j].style.animationIterationCount = "1";
@@ -440,11 +444,16 @@ let computer_play_card = (pile) => {
                 }
             }
             visual_card.addEventListener("animationend", (animationEvent) => {
+                let card_placed_on_pile = new Card(computer.known_hand[i].card_type,
+                                                   computer.known_hand[i].card_suit,
+                                                   computer.known_hand[i].card_point,
+                                                   computer.known_hand[i].card_ability);
                 computer_hand_div.removeChild(computer.visual_hand[i]); //Visuals of the cards
                 computer.visual_hand.splice(i, 1); //Actual imgs
                 computer.known_hand.splice(i, 1); //Remove played card from the known hand
                 computer.hand.splice(i, 1); //Remove played card from the actual hand
                 computer.num_of_cards -= 1; //Decrement the number of cards from the hand
+                play_card_on_pile(computer, card_placed_on_pile, pile, false); //Play the corresponding card on the pile
                 display_full_hand(computer, player, pile);
                 computer_play_card(pile);
             }, {once: true});
@@ -652,18 +661,20 @@ let computer_drawing_card = () => {
     visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
     container_computer_card_action.style.display = "initial";
     computer_card_action.appendChild(visual_card);
-    if(random_number(100) < 100){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
+    if(random_number(100) < 50){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
         switch_card(computer, drawn_card, undefined, pile); //Switch the drawn card with a random card from the computer's hand.
         console.log(computer.known_hand);
     }
     else { //Play the drawn card
-        play_card_on_pile(computer, drawn_card, pile, false); //Play the drawn card
         visual_card.addEventListener("animationend", (animationEvent) => {
             computer_card_action.removeChild(visual_card);
             container_computer_card_action.style.display = "none";
             visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
             visual_card.style.animationName = "computer_playing_card";
             pile_div.appendChild(visual_card);
+            visual_card.addEventListener("animationend", (animationInternalEvent) => {
+                play_card_on_pile(computer, drawn_card, pile, false); //Play the drawn card
+            }, {once: true});
         }, {once: true});
         console.log(computer.known_hand);
     }
