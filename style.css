@@ -99,7 +99,8 @@ button.switch {
 .computer_hand > img {
     animation-name: none;
     animation-timing-function: ease-in-out;
-    animation-duration: 0.5s;
+    animation-duration: 0.75s;
+    animation-fill-mode: none;
     pointer-events: initial;   
 }
 
@@ -179,7 +180,7 @@ div.pile > img {
     width: 100px;
     height: 200px;
     animation-name: none;
-    animation-duration: 1s;
+    animation-duration: 0.75s;
     animation-timing-function: ease;
 }
 
@@ -277,7 +278,7 @@ div.computer_dutch {
 .player_hand > img {
     animation-name: none;
     animation-timing-function: ease-in-out;
-    animation-duration: 0.5s;
+    animation-duration: 0.75s;
     animation-iteration-count: infinite;    
 }
 
@@ -405,7 +406,7 @@ div.computer_dutch {
         transform: scale(0) rotate(360deg);
     }
     80%{
-        transform: scale(1.2);
+        transform: scale(1.5);
     }
     100%{
         transform: scale(1);
