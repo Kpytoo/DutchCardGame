@@ -142,7 +142,10 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
     if(user == player){ //If the user is playing the card.
         if(card.card_type == "seven"){ //If the player is playing a seven.
             if(user.num_of_cards != 0){ //Check if user's hand isn't empty
-                alert("Checking from playing seven!");  
+                alert("Checking from playing seven!");
+                // perspective: 800px;
+                // transform-style: preserve-3d;
+                // transform: rotateY(180deg);
             }
             else{
                 alert("You've played a seven!\n Can't peek if you have no more cards in hand!");
@@ -374,6 +377,7 @@ let play_card_from_computer = (pile, e) =>{
         } //If right card was played
         deck_div.style.pointerEvents = "none";
         button_end_turn.style.animationName = "button_pop_out";
+        button_end_turn.style.pointerEvents = "none";
         button_dutch.style.animationName = "button_pop_out";
         button_dutch.style.pointerEvents = "none";
         computer.visual_hand[i].style.visibility = "hidden";
@@ -401,17 +405,10 @@ let play_card_from_computer = (pile, e) =>{
             computer.hand.splice(i, 1);
             computer.num_of_cards -= 1;
             display_full_hand(computer, player, pile);
-            // document.querySelectorAll(".player_hand > img").forEach(e => {
-            //     e.style.animationIterationCount = "infinite";
-            //     e.style.animationName = "switching_shaking_cards";
-            // });
             for(let img = 0; img < player.num_of_cards; img++){
                 player.visual_hand[img].style.animationIterationCount = "infinite";
                 player.visual_hand[img].style.animationName = "switching_shaking_cards";
             }
-            // document.querySelectorAll(".computer_hand > img").forEach(e => {
-            //     e.style.pointerEvents = "none";
-            // });
             for(let img = 0; img < computer.num_of_cards; img++){
                 computer.visual_hand[img].style.pointerEvents = "none";
             }
@@ -534,21 +531,18 @@ let total_score_count = () => {
 
 let player_choosing_own_card_to_give_to_computer = (event) =>{
     if(event.target.getAttribute("class") == null){
-        button_end_turn.style.animationName = "button_pop_in";  
+        button_end_turn.style.animationName = "button_pop_in";
+        button_end_turn.style.pointerEvents = "initial"; 
         if(!player_has_drawn){
             button_dutch.style.animationName = "button_pop_in";
-            button_dutch.style.pointerEvents = "initial"; 
+            button_dutch.style.pointerEvents = "initial";
+            button_end_turn.style.animationName = "button_pop_out";
+            deck_div.style.pointerEvents = "initial";
         }
-        // document.querySelectorAll(".player_hand > img").forEach(e => {
-        //     e.style.animationName = "none";
-        // });
         for(let img = 0; img < player.num_of_cards; img++){
             player.visual_hand[img].style.animationName = "none";
         }
         player_hand_div.removeEventListener("click", player_choosing_own_card_to_give_to_computer);
-        // document.querySelectorAll(".computer_hand > img").forEach(e => {
-        //     e.style.pointerEvents = "initial";
-        // });
         for(let img = 0; img < computer.num_of_cards; img++){
             computer.visual_hand[img].style.pointerEvents = "initial";
         }
