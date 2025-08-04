@@ -142,10 +142,23 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
     if(user == player){ //If the user is playing the card.
         if(card.card_type == "seven"){ //If the player is playing a seven.
             if(user.num_of_cards != 0){ //Check if user's hand isn't empty
-                alert("Checking from playing seven!");
+                // alert("Checking from playing seven!");
                 // perspective: 800px;
                 // transform-style: preserve-3d;
                 // transform: rotateY(180deg);
+                deck_div.style.pointerEvents = "none";
+                button_end_turn.style.animationName = "button_pop_out";
+                button_end_turn.style.pointerEvents = "none";
+                button_dutch.style.animationName = "button_pop_out";
+                button_dutch.style.pointerEvents = "none";
+                visual_card.addEventListener("animationend", (animEnd) =>{
+                    for(let i = 0; i < player.num_of_cards; i++){
+                        player.visual_hand[i].style.animationIterationCount = "infinite";
+                        player.visual_hand[i].style.animationName = "switching_shaking_cards";
+                    }
+                    player_hand_div.addEventListener("click", player_playing_a_seven);    
+                }, {once: true});
+                
             }
             else{
                 alert("You've played a seven!\n Can't peek if you have no more cards in hand!");
@@ -613,6 +626,23 @@ let player_choosing_switching_drawn_card = (event) => {
         button_end_turn.style.display = "initial";
         button_end_turn.style.animationName = "button_pop_in";
         player_is_currently_drawing = false;
+    }
+};
+
+let player_playing_a_seven = (event) => {
+    if(event.target.getAttribute("class") == null){
+        button_end_turn.style.animationName = "button_pop_in";
+        button_end_turn.style.pointerEvents = "initial"; 
+        if(!player_has_drawn){
+            button_dutch.style.animationName = "button_pop_in";
+            button_dutch.style.pointerEvents = "initial";
+            button_end_turn.style.animationName = "button_pop_out";
+            deck_div.style.pointerEvents = "initial";
+        }
+        for(let i = 0; i < player.num_of_cards; i++){
+            player.visual_hand[i].style.animationName = "none";
+        }
+        player_hand_div.removeEventListener("click", player_playing_a_seven);    
     }
 };
 
