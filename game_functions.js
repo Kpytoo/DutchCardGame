@@ -140,8 +140,7 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
     if(played_by_opp == true) return; //If the opponent didn't play your card, or vice versa
     
     if(user == player){ //If the user is playing the card.
-        if(card.card_type == "seven"){ //If the player is playing a seven.
-            if(user.num_of_cards != 0){ //Check if user's hand isn't empty
+        if(card.card_type == "seven" && user.num_of_cards != 0){ //If the player is playing a seven and check if user's hand isn't empty
                 // alert("Checking from playing seven!");
                 // perspective: 800px;
                 // transform-style: preserve-3d;
@@ -158,11 +157,6 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
                     }
                     player_hand_div.addEventListener("click", player_playing_a_seven);    
                 }, {once: true});
-                
-            }
-            else{
-                alert("You've played a seven!\n Can't peek if you have no more cards in hand!");
-            }
         }
         else if(card.card_type == "eight"){ //If the player is playing an eight.
             if(computer.num_of_cards != 0){ //Check if computer's hand isn't empty
