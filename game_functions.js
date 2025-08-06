@@ -141,30 +141,38 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
     
     if(user == player){ //If the user is playing the card.
         if(card.card_type == "seven" && user.num_of_cards != 0){ //If the player is playing a seven and check if user's hand isn't empty
-                // alert("Checking from playing seven!");
-                // perspective: 800px;
-                // transform-style: preserve-3d;
-                // transform: rotateY(180deg);
-                deck_div.style.pointerEvents = "none";
-                button_end_turn.style.animationName = "button_pop_out";
-                button_end_turn.style.pointerEvents = "none";
-                button_dutch.style.animationName = "button_pop_out";
-                button_dutch.style.pointerEvents = "none";
-                visual_card.addEventListener("animationend", (animEnd) =>{
-                    for(let i = 0; i < player.num_of_cards; i++){
-                        player.visual_hand[i].style.animationIterationCount = "infinite";
-                        player.visual_hand[i].style.animationName = "switching_shaking_cards";
-                    }
-                    player_hand_div.addEventListener("click", player_playing_a_seven);    
-                }, {once: true});
+            deck_div.style.pointerEvents = "none";
+            button_end_turn.style.animationName = "button_pop_out";
+            button_end_turn.style.pointerEvents = "none";
+            button_dutch.style.animationName = "button_pop_out";
+            button_dutch.style.pointerEvents = "none";
+            for(let img = 0; img < computer.num_of_cards; img++){
+                computer.visual_hand[img].style.pointerEvents = "none";
+            }
+            visual_card.addEventListener("animationend", (animEnd) =>{
+                for(let i = 0; i < player.num_of_cards; i++){
+                    player.visual_hand[i].style.animationIterationCount = "infinite";
+                    player.visual_hand[i].style.animationName = "switching_shaking_cards";
+                }
+                player_hand_div.addEventListener("click", player_playing_a_seven);    
+            }, {once: true});
         }
-        else if(card.card_type == "eight"){ //If the player is playing an eight.
-            if(computer.num_of_cards != 0){ //Check if computer's hand isn't empty
-                alert("Checking computer's hand from playing an eight!");
+        else if(card.card_type == "eight" && computer.num_of_cards != 0){ //If the player is playing an eight and check if computer's hand isn't empty
+            deck_div.style.pointerEvents = "none";
+            button_end_turn.style.animationName = "button_pop_out";
+            button_end_turn.style.pointerEvents = "none";
+            button_dutch.style.animationName = "button_pop_out";
+            button_dutch.style.pointerEvents = "none";
+            for(let img = 0; img < computer.num_of_cards; img++){
+                player.visual_hand[img].style.pointerEvents = "none";
             }
-            else{
-                alert("You've played an eight!\n Can't peek if the computer has no more cards in its hand!");
-            }
+            visual_card.addEventListener("animationend", (animEnd) =>{
+                for(let i = 0; i < computer.num_of_cards; i++){
+                    computer.visual_hand[i].style.animationIterationCount = "infinite";
+                    computer.visual_hand[i].style.animationName = "switching_shaking_cards";
+                }
+                computer_hand_div.addEventListener("click", player_playing_an_eight);    
+            }, {once: true});
         }
         else if(card.card_type == "ten"){ //If the player is playing a ten.
             if(computer.num_of_cards != 0){ //Check if computer's hand isn't empty
@@ -636,7 +644,58 @@ let player_playing_a_seven = (event) => {
         for(let i = 0; i < player.num_of_cards; i++){
             player.visual_hand[i].style.animationName = "none";
         }
+        for(let img = 0; img < computer.num_of_cards; img++){
+            computer.visual_hand[img].style.pointerEvents = "initial";
+        }
+        let tempCardSrc = event.target.getAttribute("src");
+        event.target.style.animationIterationCount = "1";
+        event.target.style.animationName = "player_looking_at_a_card_face_up";
+        event.target.style.pointerEvents = "none";
+        event.target.addEventListener("animationend", (e)=>{
+            event.target.setAttribute("src", "CARDS\\back_side_.png");
+            event.target.style.animationName = "player_looking_at_a_card_face_down";
+            event.target.addEventListener("animationend", (e2)=>{
+                event.target.setAttribute("src", tempCardSrc);
+                event.target.style.animationIterationCount = "infinite";
+                event.target.style.animationName = "none";
+                event.target.style.pointerEvents = "initial";
+            }, {once: true});
+        }, {once: true}); 
         player_hand_div.removeEventListener("click", player_playing_a_seven);    
+    }
+};
+
+let player_playing_an_eight = (event) => {
+    if(event.target.getAttribute("class") == null){
+        button_end_turn.style.animationName = "button_pop_in";
+        button_end_turn.style.pointerEvents = "initial"; 
+        if(!player_has_drawn){
+            button_dutch.style.animationName = "button_pop_in";
+            button_dutch.style.pointerEvents = "initial";
+            button_end_turn.style.animationName = "button_pop_out";
+            deck_div.style.pointerEvents = "initial";
+        }
+        for(let i = 0; i < player.num_of_cards; i++){
+            computer.visual_hand[i].style.animationName = "none";
+        }
+        for(let img = 0; img < computer.num_of_cards; img++){
+            player.visual_hand[img].style.pointerEvents = "initial";
+        }
+        let tempCardSrc = event.target.getAttribute("src");
+        event.target.style.animationIterationCount = "1";
+        event.target.style.animationName = "player_looking_at_a_card_face_up";
+        event.target.style.pointerEvents = "none";
+        event.target.addEventListener("animationend", (e)=>{
+            event.target.setAttribute("src", "CARDS\\back_side_.png");
+            event.target.style.animationName = "player_looking_at_a_card_face_down";
+            event.target.addEventListener("animationend", (e2)=>{
+                event.target.setAttribute("src", tempCardSrc);
+                event.target.style.animationIterationCount = "1";
+                event.target.style.animationName = "none";
+                event.target.style.pointerEvents = "initial";
+            }, {once: true});
+        }, {once: true}); 
+        computer_hand_div.removeEventListener("click", player_playing_an_eight);    
     }
 };
 

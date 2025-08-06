@@ -272,6 +272,8 @@ div.computer_dutch {
     transition-property: transform;
     transition-duration: 0.4s;
     transition-timing-function: ease;
+    perspective: 800px; /* NEW */
+    transform-style: preserve-3d; /* NEW */
 }
 
 .player_hand > img {
@@ -490,6 +492,24 @@ div.computer_dutch {
     }
     to{
         transform: scale(1);
+    }
+}
+
+@keyframes player_looking_at_a_card_face_up {
+    from { 
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes player_looking_at_a_card_face_down {
+    from { 
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(0deg);
     }
 }
 /* <<<<<<<<<<<<<<<< Animations - END >>>>>>>>>>>>>>>> */
