@@ -174,18 +174,9 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
                 computer_hand_div.addEventListener("click", player_playing_an_eight);    
             }, {once: true});
         }
-        else if(card.card_type == "ten"){ //If the player is playing a ten.
-            if(computer.num_of_cards != 0){ //Check if computer's hand isn't empty
-                if(player.num_of_cards != 0){ //Also check if the player's hand isn't empty
-                    alert("Played a ten! Deciding to switch or not... Then proceeding with the chosen action");
-                }
-                else{ //Can't switch cards after playing a ten if the player has no cards in hand.
-                    alert("You've played a ten!\n Can't switch cards if you don't have anymore cards in your hand!")
-                }   
-            }
-            else{ //Can't switch cards after playing a ten if the computer has no cards in hand.
-                alert("You've played a ten!\n Can't switch cards if the computer has no more cards in its hand!");
-            }
+        else if(card.card_type == "ten" && computer.num_of_cards != 0 && player.num_of_cards != 0){ //If the player is playing a ten and check if computer's hand isn't empty and also check if the player's hand isn't empty
+            alert("do you want to switch");
+
         }
         else{} //Else do nothing
     }
