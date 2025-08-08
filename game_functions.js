@@ -163,7 +163,7 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
             button_end_turn.style.pointerEvents = "none";
             button_dutch.style.animationName = "button_pop_out";
             button_dutch.style.pointerEvents = "none";
-            for(let img = 0; img < computer.num_of_cards; img++){
+            for(let img = 0; img < player.num_of_cards; img++){
                 player.visual_hand[img].style.pointerEvents = "none";
             }
             visual_card.addEventListener("animationend", (animEnd) =>{
@@ -175,8 +175,20 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
             }, {once: true});
         }
         else if(card.card_type == "ten" && computer.num_of_cards != 0 && player.num_of_cards != 0){ //If the player is playing a ten and check if computer's hand isn't empty and also check if the player's hand isn't empty
-            alert("do you want to switch");
-
+            deck_div.style.pointerEvents = "none";
+            button_end_turn.style.animationName = "button_pop_out";
+            button_end_turn.style.pointerEvents = "none";
+            button_dutch.style.animationName = "button_pop_out";
+            button_dutch.style.pointerEvents = "none";
+            for(let img = 0; img < computer.num_of_cards; img++){
+                computer.visual_hand[img].style.pointerEvents = "none";
+            }
+            for(let img = 0; img < player.num_of_cards; img++){
+                player.visual_hand[img].style.pointerEvents = "none";
+            }
+            visual_card.addEventListener("animationend", (animEnd) =>{
+                container_button_player_playing_ten.style.display = "flex";    
+            }, {once: true});  
         }
         else{} //Else do nothing
     }
@@ -201,7 +213,7 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
         else if(card.card_type == "ten"){ //If the computer is playing a ten.
             // alert("ten was used by the computer");
             if(player.num_of_cards != 0 && computer.num_of_cards != 0){ //Check if the player's hand isn't empty and also check if computer's hand isn't empty
-                let player_card_index = random_number(player.num_of_cards); //Get a random index based on the player's hand
+                player_card_index = random_number(player.num_of_cards); //Get a random index based on the player's hand
                 let computer_card_index = random_number(computer.num_of_cards); //Get a random index based on the computer's hand
 
                 let placeholder_card = new Card(player.hand[player_card_index].card_type, //Make a place holder card during the switch.
@@ -666,10 +678,10 @@ let player_playing_an_eight = (event) => {
             button_end_turn.style.animationName = "button_pop_out";
             deck_div.style.pointerEvents = "initial";
         }
-        for(let i = 0; i < player.num_of_cards; i++){
+        for(let i = 0; i < computer.num_of_cards; i++){
             computer.visual_hand[i].style.animationName = "none";
         }
-        for(let img = 0; img < computer.num_of_cards; img++){
+        for(let img = 0; img < player.num_of_cards; img++){
             player.visual_hand[img].style.pointerEvents = "initial";
         }
         let tempCardSrc = event.target.getAttribute("src");
@@ -687,6 +699,101 @@ let player_playing_an_eight = (event) => {
             }, {once: true});
         }, {once: true}); 
         computer_hand_div.removeEventListener("click", player_playing_an_eight);    
+    }
+};
+
+
+let player_playing_a_ten = (event) => {
+    if(event.target.getAttribute("class") == null){
+        player_hand_div.removeEventListener("click", player_playing_a_ten);
+        for(let i = 0; i < player.num_of_cards; i++){
+            player.visual_hand[i].style.pointerEvents = "none";
+        }
+        for(let i = 0; i < player.num_of_cards; i++){
+            player.visual_hand[i].style.animationName = "none";
+        }
+        for(let i = 0; i < computer.num_of_cards; i++){
+            computer.visual_hand[i].style.pointerEvents = "initial";
+        }
+        for(let i = 0; i < computer.num_of_cards; i++){
+            computer.visual_hand[i].style.animationIterationCount = "infinite";
+            computer.visual_hand[i].style.animationName = "switching_shaking_cards";
+        }
+        player_card_index = 0
+        for(let i = 0; i < player.num_of_cards; i++){
+            if(player.visual_hand[i].getAttribute("src") == event.target.getAttribute("src")){
+                player_card_index = i;
+                break;
+            }
+        }
+        //Choosing computer's card to switch
+        computer_hand_div.addEventListener("click", player_playing_a_ten_choosing_computer_card);
+    }
+};
+
+let player_playing_a_ten_choosing_computer_card = (eventComp) => {
+    if(eventComp.target.getAttribute("class") == null){
+        button_end_turn.style.animationName = "button_pop_in";
+        button_end_turn.style.pointerEvents = "initial";
+        for(let i = 0; i < player.num_of_cards; i++){
+            player.visual_hand[i].style.pointerEvents = "initial";
+        } 
+        if(!player_has_drawn){
+            button_dutch.style.animationName = "button_pop_in";
+            button_dutch.style.pointerEvents = "initial";
+            button_end_turn.style.animationName = "button_pop_out";
+            deck_div.style.pointerEvents = "initial";
+        }
+        computer_hand_div.removeEventListener("click", player_playing_a_ten_choosing_computer_card);
+        for(let i = 0; i < computer.num_of_cards; i++){
+            computer.visual_hand[i].style.animationIterationCount = "1";
+            computer.visual_hand[i].style.animationName = "none";
+        }
+        let placeholder_card = new Card(player.hand[player_card_index].card_type, //Make a place holder card during the switch.
+                                        player.hand[player_card_index].card_suit,
+                                        player.hand[player_card_index].card_point,
+                                        player.hand[player_card_index].card_ability);
+        let placeholder_card_src = player.visual_hand[player_card_index].getAttribute("src");
+        let computer_card_index = 0;
+        for(let i = 0; i < computer.num_of_cards; i++){
+            if(computer.visual_hand[i].getAttribute("src") == eventComp.target.getAttribute("src")){
+                computer_card_index = i;
+                break;
+            }
+        }
+        //Assign to the player's card the computer's card
+        player.hand[player_card_index].card_type = computer.hand[computer_card_index].card_type;
+        player.hand[player_card_index].card_suit = computer.hand[computer_card_index].card_suit;
+        player.hand[player_card_index].card_point = computer.hand[computer_card_index].card_point;
+        player.hand[player_card_index].card_ability = computer.hand[computer_card_index].card_ability;
+
+        player.visual_hand[player_card_index].setAttribute("src", computer.visual_hand[computer_card_index].getAttribute("src"));
+        player.visual_hand[player_card_index].style.animationIterationCount = "1";
+        player.visual_hand[player_card_index].style.animationName = "switching_cards_in_hand_from_playing_ten";
+
+        //Assign to the computer's card the placeholder_card (player card)
+        //**For the known hand, we assign undefined because the computer won't know its new changed card.
+        computer.hand[computer_card_index].card_type = placeholder_card.card_type;
+        computer.hand[computer_card_index].card_suit = placeholder_card.card_suit;
+        computer.hand[computer_card_index].card_point = placeholder_card.card_point;
+        computer.hand[computer_card_index].card_ability = placeholder_card.card_ability;
+        computer.known_hand[computer_card_index].card_type = undefined;
+        computer.known_hand[computer_card_index].card_suit = undefined;
+        computer.known_hand[computer_card_index].card_point = undefined;
+        computer.known_hand[computer_card_index].card_ability = undefined;
+
+        computer.visual_hand[computer_card_index].setAttribute("src", placeholder_card_src);
+        computer.visual_hand[computer_card_index].style.animationIterationCount = "1";
+        computer.visual_hand[computer_card_index].style.animationName = "switching_cards_in_hand_from_playing_ten";
+
+        computer.visual_hand[computer_card_index].addEventListener("animationend", (animationEnd3) => {
+            if(player.visual_hand[player_card_index] != undefined){
+                player.visual_hand[player_card_index].style.animationName = "none";
+            }
+            if(computer.visual_hand[computer_card_index] != undefined){
+                computer.visual_hand[computer_card_index].style.animationName = "none"; 
+            }
+        }, {once: true});
     }
 };
 

@@ -60,6 +60,38 @@ player_card_action_prompt.addEventListener("click", (e) => {
     display_full_hand(computer, player, pile);
 });
 
+//**Player deciding to switch or not after playing a ten
+container_button_player_playing_ten.addEventListener("click", (e) => {
+    if(e.target.getAttribute("class") == "switch_ten"){
+        container_button_player_playing_ten.style.display = "none";
+        for(let img = 0; img < player.num_of_cards; img++){
+            player.visual_hand[img].style.pointerEvents = "initial";
+        }
+        for(let i = 0; i < player.num_of_cards; i++){
+            player.visual_hand[i].style.animationIterationCount = "infinite";
+            player.visual_hand[i].style.animationName = "switching_shaking_cards";
+        }
+        player_hand_div.addEventListener("click", player_playing_a_ten);
+    }
+    if(e.target.getAttribute("class") == "no_switch_ten"){
+        container_button_player_playing_ten.style.display = "none";
+        button_end_turn.style.animationName = "button_pop_in";
+        button_end_turn.style.pointerEvents = "initial"; 
+        if(!player_has_drawn){
+            button_dutch.style.animationName = "button_pop_in";
+            button_dutch.style.pointerEvents = "initial";
+            button_end_turn.style.animationName = "button_pop_out";
+            deck_div.style.pointerEvents = "initial";
+        }
+        for(let img = 0; img < computer.num_of_cards; img++){
+            computer.visual_hand[img].style.pointerEvents = "initial";
+        }
+        for(let img = 0; img < player.num_of_cards; img++){
+            player.visual_hand[img].style.pointerEvents = "initial";
+        }
+    }
+});
+
 
 //**Ending player's turn and playing the computer's turn**
 button_end_turn.addEventListener("click", (e) => {

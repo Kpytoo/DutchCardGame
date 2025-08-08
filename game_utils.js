@@ -71,7 +71,7 @@ let player_is_currently_drawing = false;
 let player_has_played = false; //Keep track if player has played during their turn
 let computer_turn = false; //Keep track if computer's turn
 let player_has_switched_cards = false;
-
+let player_card_index = 0;
 
 const computer_hand_div = document.querySelector(".computer_hand"); //Where we are adding/removing visual cards
 const player_hand_div = document.querySelector(".player_hand"); //Where we are adding/removing visual cards
@@ -89,3 +89,4 @@ const container_player_card_action_prompt = document.querySelector(".container_p
 const player_card_action_prompt = document.querySelector(".player_card_action_prompt");
 const container_computer_card_action = document.querySelector(".container_computer_card_action");
 const computer_card_action = document.querySelector(".computer_card_action");
+const container_button_player_playing_ten = document.querySelector(".container_button_player_playing_ten");

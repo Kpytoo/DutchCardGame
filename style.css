@@ -33,6 +33,25 @@ body {
     border-width: 0;
 }
 
+.table > .container_button_player_playing_ten {
+    position: absolute;
+    width: 100px;
+    height: 125px;
+    display: none;
+    flex-direction: column;
+    gap: 13%;
+    justify-content: center;
+    top: 510px;
+    left: 640px;
+    border-width: 0;
+}
+
+.container_button_player_playing_ten > button {
+    width: 95%;
+    height: 55px;
+    font-size: 1.25rem;
+}
+
 .player_card_action_prompt, .computer_card_action {
     display: flex;
     justify-content: space-between;
@@ -48,8 +67,6 @@ body {
 .container_button {
     display: flex;
     flex-direction: column;
-    /* border-color: black;
-    border-style: solid; */
     width: 30%;
     height: 100px;
     gap: 13%;
@@ -72,7 +89,15 @@ button.switch {
     border-color: rgb(255, 153, 0);
 }
 
+button.switch_ten {
+    background-color: rgb(96, 255, 96);
+    border-color: rgb(33, 255, 33);
+}
 
+button.no_switch_ten {
+    background-color: rgb(255, 77, 77);
+    border-color: rgb(255, 17, 0);
+}
 
 .table > div, .middle_board > div {
     border-width: 5px;
