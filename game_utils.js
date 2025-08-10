@@ -79,6 +79,7 @@ const deck_div = document.querySelector(".deck");
 const pile_div = document.querySelector(".pile");
 const button_end_turn = document.querySelector(".button_end_turn");
 const button_dutch = document.querySelector("button.dutch");
+const button_game_rules = document.querySelector("button.game_rules");
 
 const display_number_of_cards_in_deck = document.querySelector("span.display_number_of_cards_in_deck");
 
@@ -90,3 +91,4 @@ const player_card_action_prompt = document.querySelector(".player_card_action_pr
 const container_computer_card_action = document.querySelector(".container_computer_card_action");
 const computer_card_action = document.querySelector(".computer_card_action");
 const container_button_player_playing_ten = document.querySelector(".container_button_player_playing_ten");
+const container_game_rules_information = document.querySelector(".container_game_rules_information");

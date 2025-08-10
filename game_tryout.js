@@ -163,3 +163,7 @@ button_dutch.addEventListener("click", (e) =>{
         // }, 5000);        
     }
 });
+
+button_game_rules.addEventListener("click", (e) => {
+    container_game_rules_information.style.display = "flex";
+});

@@ -104,6 +104,51 @@ button.no_switch_ten {
     border-style: solid;
 }
 
+.table > .container_button_game_rules {
+    position: absolute;
+    top: 415px;
+    left: 10px;
+    border-width: 0px;  
+}
+
+.game_rules {
+    border-radius: 5px;
+    border-color: rgb(27, 138, 55);
+    background-color: rgb(66, 244, 110);
+    font-weight: bolder;
+}
+
+.table > .container_game_rules_information {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-image: radial-gradient(circle, rgb(169, 169, 126) , rgb(149, 114, 90));
+    width: 600px;
+    height: 700px;
+    top: 250px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(85, 7, 7);
+    border-width: 15px;
+    overflow-y: scroll;
+}
+
+div.title_rules {
+    align-self: center;
+    font-weight: bolder;
+    font-size: 2rem;
+    text-decoration: underline;
+}
+
+div.how_its_played {
+    font-size: 1.7rem;
+    line-height: 2.5rem;
+    padding: 5px;
+    font-weight: 100;
+    text-shadow: 1px 1px 10px rgb(255, 255, 255);
+}
+
 /* <<<<<<<<<<<<<<<< Computer Board >>>>>>>>>>>>>>>> */
 
 .computer_hand {

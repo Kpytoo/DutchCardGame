@@ -283,6 +283,7 @@ const switch_card = (user, drawn_card, switched_card_index, pile) => { //switche
             user.known_hand[random_card].card_ability = drawn_card.card_ability;   
             let card_src = user.visual_hand[random_card].getAttribute("src");
             user.visual_hand[random_card].setAttribute("src", visual_card.getAttribute("src"));
+            user.visual_hand[random_card].style.animationIterationCount = "1";
             user.visual_hand[random_card].style.animationName = "switching_cards_in_hand";
             computer_card_action.removeChild(visual_card);
             container_computer_card_action.style.display = "none";
@@ -545,6 +546,7 @@ let total_score_count = () => {
     else{
         alert("The game is a tie!");
     }
+    location.reload();
 };
 
 let player_choosing_own_card_to_give_to_computer = (event) =>{
@@ -861,7 +863,6 @@ let computer_ending_its_turn = () => {
     if(player.dutch){
         alert("Showing hands and total!");
         total_score_count();
-        location.reload();
     }
     button_dutch.style.animationName = "button_pop_in";
     button_dutch.style.pointerEvents = "initial";
