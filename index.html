@@ -49,6 +49,52 @@
             <button class="game_rules">Game Rules</button>
         </div>
         <div class="container_game_rules_information">
+            <div class="container_exit_button">
+                <button class="exit_button">X</button>
+            </div>
+            <div class="title_power_cards">Power Cards</div>
+            <div class="power_cards">
+                <div>
+                    <img src="CARDS//clubs_seven.png" style="width:50px;height:100px;margin:2px;">
+                    <img src="CARDS//diamonds_seven.png" style="width:50px;height:100px;margin:2px;">
+                    <img src="CARDS//spades_seven.png" style="width:50px;height:100px;margin:2px;">
+                    <img src="CARDS//hearts_seven.png" style="width:50px;height:100px;margin:2px;">
+                    <p>- Player can look at one of their own cards</p>
+                </div>
+                <div>
+                    <img src="CARDS//clubs_eight.png" style="width:50px;height:100px;margin:2px;">
+                    <img src="CARDS//diamonds_eight.png" style="width:50px;height:100px;margin:2px;">
+                    <img src="CARDS//spades_eight.png" style="width:50px;height:100px;margin:2px;">
+                    <img src="CARDS//hearts_eight.png" style="width:50px;height:100px;margin:2px;">
+                    <p>- Player can look at one card from an opponent</p>
+                </div>
+                <div>
+                    <img src="CARDS//clubs_ten.png" style="width:50px;height:100px;margin:2px;">
+                    <img src="CARDS//diamonds_ten.png" style="width:50px;height:100px;margin:2px;">
+                    <img src="CARDS//spades_ten.png" style="width:50px;height:100px;margin:2px;">
+                    <img src="CARDS//hearts_ten.png" style="width:50px;height:100px;margin:2px;">
+                    <p>- Player can can switch a card between themselves and
+                       any opponent OR between two opponents. Not an obligation!</p>
+                </div>
+            </div>
+            <div class="title_points">Card Points</div>
+            <div class="card_points">
+                Ace | 1p <br>
+                Two | 2p <br>
+                Three | 3p <br>
+                Four | 4p <br>
+                Five | 5p <br>
+                Six | 6p <br>
+                Seven | 7p <br>
+                Eight | 8p <br>
+                Nine | 9p <br>
+                Ten | 10p <br>
+                Jack | 10p <br>
+                Queen | 10p <br>
+                Black King | 13p (spades or clubs) <br>
+                Red King | -3p (hearts or diamonds) <br>
+                Joker | 0p <br>
+            </div>
             <div class="title_rules">Rules</div>
             <div class="how_its_played">
                 Welcome to the game Dutch! <br> <br>
@@ -63,51 +109,60 @@
                 Start by shuffling the deck of 54 cards. <br> <br>
 
                 The game starts by giving each player 4 cards facing down. This is
-                known as the hand. The cards should be arranged in a rectangular fashion.
+                known as the hand. The cards should be arranged in a rectangular fashion. <br>
+                <div class="rules_starting_hand">
+                    <img src="CARDS\\back_side_.png">
+                    <img src="CARDS\\back_side_.png">
+                    <img src="CARDS\\back_side_.png">
+                    <img src="CARDS\\back_side_.png">   
+                </div>
 
                 Each player has the chance to take a look at their two bottom cards and
-                to memorize them, they may do so only once.
+                to memorize them, they may do so only once. <br> <br>
 
                 When every player has had the chance to take a look at their two bottom cards,
-                the game may begin!
+                the game may begin! <br> <br>
 
                 The game is played in a turned-based fashion. The player to the left of the dealer
-                starts their turn.
+                starts their turn. <br> <br>
 
-                The player has two choices whenever their turn arises.
-                - Draw a card
-                - Call Dutch (We'll get back to this later)
+                The player has two choices whenever their turn arises. <br>
+                - Draw a card <br>
+                - Call Dutch (We'll get back to this later) <br> <br>
 
-                The player can a draw a card, and should do so in a secretive manner.
-                The player will look at the drawn card and choose their next move.
+                The player can a draw a card, and should do so in a secretive manner. <br>
+                The player will look at the drawn card and choose their next move. <br> 
                 They can either switch one of their cards (in their hand) with the drawn card, and 
                 play the switched card by placing it face up in the pile (in the middle of the table, now empty since it
-                is the first play) OR play directly the drawn card by placing it face up in the pile.
+                is the first play) OR play directly the drawn card by placing it face up in the pile. <br> <br>
 
                 After the player has played, the next player situated to the left begins their turn,
-                and so forth.
+                and so forth. <br> <br>
 
                 At any point during the game, independent of whose turn it is, a player may decide
                 to get rid of a card, or multiple of their cards. Whatever the last card was added to the pile,
-                any equivalent card from any player's hand can be played.
+                any equivalent card from any player's hand can be played. <br> <br>
 
                 For example, let's say Player 1 drew a card (5 of spades) and played it (placing it on the pile),
                 Player 3 knows that he currently has a 5 in his hand, he can play that 5 (by also placing it on the pile).
-                This way, Player 3 has gotten "rid" of a card by reducing his hand from four cards to three.
+                This way, Player 3 has gotten "rid" of a card by reducing his hand from four cards to three. <br>
                 If Player 3 mistakenly thought it was a 5, but actually it was another card, he returns his card
-                to his hand, draws a card without looking at it and places it in his hand, giving himself an extra card.
+                to his hand, draws a card without looking at it and places it in his hand, giving himself an extra card. <br> <br>
 
                 A player can play a card for another player (Use case of the 8, which lets you look at one random card from 
                 an opponent) by following the same rules as above. If played correctly, the player then gives one of his cards 
                 to the player that has gotten their card played. If played incorrectly, the player then draws a card without
-                looking at it for himself and places it in his own hand.
+                looking at it for himself and places it in his own hand. <br> <br>
 
-                Calling Dutch means you think you have the least amount of points.
-                After Dutch has been called, you DO NOT draw a card and the game continues for
+                Calling Dutch means you think you have the least amount of points. <br>
+                You can only call Dutch if it is your turn and you didn't draw a card. <br>
+                After you call Dutch, you DO NOT draw a card and the game continues for
                 one last round. Whenever it is your turn again, everyone turns over their cards and the 
-                one with the least amount of points, wins!
+                one with the least amount of points, wins! <br> <br>
 
-                It is automatic Dutch, whenever it is a players turn and they do not have any cards left in their hand.
+                It is automatic Dutch, whenever it is a players turn and they do not have any cards left in their hand. <br> <br>
+
+                Have fun! :)
                                 
             </div> 
         </div>

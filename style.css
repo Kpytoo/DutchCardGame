@@ -120,7 +120,7 @@ button.no_switch_ten {
 
 .table > .container_game_rules_information {
     position: absolute;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 10px;
     background-image: radial-gradient(circle, rgb(169, 169, 126) , rgb(149, 114, 90));
@@ -132,23 +132,63 @@ button.no_switch_ten {
     border-color: rgb(85, 7, 7);
     border-width: 15px;
     overflow-y: scroll;
+    animation-name: none;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
 }
 
-div.title_rules {
+div.title_rules, div.title_points, div.title_power_cards {
     align-self: center;
     font-weight: bolder;
-    font-size: 2rem;
+    font-size: 3rem;
     text-decoration: underline;
 }
 
-div.how_its_played {
+div.how_its_played, div.card_points, .power_cards > div{
     font-size: 1.7rem;
     line-height: 2.5rem;
     padding: 5px;
-    font-weight: 100;
+    font-weight: bold;
     text-shadow: 1px 1px 10px rgb(255, 255, 255);
 }
 
+div.rules_starting_hand {
+    display:flex;
+    border-color: blueviolet;
+    border-width: 4px;
+    width: 150px;
+    height: 200px;
+    flex-wrap: wrap;
+    margin: 10px;
+    gap: 3px;
+    margin-left: 220px;
+}
+
+.rules_starting_hand > img {
+    width: 50px;
+    height: 100px;
+}
+
+div.card_points {
+    text-align: center;
+}
+
+div.power_cards {
+    text-align: center;
+}
+
+.container_exit_button {
+    display: flex;
+    position: sticky;
+    width: 100%;
+}
+
+.exit_button {
+    background-color: rgb(252, 40, 40);
+    width: 40px;
+    border-radius: 5px;
+    border-color: rgb(135, 18, 18);
+}
 /* <<<<<<<<<<<<<<<< Computer Board >>>>>>>>>>>>>>>> */
 
 .computer_hand {

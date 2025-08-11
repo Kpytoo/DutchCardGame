@@ -166,4 +166,12 @@ button_dutch.addEventListener("click", (e) =>{
 
 button_game_rules.addEventListener("click", (e) => {
     container_game_rules_information.style.display = "flex";
+    container_game_rules_information.style.animationName = "button_pop_in";
+});
+
+button_exit_rules.addEventListener("click", (e) => {
+    container_game_rules_information.style.animationName = "button_pop_out";
+    container_game_rules_information.addEventListener("animationend", (e) =>{
+        container_game_rules_information.style.display = "none";   
+    }, {once: true});
 });
