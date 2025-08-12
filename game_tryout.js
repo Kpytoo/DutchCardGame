@@ -6,7 +6,6 @@ display_full_hand(computer, player, pile);
 
 //Player turn
 player_hand_div.style.animationName = "user_flashing_turn";
-// console.log(computer.known_hand);
 
 //**Drawing from the deck**
 deck_div.addEventListener("click", (e)=>{
@@ -156,11 +155,7 @@ button_dutch.addEventListener("click", (e) =>{
         computer_hand_div.style.animationName = "user_flashing_turn";
         button_dutch.style.animationName = "button_pop_out";
         button_dutch.style.pointerEvents = "none";
-        computer_playing_turn();
-        // setTimeout(()=>{
-        //     alert("Showing hands and total!");
-        //     total_score_count();
-        // }, 5000);        
+        computer_playing_turn();      
     }
 });
 
@@ -174,4 +169,23 @@ button_exit_rules.addEventListener("click", (e) => {
     container_game_rules_information.addEventListener("animationend", (e) =>{
         container_game_rules_information.style.display = "none";   
     }, {once: true});
+});
+
+button_start_game.addEventListener("click", (e) =>{
+    button_start_game.style.display = "none";
+    deck_div.style.pointerEvents = "initial";
+    button_dutch.style.pointerEvents = "initial";
+    for(let i = 0; i < player.num_of_cards; i++){
+        if(i == 1 || i == 3){
+            let card_src = ("CARDS\\" + player.hand[i].card_suit + "_" + player.hand[i].card_type + ".png");
+            player.visual_hand[i].style.animationName = "player_looking_at_a_card_face_down";
+            player.visual_hand[i].addEventListener("animationend", (e)=>{
+                player.visual_hand[i].setAttribute("src", card_src);
+                player.visual_hand[i].style.animationIterationCount = "infinite";
+                player.visual_hand[i].style.animationName = "none";
+                player.visual_hand[i].style.pointerEvents = "initial";
+                player.visual_hand[i].style.animationDuration = "0.75s";
+            },{once: true});
+        }
+    }
 });

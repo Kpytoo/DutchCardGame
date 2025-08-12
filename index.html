@@ -45,12 +45,29 @@
         </div>
         <div class="player_hand">
         </div>
+        <div class="container_start_game">
+            <button class="start_game">Start</button>
+        </div>
         <div class="container_button_game_rules">
             <button class="game_rules">Game Rules</button>
         </div>
         <div class="container_game_rules_information">
             <div class="container_exit_button">
                 <button class="exit_button">X</button>
+            </div> 
+            <div class="title_game_controls">Game Controls</div>
+            <div class="game_controls">
+                - Memorize your two revealed cards at the start of the game.
+                  Press the green button "Start" to start the game. <br> <br>
+                - It is your turn when your side of the table is flashing. <br> <br>
+                - Click on the deck to draw <br>(given it's your turn) <br> <br>
+                - Double click on your own cards to play them (given the pile isn't empty) <br> <br>
+                - Double click on the computer's cards to play them (given the pile isn't empty) <br> <br>
+                - Click on the yellow "Dutch" button to call Dutch! <br> <br>
+                - Click on the orange "End Turn" button to end your turn <br> <br>
+                - After playing a SEVEN, click on one of your cards to look at it <br> <br>
+                - After playing an EIGHT, click on one of the computer's cards to look at it <br> <br>
+                - After playing a TEN, click on one of your cards and the computer's cards to switch them <br> <br>
             </div>
             <div class="title_power_cards">Power Cards</div>
             <div class="power_cards">
@@ -95,14 +112,14 @@
                 Red King | -3p (hearts or diamonds) <br>
                 Joker | 0p <br>
             </div>
-            <div class="title_rules">Rules</div>
+            <div class="title_rules">Dutch Rules</div>
             <div class="how_its_played">
                 Welcome to the game Dutch! <br> <br>
 
                 This project will only focus on 2 players, the user and the computer. <br> <br>
                 
                 This is a memory game. <br>
-                The main goal is to get rid of your cards for you to win.
+                The main goal is to get rid of your cards for you to win. <br>
                 Each card has a point number associated to it, your objective
                 is to have the least amount of points. <br> <br>
 
@@ -130,11 +147,11 @@
                 - Draw a card <br>
                 - Call Dutch (We'll get back to this later) <br> <br>
 
-                The player can a draw a card, and should do so in a secretive manner. <br>
+                The player can draw a card, and should do so in a secretive manner. <br>
                 The player will look at the drawn card and choose their next move. <br> 
                 They can either switch one of their cards (in their hand) with the drawn card, and 
-                play the switched card by placing it face up in the pile (in the middle of the table, now empty since it
-                is the first play) OR play directly the drawn card by placing it face up in the pile. <br> <br>
+                play the switched card by placing it face up on the pile (in the middle of the table, now empty since it
+                is the first play) OR play directly the drawn card by placing it face up on the pile. <br> <br>
 
                 After the player has played, the next player situated to the left begins their turn,
                 and so forth. <br> <br>
@@ -156,15 +173,16 @@
 
                 Calling Dutch means you think you have the least amount of points. <br>
                 You can only call Dutch if it is your turn and you didn't draw a card. <br>
+                No one else can call Dutch if someone has already called Dutch. <br>
                 After you call Dutch, you DO NOT draw a card and the game continues for
                 one last round. Whenever it is your turn again, everyone turns over their cards and the 
                 one with the least amount of points, wins! <br> <br>
 
-                It is automatic Dutch, whenever it is a players turn and they do not have any cards left in their hand. <br> <br>
+                It is automatic Dutch, whenever it is a players turn and they do not have any cards left in their hand. <br>
+                If someone is empty handed and Dutch has already been called, their turn is skipped. <br> <br>
 
-                Have fun! :)
-                                
-            </div> 
+                Have fun! :)                
+            </div>
         </div>
     </div>
 </body>

@@ -1,11 +1,10 @@
 * {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 body {
     display:flex;
     justify-content: center;
-    /* filter: blur(8px); */
 }
 
 .table {
@@ -132,19 +131,21 @@ button.no_switch_ten {
     border-color: rgb(85, 7, 7);
     border-width: 15px;
     overflow-y: scroll;
+    scrollbar-color: black rgb(128, 107, 50);
+    scrollbar-width: auto;
     animation-name: none;
-    animation-duration: 1s;
+    animation-duration: 0.4s;
     animation-timing-function: ease-in-out;
 }
 
-div.title_rules, div.title_points, div.title_power_cards {
+div.title_rules, div.title_points, div.title_power_cards, div.title_game_controls {
     align-self: center;
     font-weight: bolder;
     font-size: 3rem;
     text-decoration: underline;
 }
 
-div.how_its_played, div.card_points, .power_cards > div{
+div.how_its_played, div.card_points, .power_cards > div, div.game_controls{
     font-size: 1.7rem;
     line-height: 2.5rem;
     padding: 5px;
@@ -180,6 +181,7 @@ div.power_cards {
 .container_exit_button {
     display: flex;
     position: sticky;
+    top: 0;
     width: 100%;
 }
 
@@ -188,6 +190,23 @@ div.power_cards {
     width: 40px;
     border-radius: 5px;
     border-color: rgb(135, 18, 18);
+}
+
+.table > .container_start_game {
+    position: absolute;
+    bottom: 50px;
+    left: 320px;
+    border-width: 0;
+}
+
+button.start_game {
+    width: 80px;
+    height: 80px;
+    background-color: rgb(26, 255, 0);
+    border-radius: 500px;
+    border-color: rgb(17, 113, 6);
+    display: initial;
+    font-size: 1.3rem;
 }
 /* <<<<<<<<<<<<<<<< Computer Board >>>>>>>>>>>>>>>> */
 

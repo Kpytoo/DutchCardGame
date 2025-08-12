@@ -81,6 +81,7 @@ const button_end_turn = document.querySelector(".button_end_turn");
 const button_dutch = document.querySelector("button.dutch");
 const button_game_rules = document.querySelector("button.game_rules");
 const button_exit_rules = document.querySelector("button.exit_button");
+const button_start_game = document.querySelector("button.start_game");
 
 const display_number_of_cards_in_deck = document.querySelector("span.display_number_of_cards_in_deck");
 

@@ -85,18 +85,19 @@ const start_game = () => {
     } //End while loop
 
     display_number_of_cards_in_deck.textContent = "Cards: "+num_of_cards_in_deck();
-    
+    deck_div.style.pointerEvents = "none";
+    button_dutch.style.pointerEvents = "none";
     // //Display starting hand to player (reveals only 2 cards)
-    // for(let i = 0; i < player.num_of_cards; i++){
-    //     if(i == 1 || i == 3){
-    //         console.log("-----\n|"+player.hand[i].card_type+"|\n|"+player.hand[i].card_suit+"|\n-----\n"+
-    //         "Points: "+player.hand[i].card_point+"\n"+
-    //         "Ability: "+player.hand[i].card_ability); 
-    //     }
-    //     else{
-    //         console.log("-----\n|CARD "+ (i+1) +"|\n-----");
-    //     }
-    // }
+    for(let i = 0; i < player.num_of_cards; i++){
+        if(i == 1 || i == 3){
+            player.visual_hand[i].style.animationIterationCount = "1";
+            player.visual_hand[i].style.animationDuration = "1.2s";
+            player.visual_hand[i].style.animationName = "player_looking_at_a_card_face_up";
+            player.visual_hand[i].addEventListener("animationend", (e)=>{
+                player.visual_hand[i].setAttribute("src", "CARDS\\back_side_.png");
+            },{once: true});
+        }
+    }
 };
 
 //Function that draws a card for a user (computer or player)
