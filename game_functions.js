@@ -90,11 +90,11 @@ const start_game = () => {
     // //Display starting hand to player (reveals only 2 cards)
     for(let i = 0; i < player.num_of_cards; i++){
         if(i == 1 || i == 3){
+            // let card_src = ("CARDS\\" + player.hand[i].card_suit + "_" + player.hand[i].card_type + ".png");
             player.visual_hand[i].style.animationIterationCount = "1";
-            player.visual_hand[i].style.animationDuration = "1.2s";
             player.visual_hand[i].style.animationName = "player_looking_at_a_card_face_up";
             player.visual_hand[i].addEventListener("animationend", (e)=>{
-                player.visual_hand[i].setAttribute("src", "CARDS\\back_side_.png");
+                player.visual_hand[i].setAttribute("src", back_card_src);
             },{once: true});
         }
     }
@@ -613,6 +613,7 @@ let player_choosing_switching_drawn_card = (event) => {
         player.visual_hand[i].style.animationName = "none";
     }
     let card_src = event.target.getAttribute("src");
+    alert(card_src);
     let switched_card_index = 0;
     if(card_src != null){
         for(let i = 0; i < player.num_of_cards; i++){

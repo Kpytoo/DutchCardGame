@@ -62,7 +62,8 @@ const player = {
 };
 
 let visual_card; //NEW
-let card_name_visual; //NEW
+let back_card_src = ("CARDS\\back_side_.png"); //NEW
+let card_name_visual;
 let pile = new Card(undefined, undefined, undefined, undefined); //Create an object "pile" card, which is the last played card in the pile (starts empty - undefined)
 let drawn_card = new Card (); //Create a new card object that will be assigned the random drawn card
 let player_turn = true; //Keep track if player's turn

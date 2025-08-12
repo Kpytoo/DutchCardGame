@@ -184,7 +184,6 @@ button_start_game.addEventListener("click", (e) =>{
                 player.visual_hand[i].style.animationIterationCount = "infinite";
                 player.visual_hand[i].style.animationName = "none";
                 player.visual_hand[i].style.pointerEvents = "initial";
-                player.visual_hand[i].style.animationDuration = "0.75s";
             },{once: true});
         }
     }
