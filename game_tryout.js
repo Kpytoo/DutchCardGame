@@ -109,7 +109,6 @@ button_end_turn.addEventListener("click", (e) => {
         player_hand_div.style.animationName = "none";
         button_end_turn.style.animationName = "button_pop_out";
         deck_div.style.pointerEvents = "none";
-        alert("Showing hands and total!");
         total_score_count();
     }
 });
@@ -172,9 +171,11 @@ button_exit_rules.addEventListener("click", (e) => {
 });
 
 button_start_game.addEventListener("click", (e) =>{
-    button_start_game.style.display = "none";
+    button_start_game.style.animationName = "button_pop_out"; 
     deck_div.style.pointerEvents = "initial";
     button_dutch.style.pointerEvents = "initial";
+    button_dutch.style.display = "initial";
+    button_dutch.style.animationName = "button_pop_in";
     for(let i = 0; i < player.num_of_cards; i++){
         if(i == 1 || i == 3){
             let card_src = ("CARDS\\" + player.hand[i].card_suit + "_" + player.hand[i].card_type + ".png");
@@ -187,4 +188,8 @@ button_start_game.addEventListener("click", (e) =>{
             },{once: true});
         }
     }
+});
+
+button_play_again.addEventListener("click", (e) =>{
+    location.reload();
 });

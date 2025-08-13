@@ -83,6 +83,10 @@ const button_dutch = document.querySelector("button.dutch");
 const button_game_rules = document.querySelector("button.game_rules");
 const button_exit_rules = document.querySelector("button.exit_button");
 const button_start_game = document.querySelector("button.start_game");
+const button_play_again = document.querySelector("button.play_again");
+const user_score_player = document.querySelector(".user_score_player");
+const user_score_computer = document.querySelector(".user_score_computer");
+const winner = document.querySelector(".winner");
 
 const display_number_of_cards_in_deck = document.querySelector("span.display_number_of_cards_in_deck");
 
@@ -95,3 +99,4 @@ const container_computer_card_action = document.querySelector(".container_comput
 const computer_card_action = document.querySelector(".computer_card_action");
 const container_button_player_playing_ten = document.querySelector(".container_button_player_playing_ten");
 const container_game_rules_information = document.querySelector(".container_game_rules_information");
+const container_endgame_results = document.querySelector(".container_endgame_results");

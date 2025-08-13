@@ -105,6 +105,7 @@ const start_game = () => {
 const draw_card = (drawn_card) => {
     if(deck_of_cards.length == 0){
         alert("Deck is empty! Game finished. Reveal your cards!");
+        total_score_count();
         return;
     } //If the deck isn't empty
     while(deck_of_cards.length != 0){ //If there are no more suits of the random card type (all suits of that card were drawn)
@@ -198,12 +199,10 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
             if(computer.num_of_cards != 0){//If the computer's hand isn't empty
                 for(let card_index = 0; card_index < computer.num_of_cards; card_index++){ //Check for cards that are unknown to the comp in the known hand (values are undefined)
                     if(computer.known_hand[card_index].card_type == undefined){ //If found, make the card known to the card computer
-                        alert(card_index + " " + computer.known_hand[card_index].card_type + " " + computer.known_hand[card_index].card_suit);
                         computer.known_hand[card_index].card_type = computer.hand[card_index].card_type;
                         computer.known_hand[card_index].card_suit = computer.hand[card_index].card_suit;
                         computer.known_hand[card_index].card_point = computer.hand[card_index].card_point;
                         computer.known_hand[card_index].card_ability = computer.hand[card_index].card_ability;
-                        alert(card_index + " " + computer.known_hand[card_index].card_type + " " + computer.known_hand[card_index].card_suit);
                         break; //Break out of the for loop
                     }
                 }
@@ -212,7 +211,6 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
         else if(card.card_type == "eight"){ //If the computer is playing an eight, it doesn't do anything --- dumb computer :(
         }
         else if(card.card_type == "ten"){ //If the computer is playing a ten.
-            // alert("ten was used by the computer");
             if(player.num_of_cards != 0 && computer.num_of_cards != 0){ //Check if the player's hand isn't empty and also check if computer's hand isn't empty
                 player_card_index = random_number(player.num_of_cards); //Get a random index based on the player's hand
                 let computer_card_index = random_number(computer.num_of_cards); //Get a random index based on the computer's hand
@@ -522,6 +520,11 @@ let computer_playing_turn = () =>{
 };
 
 let total_score_count = () => {
+    button_game_rules.style.pointerEvents = "none";
+    deck_div.style.pointerEvents = "none";
+    button_dutch.style.display = "none";
+    computer_hand_div.style.pointerEvents = "none";
+    player_hand_div.style.pointerEvents = "none";
     let total_player_score = 0;
     let total_computer_score = 0;
 
@@ -536,18 +539,20 @@ let total_score_count = () => {
         }
     }
 
-    alert("Final Score\n\n"+"Player's score: " + total_player_score +"\nComputer's score: " + total_computer_score);
+    container_endgame_results.style.display="flex";
+    user_score_player.textContent = ("Player: "+total_player_score);
+    user_score_computer.textContent = ("Computer: "+total_computer_score);
+    
 
     if(total_computer_score > total_player_score){
-        alert("The player won!");
+        winner.textContent = ("Winner: Player")
     }
     else if(total_computer_score < total_player_score){
-        alert("The computer won!");
+        winner.textContent = ("Winner: Computer")
     }
     else{
-        alert("The game is a tie!");
+        winner.textContent = ("Game is a tie!")
     }
-    location.reload();
 };
 
 let player_choosing_own_card_to_give_to_computer = (event) =>{
@@ -613,7 +618,6 @@ let player_choosing_switching_drawn_card = (event) => {
         player.visual_hand[i].style.animationName = "none";
     }
     let card_src = event.target.getAttribute("src");
-    alert(card_src);
     let switched_card_index = 0;
     if(card_src != null){
         for(let i = 0; i < player.num_of_cards; i++){
@@ -863,7 +867,6 @@ let computer_drawing_card = () => {
 let computer_ending_its_turn = () => {
     computer_end_turn_set_variables();
     if(player.dutch){
-        alert("Showing hands and total!");
         total_score_count();
     }
     button_dutch.style.animationName = "button_pop_in";

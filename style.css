@@ -81,21 +81,57 @@ body {
 button.play {
     background-color: rgb(96, 255, 96);
     border-color: rgb(33, 255, 33);
+    border-radius: 5px;
+}
+
+button.play:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(158, 253, 158);
+    top: 2px;
+    border-width: 3px;
 }
 
 button.switch {
     background-color: rgb(255, 184, 77);
     border-color: rgb(255, 153, 0);
+    border-radius: 5px;
+}
+
+button.switch:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(246, 197, 130);
+    top: 2px;
+    border-width: 3px;
 }
 
 button.switch_ten {
     background-color: rgb(96, 255, 96);
     border-color: rgb(33, 255, 33);
+    border-radius: 5px;
+}
+
+button.switch_ten:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(158, 253, 158);
+    top: 2px;
+    border-width: 3px;
 }
 
 button.no_switch_ten {
     background-color: rgb(255, 77, 77);
     border-color: rgb(255, 17, 0);
+    border-radius: 5px;
+}
+
+button.no_switch_ten:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(250, 105, 105);
+    top: 2px;
+    border-width: 3px;
 }
 
 .table > div, .middle_board > div {
@@ -115,6 +151,13 @@ button.no_switch_ten {
     border-color: rgb(27, 138, 55);
     background-color: rgb(66, 244, 110);
     font-weight: bolder;
+}
+
+button.game_rules:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(181, 231, 175);
+    top: 1px;
 }
 
 .table > .container_game_rules_information {
@@ -138,7 +181,7 @@ button.no_switch_ten {
     animation-timing-function: ease-in-out;
 }
 
-div.title_rules, div.title_points, div.title_power_cards, div.title_game_controls {
+div.title_rules, div.title_points, div.title_power_cards, div.title_game_controls, div.title_end_results {
     align-self: center;
     font-weight: bolder;
     font-size: 3rem;
@@ -192,6 +235,11 @@ div.power_cards {
     border-color: rgb(135, 18, 18);
 }
 
+button.exit_button:hover {
+    cursor: pointer;
+    background-color: rgb(240, 135, 117);
+}
+
 .table > .container_start_game {
     position: absolute;
     bottom: 50px;
@@ -205,9 +253,82 @@ button.start_game {
     background-color: rgb(26, 255, 0);
     border-radius: 500px;
     border-color: rgb(17, 113, 6);
+    border-width: 3px;
     display: initial;
     font-size: 1.3rem;
+    animation-name: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
 }
+
+button.start_game:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(181, 231, 175);
+    border-width: 5px;
+    top: 1px;
+}
+
+.table > .container_endgame_results {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background-image: radial-gradient(circle, rgb(169, 169, 126) , rgb(149, 114, 90));
+    width: 600px;
+    height: 700px;
+    top: 250px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(85, 7, 7);
+    border-width: 15px;
+    animation-name: button_pop_in;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+    gap: 150px;
+}
+
+.user_score_player, .user_score_computer, .winner {
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 10px rgb(255, 255, 255);
+}
+
+.user_score_player {
+    background-color: rgb(112, 184, 206);
+    border-radius: 10px;
+}
+
+.user_score_computer {
+    background-color: rgb(223, 154, 108);
+    border-radius: 10px;
+}
+
+.winner {
+    background-color: rgb(241, 230, 128);
+    border-radius: 10px;
+}
+
+.user_scores {
+    display: flex;
+    justify-content: center;
+    gap: 110px;
+}
+
+.winner {
+    align-self: center;
+}
+
+button.play_again {
+    align-self: center;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: rgb(26, 255, 0);
+    border-color: rgb(17, 113, 6);
+}
+
 /* <<<<<<<<<<<<<<<< Computer Board >>>>>>>>>>>>>>>> */
 
 .computer_hand {
@@ -230,7 +351,7 @@ button.start_game {
     animation-timing-function: ease-in-out;
     animation-duration: 0.75s;
     animation-fill-mode: none;
-    pointer-events: initial;   
+    /* pointer-events: initial;    */
 }
 
 /* <<<<<<<<<<<<<<<< Computer Board - END >>>>>>>>>>>>>>>> */
@@ -320,14 +441,21 @@ button.button_end_turn {
     width: 100px;
     height: 60px;
     background-color: rgb(238, 165, 61);
-    border-radius: 1px;
+    border-radius: 5px;
     border-color: rgb(208, 126, 10);
     border-width: 3px;
+    font-weight: bold;
     display: none;
     animation-name: none;
     animation-timing-function: ease-in-out;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
+}
+
+button.button_end_turn:hover {
+    cursor: pointer;
+    background-color: rgb(239, 181, 100);
+    border-width: 5px;
 }
 
 button.dutch {
@@ -341,11 +469,18 @@ button.dutch {
     border-color: rgb(203, 173, 0);
     border-width: 3px;
     pointer-events: initial;
-    display: initial;
+    font-weight: bold;
+    display: none;
     animation-name: none;
     animation-timing-function: ease-in-out;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
+}
+
+button.dutch:hover {
+    cursor: pointer;
+    background-color: rgb(236, 217, 109);
+    border-width: 5px;
 }
 
 div.player_dutch {
