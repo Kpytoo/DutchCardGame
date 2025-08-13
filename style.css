@@ -327,6 +327,15 @@ button.play_again {
     border-radius: 10px;
     background-color: rgb(26, 255, 0);
     border-color: rgb(17, 113, 6);
+    border-width: 3px;
+}
+
+button.play_again:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(136, 255, 123);
+    border-width: 5px;
+    top: 1px;
 }
 
 /* <<<<<<<<<<<<<<<< Computer Board >>>>>>>>>>>>>>>> */
