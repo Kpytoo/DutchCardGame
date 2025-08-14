@@ -179,7 +179,7 @@ button_start_game.addEventListener("click", (e) =>{
             // let card_src = ("CARDS\\" + player.hand[i].card_suit + "_" + player.hand[i].card_type + ".png");
             player.visual_hand[i].style.animationName = "player_looking_at_a_card_face_down";
             player.visual_hand[i].addEventListener("animationend", (e)=>{
-                player.visual_hand[i].setAttribute("src", player.visual_hand[i].getAttribute("class"));
+                player.visual_hand[i].setAttribute("src", back_card_src);
                 player.visual_hand[i].style.animationIterationCount = "infinite";
                 player.visual_hand[i].style.animationName = "none";
                 player.visual_hand[i].style.pointerEvents = "initial";

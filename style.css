@@ -769,19 +769,19 @@ div.computer_dutch {
 
 @keyframes player_looking_at_a_card_face_up {
     from { 
-        transform: rotateY(180deg);
+        transform: rotateY(0deg);
     }
     to {
-        transform: rotateY(0deg);
+        transform: rotateY(180deg);
     }
 }
 
 @keyframes player_looking_at_a_card_face_down {
     from { 
-        transform: rotateY(180deg);
+        transform: rotateY(0deg);
     }
     to {
-        transform: rotateY(0deg);
+        transform: rotateY(180deg);
     }
 }
 /* <<<<<<<<<<<<<<<< Animations - END >>>>>>>>>>>>>>>> */
