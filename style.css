@@ -274,11 +274,10 @@ button.start_game:hover {
     position: absolute;
     display: none;
     flex-direction: column;
-    gap: 10px;
     background-image: radial-gradient(circle, rgb(169, 169, 126) , rgb(149, 114, 90));
     width: 600px;
-    height: 700px;
-    top: 250px;
+    height: 350px;
+    top: 400px;
     border-radius: 5px;
     border-style: solid;
     border-color: rgb(85, 7, 7);
@@ -286,7 +285,7 @@ button.start_game:hover {
     animation-name: button_pop_in;
     animation-duration: 0.4s;
     animation-timing-function: ease-in-out;
-    gap: 150px;
+    gap: 35px;
 }
 
 .user_score_player, .user_score_computer, .winner {

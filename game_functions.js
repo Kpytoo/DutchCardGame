@@ -64,6 +64,7 @@ const start_game = () => {
         card_name_visual = ("CARDS\\" + card_suit + "_" + card_type + ".png"); //NEW
         visual_card = document.createElement("img"); //NEW
         visual_card.setAttribute("src", card_name_visual); //NEW 
+        visual_card.setAttribute("class", card_name_visual);
         if(computer.num_of_cards < 4){ //Give the computer 4 random cards
             computer.hand.push(new Card(card_type, card_suit, card_point, card_ability)); //Create a card object using the card type and card suit and add it to their hand
             computer.visual_hand.push(visual_card); //NEW
@@ -220,7 +221,7 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
                                                 player.hand[player_card_index].card_point,
                                                 player.hand[player_card_index].card_ability);
 
-                let placeholder_card_src = player.visual_hand[player_card_index].getAttribute("src");
+                let placeholder_card_src = player.visual_hand[player_card_index].getAttribute("class");
 
                 //Assign to the player's card the computer's card
                 player.hand[player_card_index].card_type = computer.hand[computer_card_index].card_type;
@@ -228,7 +229,8 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
                 player.hand[player_card_index].card_point = computer.hand[computer_card_index].card_point;
                 player.hand[player_card_index].card_ability = computer.hand[computer_card_index].card_ability;
 
-                player.visual_hand[player_card_index].setAttribute("src", computer.visual_hand[computer_card_index].getAttribute("src"));
+                player.visual_hand[player_card_index].setAttribute("class", computer.visual_hand[computer_card_index].getAttribute("class"))
+                player.visual_hand[player_card_index].setAttribute("src", player.visual_hand[player_card_index].getAttribute("class")); //SET TO BACK CARD SRC
                 player.visual_hand[player_card_index].style.animationIterationCount = "1";
                 player.visual_hand[player_card_index].style.animationName = "switching_cards_in_hand_from_playing_ten";
 
@@ -243,7 +245,8 @@ const play_card_on_pile = (user, card, pile, played_by_opp) => {
                 computer.known_hand[computer_card_index].card_point = undefined;
                 computer.known_hand[computer_card_index].card_ability = undefined;
 
-                computer.visual_hand[computer_card_index].setAttribute("src", placeholder_card_src);
+                computer.visual_hand[computer_card_index].setAttribute("class", placeholder_card_src);
+                computer.visual_hand[computer_card_index].setAttribute("src", computer.visual_hand[computer_card_index].getAttribute("class")); //SET TO BACK CARD SRC
                 computer.visual_hand[computer_card_index].style.animationIterationCount = "1";
                 computer.visual_hand[computer_card_index].style.animationName = "switching_cards_in_hand_from_playing_ten";
 
@@ -280,12 +283,14 @@ const switch_card = (user, drawn_card, switched_card_index, pile) => { //switche
             user.known_hand[random_card].card_suit = drawn_card.card_suit;
             user.known_hand[random_card].card_point = drawn_card.card_point;
             user.known_hand[random_card].card_ability = drawn_card.card_ability;   
-            let card_src = user.visual_hand[random_card].getAttribute("src");
-            user.visual_hand[random_card].setAttribute("src", visual_card.getAttribute("src"));
+            let card_src = user.visual_hand[random_card].getAttribute("class");
+            user.visual_hand[random_card].setAttribute("class", visual_card.getAttribute("class"));
+            user.visual_hand[random_card].setAttribute("src", visual_card.getAttribute("class")); //CHANGE TO BACK CARD SRC
             user.visual_hand[random_card].style.animationIterationCount = "1";
             user.visual_hand[random_card].style.animationName = "switching_cards_in_hand";
             computer_card_action.removeChild(visual_card);
             container_computer_card_action.style.display = "none";
+            visual_card.setAttribute("class", card_src);
             visual_card.setAttribute("src", card_src);
             visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
             visual_card.style.animationName = "computer_playing_card";
@@ -314,7 +319,7 @@ const switch_card = (user, drawn_card, switched_card_index, pile) => { //switche
 //Function that let's the user play one of their own cards, whether right or wrong
 let play_card = (pile, e) =>{
     for(let i = 0; i < player.num_of_cards; i++){
-        if(player.visual_hand[i].getAttribute("src") != e.target.getAttribute("src")){ //Check which card was clicked on
+        if(player.visual_hand[i].getAttribute("class") != e.target.getAttribute("class")){ //Check which card was clicked on
             continue;
         }
         if(player.hand[i].card_type != pile.card_type){ //If wrong card was played
@@ -325,7 +330,8 @@ let play_card = (pile, e) =>{
                 player.hand.push(new Card(drawn_card.card_type, drawn_card.card_suit, drawn_card.card_point, drawn_card.card_ability));
                 player.num_of_cards++;
                 visual_card = document.createElement("img");
-                visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+                visual_card.setAttribute("class", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"))
+                visual_card.setAttribute("src", visual_card.getAttribute("class")); //TO CHANGE TO BACK CARD SRC
                 player.visual_hand.push(visual_card);
                 player_hand_div.appendChild(visual_card);
                 player.visual_hand[i].style.animationName = "none";
@@ -340,7 +346,8 @@ let play_card = (pile, e) =>{
         } //If right card was played 
         player.visual_hand[i].style.visibility = "hidden";
         visual_card = document.createElement("img");
-        visual_card.setAttribute("src", e.target.getAttribute("src"));
+        visual_card.setAttribute("class", e.target.getAttribute("class"))
+        visual_card.setAttribute("src", visual_card.getAttribute("class"));
         visual_card.style.transform = "rotate("+(45 - random_number(91))+"deg)";
         visual_card.style.animationName = "player_playing_card";
         pile_div.appendChild(visual_card);
@@ -369,7 +376,7 @@ let play_card = (pile, e) =>{
 //Function that let's the user play one of their own cards, whether right or wrong
 let play_card_from_computer = (pile, e) =>{
     for(let i = 0; i < computer.num_of_cards; i++){
-        if(computer.visual_hand[i].getAttribute("src") != e.target.getAttribute("src")){
+        if(computer.visual_hand[i].getAttribute("class") != e.target.getAttribute("class")){
             continue;
         }
         if(computer.hand[i].card_type != pile.card_type){ //If wrong card was played
@@ -380,7 +387,8 @@ let play_card_from_computer = (pile, e) =>{
                 player.hand.push(new Card(drawn_card.card_type, drawn_card.card_suit, drawn_card.card_point, drawn_card.card_ability));
                 player.num_of_cards++;
                 visual_card = document.createElement("img");
-                visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+                visual_card.setAttribute("class", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"))
+                visual_card.setAttribute("src", visual_card.getAttribute("class")); // TO BE CHANGED TO BACK CARD SRC
                 player.visual_hand.push(visual_card);
                 player_hand_div.appendChild(visual_card);
                 computer.visual_hand[i].style.animationName = "none";
@@ -400,7 +408,8 @@ let play_card_from_computer = (pile, e) =>{
         button_dutch.style.pointerEvents = "none";
         computer.visual_hand[i].style.visibility = "hidden";
         visual_card = document.createElement("img");
-        visual_card.setAttribute("src", e.target.getAttribute("src"));
+        visual_card.setAttribute("class", e.target.getAttribute("class"));
+        visual_card.setAttribute("src", visual_card.getAttribute("class"));
         visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
         visual_card.style.animationName = "computer_playing_card";
         pile_div.appendChild(visual_card);
@@ -444,7 +453,8 @@ let computer_play_card = (pile) => {
         else if(computer.known_hand[i].card_type == pile.card_type){ //Checking with its "known" cards
             computer.visual_hand[i].style.visibility = "hidden";
             visual_card = document.createElement("img");
-            visual_card.setAttribute("src", ("CARDS\\" + computer.known_hand[i].card_suit + "_" + computer.known_hand[i].card_type + ".png"));
+            visual_card.setAttribute("class", ("CARDS\\" + computer.known_hand[i].card_suit + "_" + computer.known_hand[i].card_type + ".png"));
+            visual_card.setAttribute("src", visual_card.getAttribute("class"));
             visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";
             visual_card.style.animationName = "computer_playing_card";
             pile_div.appendChild(visual_card);
@@ -520,7 +530,6 @@ let computer_playing_turn = () =>{
 };
 
 let total_score_count = () => {
-    button_game_rules.style.pointerEvents = "none";
     deck_div.style.pointerEvents = "none";
     button_dutch.style.display = "none";
     computer_hand_div.style.pointerEvents = "none";
@@ -537,6 +546,21 @@ let total_score_count = () => {
         for(let i = 0; i < computer.num_of_cards; i++){
             total_computer_score += computer.hand[i].card_point;
         }
+    }
+
+    for(let i = 0; i < player.num_of_cards; i++){
+        player.visual_hand[i].style.animationIterationCount = "1";
+        player.visual_hand[i].style.animationName = "player_looking_at_a_card_face_up";
+        player.visual_hand[i].addEventListener("animationend", (e)=>{
+            player.visual_hand[i].setAttribute("src", back_card_src);
+        },{once: true});
+    }
+    for(let i = 0; i < computer.num_of_cards; i++){
+        computer.visual_hand[i].style.animationIterationCount = "1";
+        computer.visual_hand[i].style.animationName = "player_looking_at_a_card_face_up";
+        computer.visual_hand[i].addEventListener("animationend", (e)=>{
+            computer.visual_hand[i].setAttribute("src", back_card_src);
+        },{once: true});
     }
 
     container_endgame_results.style.display="flex";
@@ -556,7 +580,7 @@ let total_score_count = () => {
 };
 
 let player_choosing_own_card_to_give_to_computer = (event) =>{
-    if(event.target.getAttribute("class") == null){
+    if(event.target.getAttribute("src") != null){
         button_end_turn.style.animationName = "button_pop_in";
         button_end_turn.style.pointerEvents = "initial"; 
         if(!player_has_drawn){
@@ -575,7 +599,7 @@ let player_choosing_own_card_to_give_to_computer = (event) =>{
         //Adding player's card to the computer's hand
         let index = null;
         for(let i = 0; i < player.num_of_cards; i++){
-            if(player.visual_hand[i].getAttribute("src") == event.target.getAttribute("src")){
+            if(player.visual_hand[i].getAttribute("class") == event.target.getAttribute("class")){
                 index = i;
             };
         }
@@ -586,7 +610,8 @@ let player_choosing_own_card_to_give_to_computer = (event) =>{
         computer.hand.push(added_card);
         computer.known_hand.push(new Card(undefined, undefined, undefined, undefined));
         let added_visual_card = document.createElement("img");
-        added_visual_card.setAttribute("src", player.visual_hand[index].getAttribute("src"));
+        added_visual_card.setAttribute("class", player.visual_hand[index].getAttribute("class"));
+        added_visual_card.setAttribute("src", added_visual_card.getAttribute("class"));
         computer.visual_hand.push(added_visual_card);
         computer.num_of_cards += 1;
         computer_hand_div.appendChild(added_visual_card);
@@ -617,20 +642,20 @@ let player_choosing_switching_drawn_card = (event) => {
     for(let i = 0; i < player.num_of_cards; i++){
         player.visual_hand[i].style.animationName = "none";
     }
-    let card_src = event.target.getAttribute("src");
+    let card_src = event.target.getAttribute("class");
     let switched_card_index = 0;
-    if(card_src != null){
+    if(event.target.getAttribute("src") != null){
         for(let i = 0; i < player.num_of_cards; i++){
-            if(player.visual_hand[i].getAttribute("src") == card_src){
+            if(player.visual_hand[i].getAttribute("class") == card_src){
                 switched_card_index = i;
             }
         }
         switch_card(player, drawn_card, switched_card_index, pile);
-        let temp_src = event.target.getAttribute("src");
-        event.target.setAttribute("src", visual_card.getAttribute("src"));
+        event.target.setAttribute("src", visual_card.getAttribute("class")); //TOBE REMOVED
+        event.target.setAttribute("class", visual_card.getAttribute("class"));
         event.target.style.animationIterationCount = "1";
         event.target.style.animationName = "switching_cards_in_hand";
-        visual_card.setAttribute("src", temp_src);
+        visual_card.setAttribute("src", card_src);
         player_card_action_prompt.removeChild(visual_card);
         container_player_card_action_prompt.style.display = "none";
         visual_card.style.transform = "rotate("+(45 - random_number(91))+"deg)";
@@ -639,11 +664,12 @@ let player_choosing_switching_drawn_card = (event) => {
         button_end_turn.style.display = "initial";
         button_end_turn.style.animationName = "button_pop_in";
         player_is_currently_drawing = false;
+        console.log(visual_card);
     }
 };
 
 let player_playing_a_seven = (event) => {
-    if(event.target.getAttribute("class") == null){
+    if(event.target.getAttribute("src") != null){
         button_end_turn.style.animationName = "button_pop_in";
         button_end_turn.style.pointerEvents = "initial"; 
         if(!player_has_drawn){
@@ -677,7 +703,7 @@ let player_playing_a_seven = (event) => {
 };
 
 let player_playing_an_eight = (event) => {
-    if(event.target.getAttribute("class") == null){
+    if(event.target.getAttribute("src") != null){
         button_end_turn.style.animationName = "button_pop_in";
         button_end_turn.style.pointerEvents = "initial"; 
         if(!player_has_drawn){
@@ -712,7 +738,7 @@ let player_playing_an_eight = (event) => {
 
 
 let player_playing_a_ten = (event) => {
-    if(event.target.getAttribute("class") == null){
+    if(event.target.getAttribute("src") != null){
         player_hand_div.removeEventListener("click", player_playing_a_ten);
         for(let i = 0; i < player.num_of_cards; i++){
             player.visual_hand[i].style.pointerEvents = "none";
@@ -729,7 +755,7 @@ let player_playing_a_ten = (event) => {
         }
         player_card_index = 0
         for(let i = 0; i < player.num_of_cards; i++){
-            if(player.visual_hand[i].getAttribute("src") == event.target.getAttribute("src")){
+            if(player.visual_hand[i].getAttribute("class") == event.target.getAttribute("class")){
                 player_card_index = i;
                 break;
             }
@@ -740,7 +766,7 @@ let player_playing_a_ten = (event) => {
 };
 
 let player_playing_a_ten_choosing_computer_card = (eventComp) => {
-    if(eventComp.target.getAttribute("class") == null){
+    if(eventComp.target.getAttribute("src") != null){
         button_end_turn.style.animationName = "button_pop_in";
         button_end_turn.style.pointerEvents = "initial";
         for(let i = 0; i < player.num_of_cards; i++){
@@ -761,10 +787,10 @@ let player_playing_a_ten_choosing_computer_card = (eventComp) => {
                                         player.hand[player_card_index].card_suit,
                                         player.hand[player_card_index].card_point,
                                         player.hand[player_card_index].card_ability);
-        let placeholder_card_src = player.visual_hand[player_card_index].getAttribute("src");
+        let placeholder_card_src = player.visual_hand[player_card_index].getAttribute("class");
         let computer_card_index = 0;
         for(let i = 0; i < computer.num_of_cards; i++){
-            if(computer.visual_hand[i].getAttribute("src") == eventComp.target.getAttribute("src")){
+            if(computer.visual_hand[i].getAttribute("class") == eventComp.target.getAttribute("class")){
                 computer_card_index = i;
                 break;
             }
@@ -775,7 +801,8 @@ let player_playing_a_ten_choosing_computer_card = (eventComp) => {
         player.hand[player_card_index].card_point = computer.hand[computer_card_index].card_point;
         player.hand[player_card_index].card_ability = computer.hand[computer_card_index].card_ability;
 
-        player.visual_hand[player_card_index].setAttribute("src", computer.visual_hand[computer_card_index].getAttribute("src"));
+        player.visual_hand[player_card_index].setAttribute("class", computer.visual_hand[computer_card_index].getAttribute("class"));
+        player.visual_hand[player_card_index].setAttribute("src", player.visual_hand[player_card_index].getAttribute("class")); //CHANGE TO BACK CARD SRC
         player.visual_hand[player_card_index].style.animationIterationCount = "1";
         player.visual_hand[player_card_index].style.animationName = "switching_cards_in_hand_from_playing_ten";
 
@@ -790,7 +817,8 @@ let player_playing_a_ten_choosing_computer_card = (eventComp) => {
         computer.known_hand[computer_card_index].card_point = undefined;
         computer.known_hand[computer_card_index].card_ability = undefined;
 
-        computer.visual_hand[computer_card_index].setAttribute("src", placeholder_card_src);
+        computer.visual_hand[computer_card_index].setAttribute("class", placeholder_card_src);
+        computer.visual_hand[computer_card_index].setAttribute("src", placeholder_card_src); //CHANGE TO BACK CARD SRC
         computer.visual_hand[computer_card_index].style.animationIterationCount = "1";
         computer.visual_hand[computer_card_index].style.animationName = "switching_cards_in_hand_from_playing_ten";
 
@@ -841,7 +869,8 @@ let computer_empty_hand_check = () => {
 let computer_drawing_card = () => {
     draw_card(drawn_card); //Draw a random card from the deck
     visual_card = document.createElement("img");
-    visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+    visual_card.setAttribute("class", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+    visual_card.setAttribute("src", back_card_src); //SET TO BACK CARD SRC
     container_computer_card_action.style.display = "initial";
     computer_card_action.appendChild(visual_card);
     if(random_number(100) < 50){ //Gets a random number between 0-99, if the number is lower than 50, switches the drawn card, else plays the drawn card.
@@ -850,6 +879,7 @@ let computer_drawing_card = () => {
     }
     else { //Play the drawn card
         visual_card.addEventListener("animationend", (animationEvent) => {
+            visual_card.setAttribute("src", visual_card.getAttribute("class"));
             computer_card_action.removeChild(visual_card);
             container_computer_card_action.style.display = "none";
             visual_card.style.transform = "rotate("+(225 - random_number(91))+"deg)";

@@ -1,9 +1,5 @@
 start_game(); //Starts the game by giving each player 4 cards
 display_full_hand(computer, player, pile);
-//********Implement function that allows the player to see the two bottom cards, then the game starts. (Do it at the end)
-
-
-
 //Player turn
 player_hand_div.style.animationName = "user_flashing_turn";
 
@@ -26,7 +22,9 @@ deck_div.addEventListener("click", (e)=>{
         player_has_drawn = true;
         deck_div.style.pointerEvents = "none";
         visual_card = document.createElement("img");
-        visual_card.setAttribute("src", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+        visual_card.setAttribute("class", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
+        visual_card.setAttribute("src", visual_card.getAttribute("class"));
+        console.log(visual_card);
         container_player_card_action_prompt.style.display = "initial";
         player_card_action_prompt.appendChild(visual_card); 
         button_dutch.style.animationName = "button_pop_out";
@@ -178,10 +176,10 @@ button_start_game.addEventListener("click", (e) =>{
     button_dutch.style.animationName = "button_pop_in";
     for(let i = 0; i < player.num_of_cards; i++){
         if(i == 1 || i == 3){
-            let card_src = ("CARDS\\" + player.hand[i].card_suit + "_" + player.hand[i].card_type + ".png");
+            // let card_src = ("CARDS\\" + player.hand[i].card_suit + "_" + player.hand[i].card_type + ".png");
             player.visual_hand[i].style.animationName = "player_looking_at_a_card_face_down";
             player.visual_hand[i].addEventListener("animationend", (e)=>{
-                player.visual_hand[i].setAttribute("src", card_src);
+                player.visual_hand[i].setAttribute("src", player.visual_hand[i].getAttribute("class"));
                 player.visual_hand[i].style.animationIterationCount = "infinite";
                 player.visual_hand[i].style.animationName = "none";
                 player.visual_hand[i].style.pointerEvents = "initial";

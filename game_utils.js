@@ -48,7 +48,7 @@ const deck_of_cards = [
 const computer = {
     hand: [], //Actual hand of the computer
     known_hand: [], //Known hand by the computer, meaning only the cards that are revealed
-    visual_hand: [], //Visual hand which holds card <img>s of the respective card in the hand 
+    visual_hand: [], //Visual hand which holds card <img>s of the respective card in the hand
     num_of_cards: 0, //Number of cards
     dutch: false, //If dutch was called
 };
