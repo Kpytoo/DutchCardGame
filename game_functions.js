@@ -552,14 +552,14 @@ let total_score_count = () => {
         player.visual_hand[i].style.animationIterationCount = "1";
         player.visual_hand[i].style.animationName = "player_looking_at_a_card_face_up";
         player.visual_hand[i].addEventListener("animationend", (e)=>{
-            player.visual_hand[i].setAttribute("src", back_card_src);
+            player.visual_hand[i].setAttribute("src", player.visual_hand[i].getAttribute("class"));
         },{once: true});
     }
     for(let i = 0; i < computer.num_of_cards; i++){
         computer.visual_hand[i].style.animationIterationCount = "1";
         computer.visual_hand[i].style.animationName = "player_looking_at_a_card_face_up";
         computer.visual_hand[i].addEventListener("animationend", (e)=>{
-            computer.visual_hand[i].setAttribute("src", back_card_src);
+            computer.visual_hand[i].setAttribute("src", computer.visual_hand[i].getAttribute("class"));
         },{once: true});
     }
 
