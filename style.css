@@ -139,28 +139,28 @@ button.no_switch_ten:hover {
     border-style: solid;
 }
 
-.table > .container_button_game_rules {
+.table > .container_button_settings {
     position: absolute;
     top: 415px;
     left: 10px;
     border-width: 0px;  
 }
 
-.game_rules {
+.settings {
     border-radius: 5px;
     border-color: rgb(27, 138, 55);
     background-color: rgb(66, 244, 110);
     font-weight: bolder;
 }
 
-button.game_rules:hover {
+button.settings:hover {
     position: relative;
     cursor: pointer;
     background-color: rgb(181, 231, 175);
     top: 1px;
 }
 
-.table > .container_game_rules_information {
+.table > .container_game_settings {
     position: absolute;
     display: none;
     flex-direction: column;
