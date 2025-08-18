@@ -337,6 +337,29 @@ button.play_again:hover {
     top: 1px;
 }
 
+.container_settings_tabs {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(223, 208, 190);
+}
+
+.container_settings_tabs > div {
+    background-color: rgb(214, 214, 193);
+    font-weight: bold;
+    font-size: 1.17rem;
+    border-style: solid;
+    border-color: rgb(27, 27, 26);
+    width: 150px;
+    height: 30px;
+    text-align: center;
+}
+
+.container_settings_tabs > div:hover {
+    background-color: rgb(172, 172, 149);
+    cursor: pointer;
+}
+
+
 /* <<<<<<<<<<<<<<<< Computer Board >>>>>>>>>>>>>>>> */
 
 .computer_hand {
