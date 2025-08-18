@@ -191,3 +191,47 @@ button_start_game.addEventListener("click", (e) =>{
 button_play_again.addEventListener("click", (e) =>{
     location.reload();
 });
+
+settings_tab_game_controls.addEventListener("click", (e) => {
+    settings_tab_game_controls.style.backgroundColor = "rgb(221, 221, 34)";
+    settings_tab_power_cards.style.backgroundColor = "rgb(214, 214, 193)";
+    settings_tab_card_points.style.backgroundColor = "rgb(214, 214, 193)";
+    settings_tab_dutch_rules.style.backgroundColor = "rgb(214, 214, 193)";
+    container_game_controls.style.display = "flex";
+    container_power_cards.style.display = "none";
+    container_card_points.style.display = "none";
+    container_dutch_rules .style.display = "none";
+});
+
+settings_tab_power_cards.addEventListener("click", (e) => {
+    settings_tab_game_controls.style.backgroundColor = "rgb(214, 214, 193)";
+    settings_tab_power_cards.style.backgroundColor = "rgb(221, 221, 34)";
+    settings_tab_card_points.style.backgroundColor = "rgb(214, 214, 193)";
+    settings_tab_dutch_rules.style.backgroundColor = "rgb(214, 214, 193)";
+    container_game_controls.style.display = "none";
+    container_power_cards.style.display = "flex";
+    container_card_points.style.display = "none";
+    container_dutch_rules .style.display = "none";
+});
+
+settings_tab_card_points.addEventListener("click", (e) => {
+    settings_tab_game_controls.style.backgroundColor = "rgb(214, 214, 193)";
+    settings_tab_power_cards.style.backgroundColor = "rgb(214, 214, 193)";
+    settings_tab_card_points.style.backgroundColor = "rgb(221, 221, 34)";
+    settings_tab_dutch_rules.style.backgroundColor = "rgb(214, 214, 193)";
+    container_game_controls.style.display = "none";
+    container_power_cards.style.display = "none";
+    container_card_points.style.display = "flex";
+    container_dutch_rules .style.display = "none";
+});
+
+settings_tab_dutch_rules.addEventListener("click", (e) => {
+    settings_tab_game_controls.style.backgroundColor = "rgb(214, 214, 193)";
+    settings_tab_power_cards.style.backgroundColor = "rgb(214, 214, 193)";
+    settings_tab_card_points.style.backgroundColor = "rgb(214, 214, 193)";
+    settings_tab_dutch_rules.style.backgroundColor = "rgb(221, 221, 34)";
+    container_game_controls.style.display = "none";
+    container_power_cards.style.display = "none";
+    container_card_points.style.display = "none";
+    container_dutch_rules .style.display = "flex";
+});

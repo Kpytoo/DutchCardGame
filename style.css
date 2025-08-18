@@ -173,12 +173,32 @@ button.settings:hover {
     border-style: solid;
     border-color: rgb(85, 7, 7);
     border-width: 15px;
-    overflow-y: scroll;
-    scrollbar-color: black rgb(128, 107, 50);
-    scrollbar-width: auto;
     animation-name: none;
     animation-duration: 0.4s;
     animation-timing-function: ease-in-out;
+    overflow-y: scroll;
+    scrollbar-color: black rgb(128, 107, 50);
+    scrollbar-width: auto;
+}
+
+.container_game_controls {
+    display: flex;
+    flex-direction: column;
+}
+
+.container_power_cards {
+    display: none;
+    flex-direction: column;
+}
+
+.container_card_points {
+    display: none;
+    flex-direction: column;
+}
+
+.container_dutch_rules {
+    display: none;
+    flex-direction: column;
 }
 
 div.title_rules, div.title_points, div.title_power_cards, div.title_game_controls, div.title_end_results {
@@ -355,10 +375,12 @@ button.play_again:hover {
 }
 
 .container_settings_tabs > div:hover {
-    background-color: rgb(172, 172, 149);
     cursor: pointer;
 }
 
+div.settings_tab_game_controls {
+    background-color: rgb(221, 221, 34);
+}
 
 /* <<<<<<<<<<<<<<<< Computer Board >>>>>>>>>>>>>>>> */
 
