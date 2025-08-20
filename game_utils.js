@@ -91,6 +91,7 @@ const settings_tab_game_controls = document.querySelector(".settings_tab_game_co
 const settings_tab_power_cards = document.querySelector(".settings_tab_power_cards");
 const settings_tab_card_points = document.querySelector(".settings_tab_card_points");
 const settings_tab_dutch_rules = document.querySelector(".settings_tab_dutch_rules");
+const settings_tab_audio = document.querySelector(".settings_tab_audio");
 
 const display_number_of_cards_in_deck = document.querySelector("span.display_number_of_cards_in_deck");
 
@@ -108,3 +109,4 @@ const container_game_controls = document.querySelector(".container_game_controls
 const container_power_cards =  document.querySelector(".container_power_cards");
 const container_card_points = document.querySelector(".container_card_points");
 const container_dutch_rules = document.querySelector(".container_dutch_rules");
+const container_audio = document.querySelector(".container_audio");

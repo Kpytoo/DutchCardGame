@@ -201,7 +201,12 @@ button.settings:hover {
     flex-direction: column;
 }
 
-div.title_rules, div.title_points, div.title_power_cards, div.title_game_controls, div.title_end_results {
+.container_audio {
+    display: none;
+    flex-direction: column;
+}
+
+div.title_rules, div.title_points, div.title_power_cards, div.title_game_controls, div.title_end_results, div.title_audio {
     align-self: center;
     font-weight: bolder;
     font-size: 3rem;
@@ -365,8 +370,8 @@ button.play_again:hover {
 
 .container_settings_tabs > div {
     background-color: rgb(214, 214, 193);
-    font-weight: bold;
-    font-size: 1.17rem;
+    font-weight: bolder;
+    font-size: 1.02rem;
     border-style: solid;
     border-color: rgb(27, 27, 26);
     width: 150px;
