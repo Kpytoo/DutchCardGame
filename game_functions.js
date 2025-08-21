@@ -871,6 +871,7 @@ let computer_empty_hand_check = () => {
 
 //Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
 let computer_drawing_card = () => {
+    audio_random_draw_card();
     draw_card(drawn_card); //Draw a random card from the deck
     visual_card = document.createElement("img");
     visual_card.setAttribute("class", ("CARDS\\" + drawn_card.card_suit + "_" + drawn_card.card_type + ".png"));
@@ -905,4 +906,10 @@ let computer_ending_its_turn = () => {
     }
     button_dutch.style.animationName = "button_pop_in";
     button_dutch.style.pointerEvents = "initial";
+};
+
+//Plays a random draw card sound
+let audio_random_draw_card = () => {
+    const audio_array = [audio_card_draw_1, audio_card_draw_2, audio_card_draw_3, audio_card_draw_4];
+    audio_array[random_number(4)].play();
 };

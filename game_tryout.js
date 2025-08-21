@@ -17,6 +17,7 @@ deck_div.addEventListener("click", (e)=>{
         alert("You already drew!");
     }
     else{
+        audio_random_draw_card();
         draw_card(drawn_card);
         player_is_currently_drawing = true;
         player_has_drawn = true;

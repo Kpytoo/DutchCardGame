@@ -93,6 +93,14 @@ const settings_tab_card_points = document.querySelector(".settings_tab_card_poin
 const settings_tab_dutch_rules = document.querySelector(".settings_tab_dutch_rules");
 const settings_tab_audio = document.querySelector(".settings_tab_audio");
 const audio_main_theme = document.querySelector(".audio_main_theme");
+const audio_card_draw_1 = new Audio("Audio\\Audio_Card_Draw_1.wav");
+const audio_card_draw_2 = new Audio("Audio\\Audio_Card_Draw_2.wav");
+const audio_card_draw_3 = new Audio("Audio\\Audio_Card_Draw_3.wav");
+const audio_card_draw_4 = new Audio("Audio\\Audio_Card_Draw_4.wav");
+audio_card_draw_1.volume = "0.5";
+audio_card_draw_2.volume = "0.5";
+audio_card_draw_3.volume = "0.5";
+audio_card_draw_4.volume = "0.5";
 
 const display_number_of_cards_in_deck = document.querySelector("span.display_number_of_cards_in_deck");
 
