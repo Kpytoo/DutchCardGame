@@ -213,7 +213,7 @@ div.title_rules, div.title_points, div.title_power_cards, div.title_game_control
     text-decoration: underline;
 }
 
-div.how_its_played, div.card_points, .power_cards > div, div.game_controls{
+div.how_its_played, div.card_points, .power_cards > div, div.game_controls, div.sound_sub_titles{
     font-size: 1.7rem;
     line-height: 2.5rem;
     padding: 5px;
@@ -385,6 +385,13 @@ button.play_again:hover {
 
 div.settings_tab_game_controls {
     background-color: rgb(221, 221, 34);
+}
+
+.audio_main_theme {
+    /* background-color: aquamarine;  */
+    padding: 10px;
+    width: 400px;
+    background-color:rgb(171, 163, 137);
 }
 
 /* <<<<<<<<<<<<<<<< Computer Board >>>>>>>>>>>>>>>> */

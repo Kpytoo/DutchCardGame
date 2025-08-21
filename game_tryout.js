@@ -169,6 +169,8 @@ button_exit_rules.addEventListener("click", (e) => {
 });
 
 button_start_game.addEventListener("click", (e) =>{
+    audio_main_theme.play();
+    audio_main_theme.volume = 0.5;
     button_start_game.style.animationName = "button_pop_out"; 
     deck_div.style.pointerEvents = "initial";
     button_dutch.style.pointerEvents = "initial";

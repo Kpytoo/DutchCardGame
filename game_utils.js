@@ -92,6 +92,7 @@ const settings_tab_power_cards = document.querySelector(".settings_tab_power_car
 const settings_tab_card_points = document.querySelector(".settings_tab_card_points");
 const settings_tab_dutch_rules = document.querySelector(".settings_tab_dutch_rules");
 const settings_tab_audio = document.querySelector(".settings_tab_audio");
+const audio_main_theme = document.querySelector(".audio_main_theme");
 
 const display_number_of_cards_in_deck = document.querySelector("span.display_number_of_cards_in_deck");
 
