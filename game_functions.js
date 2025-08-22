@@ -134,6 +134,7 @@ const draw_card = (drawn_card) => {
 //Function that plays a card by placing it on the pile and using its ability
 // played_by_opp (bool val) --> if it was played by the opponent, if yes, don't use the abilities
 const play_card_on_pile = (user, card, pile, played_by_opp) => {
+    audio_random_play_card();
     //Switch the pile card with the played card
     pile.card_type = card.card_type;
     pile.card_suit = card.card_suit;
@@ -318,6 +319,7 @@ const switch_card = (user, drawn_card, switched_card_index, pile) => { //switche
 
 //Function that let's the user play one of their own cards, whether right or wrong
 let play_card = (pile, e) =>{
+    deck_div.style.pointerEvents = "none";
     for(let i = 0; i < player.num_of_cards; i++){
         if(player.visual_hand[i].getAttribute("class") != e.target.getAttribute("class")){ //Check which card was clicked on
             continue;
@@ -915,5 +917,11 @@ let computer_ending_its_turn = () => {
 //Plays a random draw card sound
 let audio_random_draw_card = () => {
     const audio_array = [audio_card_draw_1, audio_card_draw_2, audio_card_draw_3, audio_card_draw_4];
+    audio_array[random_number(4)].play();
+};
+
+//Plays a random play card sound
+let audio_random_play_card = () => {
+    const audio_array = [audio_card_play_1, audio_card_play_2, audio_card_play_3, audio_card_play_4];
     audio_array[random_number(4)].play();
 };

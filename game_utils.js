@@ -101,6 +101,14 @@ audio_card_draw_1.volume = "0.5";
 audio_card_draw_2.volume = "0.5";
 audio_card_draw_3.volume = "0.5";
 audio_card_draw_4.volume = "0.5";
+const audio_card_play_1 = new Audio("Audio\\Audio_Card_Play_1.wav");
+const audio_card_play_2 = new Audio("Audio\\Audio_Card_Play_2.wav");
+const audio_card_play_3 = new Audio("Audio\\Audio_Card_Play_3.wav");
+const audio_card_play_4 = new Audio("Audio\\Audio_Card_Play_4.wav");
+audio_card_play_1.volume = "0.5";
+audio_card_play_2.volume = "0.5";
+audio_card_play_3.volume = "0.5";
+audio_card_play_4.volume = "0.5";
 
 const display_number_of_cards_in_deck = document.querySelector("span.display_number_of_cards_in_deck");
 

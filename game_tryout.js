@@ -123,7 +123,6 @@ player_hand_div.addEventListener("dblclick", (e) =>{
     if(player_is_currently_drawing){
         return;
     }
-    deck_div.style.pointerEvents = "none";
     play_card(pile, e);
 });
 
