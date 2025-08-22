@@ -340,6 +340,7 @@ let play_card = (pile, e) =>{
                 visual_card.addEventListener("animationend", (e) => {
                     visual_card.style.animationIterationCount = "infinite";
                     visual_card.style.animationName = "none";
+                    deck_div.style.pointerEvents = "initial";
                 }, {once: true}); 
             }, {once: true});
             break;
@@ -368,13 +369,15 @@ let play_card = (pile, e) =>{
             player.visual_hand.splice(i, 1);
             player.hand.splice(i, 1);
             player.num_of_cards -= 1;
-            display_full_hand(computer, player, pile);   
+            display_full_hand(computer, player, pile);  
+            deck_div.style.pointerEvents = "initial"; 
         }, {once: true});
     }
 };
 
 //Function that let's the user play one of their own cards, whether right or wrong
 let play_card_from_computer = (pile, e) =>{
+    deck_div.style.pointerEvents = "none";
     for(let i = 0; i < computer.num_of_cards; i++){
         if(computer.visual_hand[i].getAttribute("class") != e.target.getAttribute("class")){
             continue;
@@ -396,7 +399,8 @@ let play_card_from_computer = (pile, e) =>{
                 visual_card.style.animationName = "switching_cards_in_hand";
                 visual_card.addEventListener("animationend", (e) => {
                     visual_card.style.animationIterationCount = "infinite";
-                    visual_card.style.animationName = "none";  
+                    visual_card.style.animationName = "none";
+                    deck_div.style.pointerEvents = "initial";
                 }, {once: true});
             }, {once: true});
             break;
