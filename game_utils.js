@@ -74,6 +74,7 @@ let computer_turn = false; //Keep track if computer's turn
 let player_has_switched_cards = false;
 let player_card_index = 0;
 
+const table_div = document.querySelector(".table");
 const computer_hand_div = document.querySelector(".computer_hand"); //Where we are adding/removing visual cards
 const player_hand_div = document.querySelector(".player_hand"); //Where we are adding/removing visual cards
 const deck_div = document.querySelector(".deck");
@@ -109,6 +110,14 @@ audio_card_play_1.volume = "0.5";
 audio_card_play_2.volume = "0.5";
 audio_card_play_3.volume = "0.5";
 audio_card_play_4.volume = "0.5";
+const audio_card_wrong = new Audio("Audio\\Audio_Card_Wrong.wav");
+audio_card_wrong.volume = "0.05";
+const audio_click = new Audio("Audio\\Audio_Click.wav");
+audio_click.volume = "0.1";
+const audio_dutch = new Audio("Audio\\Audio_Dutch.wav");
+audio_dutch.volume = "0.3";
+const audio_end = new Audio("Audio\\Audio_End.wav");
+audio_end.volume = "0.1";
 
 const display_number_of_cards_in_deck = document.querySelector("span.display_number_of_cards_in_deck");
 

@@ -143,6 +143,7 @@ computer_hand_div.addEventListener("dblclick", (e) =>{
 //Player pressing the "Dutch!" button
 button_dutch.addEventListener("click", (e) =>{
     if(!computer.dutch){
+        audio_calling_dutch();
         document.querySelector("div.player_dutch").style.display = "initial";
         player.dutch = true;
         player_turn = false;
@@ -179,7 +180,6 @@ button_start_game.addEventListener("click", (e) =>{
     button_dutch.style.animationName = "button_pop_in";
     for(let i = 0; i < player.num_of_cards; i++){
         if(i == 1 || i == 3){
-            // let card_src = ("CARDS\\" + player.hand[i].card_suit + "_" + player.hand[i].card_type + ".png");
             player.visual_hand[i].style.animationName = "player_looking_at_a_card_face_down";
             player.visual_hand[i].addEventListener("animationend", (e)=>{
                 player.visual_hand[i].setAttribute("src", back_card_src);
@@ -258,4 +258,8 @@ settings_tab_audio.addEventListener("click", (e) => {
     container_card_points.style.display = "none";
     container_dutch_rules .style.display = "none";
     container_audio .style.display = "flex";
+});
+
+table_div.addEventListener("click", (e) => {
+    audio_mouse_click();
 });

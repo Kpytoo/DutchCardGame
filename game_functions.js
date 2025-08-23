@@ -325,9 +325,11 @@ let play_card = (pile, e) =>{
             continue;
         }
         if(player.hand[i].card_type != pile.card_type){ //If wrong card was played
+            audio_wrong_card();
             player.visual_hand[i].style.animationIterationCount = "1";
             player.visual_hand[i].style.animationName = "wrong_card_played_vibration";
             player.visual_hand[i].addEventListener("animationend", (e) => {
+                audio_random_draw_card();
                 draw_card(drawn_card);
                 player.hand.push(new Card(drawn_card.card_type, drawn_card.card_suit, drawn_card.card_point, drawn_card.card_ability));
                 player.num_of_cards++;
@@ -385,9 +387,11 @@ let play_card_from_computer = (pile, e) =>{
             continue;
         }
         if(computer.hand[i].card_type != pile.card_type){ //If wrong card was played
+            audio_wrong_card();
             computer.visual_hand[i].style.animationIterationCount = "1";
             computer.visual_hand[i].style.animationName = "wrong_card_played_vibration";
             computer.visual_hand[i].addEventListener("animationend", (e) =>{
+                audio_random_draw_card();
                 draw_card(drawn_card);
                 player.hand.push(new Card(drawn_card.card_type, drawn_card.card_suit, drawn_card.card_point, drawn_card.card_ability));
                 player.num_of_cards++;
@@ -536,6 +540,7 @@ let computer_playing_turn = () =>{
 };
 
 let total_score_count = () => {
+    audio_end_game();
     deck_div.style.pointerEvents = "none";
     button_dutch.style.display = "none";
     computer_hand_div.style.pointerEvents = "none";
@@ -854,6 +859,7 @@ let computer_end_turn_set_variables = () => {
 //Every turn, the computer has 2% chance of randomly calling Dutch, except if the player has already called Dutch
 let computer_dutch_call_chance = () => {
     if(!player.dutch && (random_number(100) < 2)){ //Check if player hasn't called Dutch and Get a random number between 0-99, if the number is between 0-2, computer calls Dutch
+        audio_calling_dutch();
         document.querySelector("div.computer_dutch").style.display = "initial";
         computer.dutch = true; //Notate that the computer has called Dutch
         computer_end_turn_set_variables();
@@ -925,3 +931,23 @@ let audio_random_play_card = () => {
     const audio_array = [audio_card_play_1, audio_card_play_2, audio_card_play_3, audio_card_play_4];
     audio_array[random_number(4)].play();
 };
+
+//Plays the wrong card sound
+let audio_wrong_card = () => {
+    audio_card_wrong.play();
+};
+
+//Plays the mouse click sound
+let audio_mouse_click = () => {
+    audio_click.play();
+};
+
+//Plays the dutch sound
+let audio_calling_dutch = () => {
+    audio_dutch.play();
+}
+
+//Plays the end sound
+let audio_end_game = () => {
+    audio_end.play();
+}
