@@ -104,12 +104,12 @@ const start_game = () => {
 //Function that draws a card for a user (computer or player)
 //Takes a card object as input
 const draw_card = (drawn_card) => {
-    if(deck_of_cards.length == 0){
+    if(num_of_cards_in_deck() == 0){
         alert("Deck is empty! Game finished. Reveal your cards!");
         total_score_count();
         return;
     } //If the deck isn't empty
-    while(deck_of_cards.length != 0){ //If there are no more suits of the random card type (all suits of that card were drawn)
+    while(num_of_cards_in_deck() != 0){ //If there are no more suits of the random card type (all suits of that card were drawn)
         let chosen_card_index = random_number(deck_of_cards.length); //Generate a random number to get a random card type
         let chosen_card = deck_of_cards[chosen_card_index]; //Retrieve a random card from the deck
         if(chosen_card[1].length == 0){
