@@ -6,15 +6,13 @@ player_hand_div.style.animationName = "user_flashing_turn";
 //**Drawing from the deck**
 deck_div.addEventListener("click", (e)=>{
     if(!player_turn){
-        alert("Not your turn!");
         return;
     }
     else if(player.num_of_cards == 0){
-        alert("Can't draw while empty handed!");
         return;
     }
     else if(player_has_drawn){
-        alert("You already drew!");
+        return;
     }
     else if(num_of_cards_in_deck() == 0){
         total_score_count();

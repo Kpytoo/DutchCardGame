@@ -885,7 +885,7 @@ let computer_empty_hand_check = () => {
 
 //Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
 let computer_drawing_card = () => {
-    if(!computer_turn){ //Skip if it isn't the computer's turn
+    if(!computer_turn || num_of_cards_in_deck() == 0){ //Skip if it isn't the computer's turn
         return;
     }
     audio_random_draw_card();
