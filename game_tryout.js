@@ -16,6 +16,9 @@ deck_div.addEventListener("click", (e)=>{
     else if(player_has_drawn){
         alert("You already drew!");
     }
+    else if(num_of_cards_in_deck() == 0){
+        total_score_count();
+    }
     else{
         audio_random_draw_card();
         draw_card(drawn_card);

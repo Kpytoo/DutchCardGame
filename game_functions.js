@@ -519,18 +519,19 @@ let computer_playing_turn = () =>{
     computer_play_card(pile);
 
     //CHECKING: If computer's hand is empty after playing, automatic Dutch (if player didn't dutch) and skip turn.
-    if(computer_empty_hand_check() == true) return;
+    setTimeout(() =>{
+        if(computer_empty_hand_check() == true) return;          
+    }, 1500);
 
     //2. Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
     setTimeout(() =>{
         computer_drawing_card();           
-    }, 1500);
+    }, 2000);
 
     //3. Computer will check again if it can play, reference (1.).
     setTimeout(() =>{
         computer_play_card(pile);        
     }, 4000);
-
 
     // 4. Computer will end its turn.
     setTimeout(()=>{
@@ -871,11 +872,12 @@ let computer_dutch_call_chance = () => {
 //If computer's hand is empty at the start of its turn, automatic Dutch and skip turn.
 let computer_empty_hand_check = () => {
     if(computer.num_of_cards == 0){
-        computer_end_turn_set_variables();
         if(!player.dutch){ //Automatic dutch if empty handed
+            audio_calling_dutch();
             document.querySelector("div.computer_dutch").style.display = "initial";
             computer.dutch = true;
         }
+        computer_end_turn_set_variables();
         return true;
     }
     return false;
@@ -883,6 +885,9 @@ let computer_empty_hand_check = () => {
 
 //Computer will draw a card, 50% it switches with a card from its hand, 50% it plays it immediately.
 let computer_drawing_card = () => {
+    if(!computer_turn){ //Skip if it isn't the computer's turn
+        return;
+    }
     audio_random_draw_card();
     draw_card(drawn_card); //Draw a random card from the deck
     visual_card = document.createElement("img");
