@@ -1,0 +1,844 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display:flex;
+    justify-content: center;
+}
+
+.table {
+    position:relative;
+    flex: 0 0 auto;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(85, 7, 7);
+    border-width: 25px;
+    width: 1100px;
+    height: 1200px;
+    background-image: radial-gradient(circle, rgb(133, 133, 50) , rgb(114, 69, 37));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.table > .container_player_card_action_prompt, .table > .container_computer_card_action{
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 37%;
+    right: 5%;
+    display: none;
+    border-width: 0;
+}
+
+.table > .container_button_player_playing_ten {
+    position: absolute;
+    width: 100px;
+    height: 125px;
+    display: none;
+    flex-direction: column;
+    gap: 13%;
+    justify-content: center;
+    top: 510px;
+    left: 640px;
+    border-width: 0;
+}
+
+.container_button_player_playing_ten > button {
+    width: 95%;
+    height: 55px;
+    font-size: 1.25rem;
+}
+
+.player_card_action_prompt, .computer_card_action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player_card_action_prompt > img, .computer_card_action > img {
+    animation-name: draw_card_from_deck;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+.container_button {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100px;
+    gap: 13%;
+    justify-content: center;
+}
+
+.container_button > button {
+    width: 95%;
+    height: 35px;
+    font-size: 1.25rem;
+}
+
+button.play {
+    background-color: rgb(96, 255, 96);
+    border-color: rgb(33, 255, 33);
+    border-radius: 5px;
+}
+
+button.play:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(158, 253, 158);
+    top: 2px;
+    border-width: 3px;
+}
+
+button.switch {
+    background-color: rgb(255, 184, 77);
+    border-color: rgb(255, 153, 0);
+    border-radius: 5px;
+}
+
+button.switch:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(246, 197, 130);
+    top: 2px;
+    border-width: 3px;
+}
+
+button.switch_ten {
+    background-color: rgb(96, 255, 96);
+    border-color: rgb(33, 255, 33);
+    border-radius: 5px;
+}
+
+button.switch_ten:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(158, 253, 158);
+    top: 2px;
+    border-width: 3px;
+}
+
+button.no_switch_ten {
+    background-color: rgb(255, 77, 77);
+    border-color: rgb(255, 17, 0);
+    border-radius: 5px;
+}
+
+button.no_switch_ten:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(250, 105, 105);
+    top: 2px;
+    border-width: 3px;
+}
+
+.table > div, .middle_board > div {
+    border-width: 5px;
+    border-style: solid;
+}
+
+.table > .container_button_settings {
+    position: absolute;
+    top: 415px;
+    left: 10px;
+    border-width: 0px;  
+}
+
+.settings {
+    border-radius: 5px;
+    border-color: rgb(27, 138, 55);
+    background-color: rgb(66, 244, 110);
+    font-weight: bolder;
+}
+
+button.settings:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(181, 231, 175);
+    top: 1px;
+}
+
+.table > .container_game_settings {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background-image: radial-gradient(circle, rgb(169, 169, 126) , rgb(149, 114, 90));
+    width: 600px;
+    height: 700px;
+    top: 250px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(85, 7, 7);
+    border-width: 15px;
+    animation-name: none;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+    overflow-y: scroll;
+    scrollbar-color: black rgb(128, 107, 50);
+    scrollbar-width: auto;
+}
+
+.container_game_controls {
+    display: flex;
+    flex-direction: column;
+}
+
+.container_power_cards {
+    display: none;
+    flex-direction: column;
+}
+
+.container_card_points {
+    display: none;
+    flex-direction: column;
+}
+
+.container_dutch_rules {
+    display: none;
+    flex-direction: column;
+}
+
+.container_audio {
+    display: none;
+    flex-direction: column;
+}
+
+div.title_rules, div.title_points, div.title_power_cards, div.title_game_controls, div.title_end_results, div.title_audio {
+    align-self: center;
+    font-weight: bolder;
+    font-size: 3rem;
+    text-decoration: underline;
+}
+
+div.how_its_played, div.card_points, .power_cards > div, div.game_controls, div.sound_sub_titles{
+    font-size: 1.7rem;
+    line-height: 2.5rem;
+    padding: 5px;
+    font-weight: bold;
+    text-shadow: 1px 1px 10px rgb(255, 255, 255);
+}
+
+div.rules_starting_hand {
+    display:flex;
+    border-color: blueviolet;
+    border-width: 4px;
+    width: 150px;
+    height: 200px;
+    flex-wrap: wrap;
+    margin: 10px;
+    gap: 3px;
+    margin-left: 220px;
+}
+
+.rules_starting_hand > img {
+    width: 50px;
+    height: 100px;
+}
+
+div.card_points {
+    text-align: center;
+}
+
+div.power_cards {
+    text-align: center;
+}
+
+.container_exit_button {
+    display: flex;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.exit_button {
+    background-color: rgb(252, 40, 40);
+    width: 40px;
+    border-radius: 5px;
+    border-color: rgb(135, 18, 18);
+}
+
+button.exit_button:hover {
+    cursor: pointer;
+    background-color: rgb(240, 135, 117);
+}
+
+.table > .container_start_game {
+    position: absolute;
+    bottom: 50px;
+    left: 320px;
+    border-width: 0;
+}
+
+button.start_game {
+    width: 80px;
+    height: 80px;
+    background-color: rgb(26, 255, 0);
+    border-radius: 500px;
+    border-color: rgb(17, 113, 6);
+    border-width: 3px;
+    display: initial;
+    font-size: 1.3rem;
+    animation-name: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+button.start_game:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(181, 231, 175);
+    border-width: 5px;
+    top: 1px;
+}
+
+.table > .container_endgame_results {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    background-image: radial-gradient(circle, rgb(169, 169, 126) , rgb(149, 114, 90));
+    width: 600px;
+    height: 350px;
+    top: 400px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(85, 7, 7);
+    border-width: 15px;
+    animation-name: button_pop_in;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+    gap: 35px;
+}
+
+.user_score_player, .user_score_computer, .winner {
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 10px rgb(255, 255, 255);
+}
+
+.user_score_player {
+    background-color: rgb(112, 184, 206);
+    border-radius: 10px;
+}
+
+.user_score_computer {
+    background-color: rgb(223, 154, 108);
+    border-radius: 10px;
+}
+
+.winner {
+    background-color: rgb(241, 230, 128);
+    border-radius: 10px;
+}
+
+.user_scores {
+    display: flex;
+    justify-content: center;
+    gap: 110px;
+}
+
+.winner {
+    align-self: center;
+}
+
+button.play_again {
+    align-self: center;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: rgb(26, 255, 0);
+    border-color: rgb(17, 113, 6);
+    border-width: 3px;
+}
+
+button.play_again:hover {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(136, 255, 123);
+    border-width: 5px;
+    top: 1px;
+}
+
+.container_settings_tabs {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(223, 208, 190);
+}
+
+.container_settings_tabs > div {
+    background-color: rgb(214, 214, 193);
+    font-weight: bolder;
+    font-size: 1.02rem;
+    border-style: solid;
+    border-color: rgb(27, 27, 26);
+    width: 150px;
+    height: 30px;
+    text-align: center;
+}
+
+.container_settings_tabs > div:hover {
+    cursor: pointer;
+}
+
+div.settings_tab_game_controls {
+    background-color: rgb(221, 221, 34);
+}
+
+.audio_main_theme {
+    /* background-color: aquamarine;  */
+    padding: 10px;
+    width: 400px;
+    background-color:rgb(171, 163, 137);
+}
+
+/* <<<<<<<<<<<<<<<< Computer Board >>>>>>>>>>>>>>>> */
+
+.computer_hand {
+    width: 100%;
+    height: 35%;
+    display: flex; 
+    flex-direction: column-reverse;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    align-content: center;
+    gap: 1%;
+    animation-name: none;
+    animation-timing-function: linear;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+}
+
+.computer_hand > img {
+    animation-name: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.75s;
+    animation-fill-mode: none;
+    /* pointer-events: initial;    */
+}
+
+/* <<<<<<<<<<<<<<<< Computer Board - END >>>>>>>>>>>>>>>> */
+
+/* <<<<<<<<<<<<<<<< Middle Board >>>>>>>>>>>>>>>> */
+
+.middle_board {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-right: 32%;
+    /* position:relative; */
+}
+
+div.deck {
+    position:relative;
+    width: 200px;
+    height: 100px;
+    border-style: dashed;
+    border-width: 3px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    pointer-events: initial;
+}
+
+div.deck > img {
+    width: 100px;
+    height: 200px;
+    transform: rotate(-90deg);
+}
+
+div.deck > img:hover {
+    box-sizing: content-box;
+    border-color: rgba(251, 255, 0, 0.783);
+    border-width: 3px;
+    border-radius: 2px;
+    border-style: solid;
+    cursor: pointer;
+}
+
+div.deck > span, div.pile > span{
+    position: absolute;
+}
+
+div.deck > span.display_number_of_cards_in_deck {
+    bottom: 100px;
+    padding: 5px 10px 5px 10px;
+    border-style: solid;
+    border-color:rgba(255, 255, 255, 0.91);
+    border-radius: 50px;
+    background-color: rgba(240, 248, 255, 0.662);
+    font-size: 1.15rem;
+    pointer-events: none;
+}
+
+div.pile {
+    width: 100px;
+    height: 200px;
+    border-style: dashed;
+    border-width: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+div.pile > img {
+    position: absolute;
+    width: 100px;
+    height: 200px;
+    animation-name: none;
+    animation-duration: 0.75s;
+    animation-timing-function: ease;
+}
+
+button.button_end_turn {
+    position: absolute;
+    top: 650px;
+    left: 190px;
+    width: 100px;
+    height: 60px;
+    background-color: rgb(238, 165, 61);
+    border-radius: 5px;
+    border-color: rgb(208, 126, 10);
+    border-width: 3px;
+    font-weight: bold;
+    display: none;
+    animation-name: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+button.button_end_turn:hover {
+    cursor: pointer;
+    background-color: rgb(239, 181, 100);
+    border-width: 5px;
+}
+
+button.dutch {
+    position: absolute;
+    top: 536px;
+    left: 35px;
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    background-color: rgb(255, 215, 0);
+    border-color: rgb(203, 173, 0);
+    border-width: 3px;
+    pointer-events: initial;
+    font-weight: bold;
+    display: none;
+    animation-name: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+button.dutch:hover {
+    cursor: pointer;
+    background-color: rgb(236, 217, 109);
+    border-width: 5px;
+}
+
+div.player_dutch {
+    position: absolute;
+    border-width: 0px;
+    top: 675px;
+    left: 437px;
+    font-size: 4rem;
+    font-weight: bolder;
+    display: none;
+    animation-name: dutch_called;
+    animation-timing-function: ease-in;
+    animation-duration: 0.4s;   
+}
+
+div.computer_dutch {
+    position: absolute;
+    border-width: 0px;
+    top: 400px;
+    left: 437px;
+    font-size: 4rem;
+    font-weight: bolder;
+    display: none;
+    animation-name: dutch_called;
+    animation-timing-function: ease-in;
+    animation-duration: 0.4s; 
+}
+
+/* <<<<<<<<<<<<<<<< Middle Board - END >>>>>>>>>>>>>>>> */
+
+/* <<<<<<<<<<<<<<<< Player Board >>>>>>>>>>>>>>>> */
+
+.player_hand {
+    width: 100%;
+    height: 35%;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 1%;
+    /* background-color: rgba(255, 221, 0, 0); */
+    animation-name: none;
+    animation-timing-function: linear;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+}
+
+.player_hand > img, .computer_hand > img { /*Cards*/
+    width: 100px;
+    height: 45%;
+    flex: 0 0 auto;
+    transition-property: transform;
+    transition-duration: 0.4s;
+    transition-timing-function: ease;
+    perspective: 800px; /* NEW */
+    transform-style: preserve-3d; /* NEW */
+}
+
+.player_hand > img {
+    animation-name: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.75s;
+    animation-iteration-count: infinite;    
+}
+
+.player_hand > img:hover, .computer_hand > img:hover { /*Cards transitions*/
+    transform: scale(1.1);
+    border-color: rgba(251, 255, 0, 0.783);
+    border-width: 3px;
+    border-radius: 2px;
+    border-style: solid;
+    cursor: pointer;
+}
+
+/* <<<<<<<<<<<<<<<< Player Board - END >>>>>>>>>>>>>>>> */
+
+/* <<<<<<<<<<<<<<<< Animations >>>>>>>>>>>>>>>> */
+
+@keyframes draw_card_from_deck {
+    from{
+        transform: translateX(-500px) rotate(0deg);
+    }
+    
+    to{
+        transform: translateX(0px) rotate(360deg);
+    }
+}
+
+@keyframes user_flashing_turn {
+    0% {
+        background-color: rgba(255, 221, 0, 0);
+    }
+    20% {
+        background-color: rgba(255, 221, 0, 0.15);
+    }
+
+    40% {
+        background-color: rgba(255, 221, 0, 0.3);
+    }
+    50%{
+        background-color: rgba(255, 221, 0, 0.4);
+    }
+    60%{
+        background-color: rgba(255, 221, 0, 0.3);
+    }
+
+    80%{
+        background-color: rgba(255, 221, 0, 0.15);
+    }
+
+    100%{
+        background-color: rgba(255, 221, 0, 0);
+    }
+}
+
+@keyframes player_playing_card {
+    from{
+        transform: translateY(200px) skew(15deg,15deg) rotate(90deg);
+    }
+    
+    to{
+        transform: translateY(0px);
+    }   
+}
+
+@keyframes switching_shaking_cards {
+    0%{
+        transform: rotate(-5deg);
+    }
+    50%{
+        transform: rotate(5deg);
+    }
+    100%{
+        transform: rotate(-5deg);
+    }
+}
+
+@keyframes button_pop_in {
+    0%{
+        transform: scale(0);
+    }
+    80%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@keyframes button_pop_out {
+    0%{
+        transform: scale(1);
+    }
+    80%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(0);
+        display: none;
+    }
+}
+
+@keyframes computer_playing_card {
+    from{
+        transform: translateY(-200px) skew(15deg,15deg);
+    }
+    
+    to{
+        transform: translateY(0px) rotate(180deg);
+    }   
+}
+
+@keyframes switching_cards_in_hand {
+    0%{
+        transform: scale(0);
+    }
+    80%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@keyframes switching_cards_in_hand_from_playing_ten {
+    0%{
+        transform: scale(0) rotate(360deg);
+    }
+    80%{
+        transform: scale(1.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@keyframes card_top_row_translation {
+    from{
+        transform: translateY(0px) translateX(0px);
+    }
+    to{
+        transform: translateY(180px) translateX(-100px);
+    }
+}
+
+@keyframes card_bottom_row_translation {
+    from{
+        transform: translateY(0px);
+    }
+    to{
+        transform: translateY(-180px);
+    }
+}
+
+@keyframes wrong_card_played_vibration {
+    0%{
+        transform: rotate(0deg);
+    }
+    10%{
+        transform: rotate(-5deg);
+    }
+    20%{
+        transform: rotate(+5deg);
+    }
+    30%{
+        transform: rotate(-5deg);
+    }
+    40%{
+        transform: rotate(+5deg);
+    }
+    50%{
+        transform: rotate(-5deg);
+    }
+    60%{
+        transform: rotate(+5deg);
+    }
+    70%{
+        transform: rotate(-5deg);
+    }
+    80%{
+        transform: rotate(+5deg);
+    }
+    90%{
+        transform: rotate(-5deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes card_top_row_translation_computer {
+    from{
+        transform: translateY(0px);
+    }
+    to{
+        transform: translateY(180px);
+    }
+}
+
+@keyframes card_bottom_row_translation_computer {
+    from{
+        transform: translateY(0px) translateX(0px);
+    }
+    to{
+        transform: translateY(-180px) translateX(100px);
+    }
+}
+
+@keyframes dutch_called {
+    from{
+        transform: scale(4);
+    }
+    to{
+        transform: scale(1);
+    }
+}
+
+@keyframes player_looking_at_a_card_face_up {
+    from { 
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(180deg);
+    }
+}
+
+@keyframes player_looking_at_a_card_face_down {
+    from { 
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(180deg);
+    }
+}
+/* <<<<<<<<<<<<<<<< Animations - END >>>>>>>>>>>>>>>> */
