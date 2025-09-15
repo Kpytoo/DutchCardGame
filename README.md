@@ -46,8 +46,18 @@ Starting off with the cards, I've decided to label them each by their own consta
 The format is as follows: const <card_type> = [[card_type], [card_suits], [card_point, card_ability]] <br/> <br/>
 
 The deck is a 1d array of all these constant values. <br/>
-This way in game, it is easy to track which cards are left in the deck by checking the respective "card_suits" available inside the 2d of the "card_type".
+This way in game, it is easy to track which cards are left in the deck by checking the respective "card_suits" available inside the 2d array of the "card_type".
+
 ## - game_functions.js
+This Javascript file contains all the functions that the game needs to run. It ranges from a wide selection of functions such as starting the game <start_game()>, drawing a card <draw_card()>, playing a card from your own hand <play_card()>, playing a card from the computer's hand <play_card_from_computer()>, etc. <br/>
+It also contains the logic that the computer uses to play against the player, and it is this that I mainly want to cover in this description. <br/> <br/>
+<img width="1226" height="1148" alt="Screenshot 2025-09-14 231911" src="https://github.com/user-attachments/assets/2821fc30-02cc-4137-99cf-4e843e4ee68a" />
+
+I wanted to create a "dumb" bot, in the sense that, the computer isn't aware of its actions. It will simply follow a script, with a little bit of randomness sprinkled in. <br/><br/>
+
+The computer has always a 2% chance of instantly calling Dutch at the beginning of its turn, regardless of its current hand, unless of course the player already called Dutch.<br/> The computer will then check if its hand is empty. If not, it will check if it can play any cards in its hand before drawing a card. Afterwards it will check again and conclude its turn.<br/> <br/>
+
+It is a rather simple script, and I specifically made it so since it was my first time designing an AI in a gaming environment. <br/>
 
 ## - game_engine.js
 
