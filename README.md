@@ -45,7 +45,8 @@ This Javascript file contains all the important variables of the game, the Card 
 Starting off with the cards, I've decided to label them each by their own constant variable. Each is a 2d array containing its respective information. <br/>
 The format is as follows: const <card_type> = [[card_type], [card_suits], [card_point, card_ability]] <br/> <br/>
 
-The deck is a 1d array of all these constant values. <br/> <br/>
+The deck is a 1d array of all these constant values. <br/>
+This way in game, it is easy to track which cards are left in the deck by checking the respective "card_suits" available inside the 2d of the "card_type".
 ## - game_functions.js
 
 ## - game_engine.js
