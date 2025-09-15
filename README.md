@@ -3,9 +3,10 @@ Play here: https://kpytoo.github.io/DutchCardGame/
 
 ## - About
 This is a project about a card game called "Dutch", it is a game that me and my friends play whenever we have a deck of cards. <br/>
-It is a memory style game where each decision and action counts and makes for great moments of fun and sometimes can even turn friends into foes! <br/><br/>
+It is a memory style game where each decision and action counts and makes for great moments of fun and sometimes can even turn friends into foes! <br/>
+Why is it called Dutch you ask? I honestly have no clue, it was the name I was introduced to whenever I played this game for the first time at my summer job. <br/> <br/>
 
-And so I've decided to program this game to test myself and learn something new in the meanwhile.<br/>
+So I've decided to program this game to test myself and learn something new in the meanwhile.<br/>
 I've always wanted to program games so I thought that this would be a great start. <br/>
 At the time, I was learning some HTML/CSS/Javascript from The Odin Project (check them out -> https://www.theodinproject.com/) and decided to tackle this project using the latter languages.
 
@@ -37,6 +38,17 @@ This actually was quite challenging but was also very fun and rewarding whenever
 
 Keyframes were especially fun to work with although at times it was rather chaotic. Nonetheless, I've learned a lot whilst playing around with some of these animations. <br/>
 There are 17 total animations used in this project, ranging from card flips to drawing and playing animations!
+
+## - game_utils.js
+This Javascript file contains all the important variables of the game, the Card constructor, the Computer and Player objects and the deck of cards. <br/> <br/>
+<img width="1198" height="1007" alt="Screenshot 2025-09-14 230615" src="https://github.com/user-attachments/assets/8c1aa823-8aa4-4bbe-8fcc-9073b2ab010e" />
+Starting off with the cards, I've decided to label them each by their own constant variable. Each is a 2d array containing its respective information. <br/>
+The format is as follows: const <card_type> = [[card_type], [card_suits], [card_point, card_ability]] <br/> <br/>
+
+The deck is a 1d array of all these constant values. <br/> <br/>
+## - game_functions.js
+
+## - game_engine.js
 
 # -- Art --
 
