@@ -115,7 +115,7 @@ The application used was FL Studio (check it out here: https://www.image-line.co
 ## - Main theme song
 Since I have some experience with music, I decided that I wanted to add some to my game! <br/>
 I tried to go for this lounge-esk jazzy track that is groovy but not too distracting. <br/>
-With the use of a simple bass pattern, simple piano chords playing 7th chords using a pentatonic blue scales, and some percussions, I was able to achieve my goal. <br/>
+With the use of a simple bass pattern, simple piano chords playing 7th chords using a pentatonic blue scales, and some percussions, I was able to achieve my goal. <br/><br/>
 The full track can be listened from the Audio folder or on my Youtube Channel found here (https://www.youtube.com/watch?v=y4IvQflFR4g) <br/>
 
 ## - Sound effects
@@ -131,3 +131,10 @@ There are also some sound effects that were entirely made using FL Studio: <br/>
 
 
 # -- Retrospective --
+If you've made it this far, I want to say thank you for your time and attention!<br/>
+This project was very fun to make and I've learned a tremendous amount of stuff that I'm sure will help me in future projects. <br/><br/>
+
+To have had not only programmed this game, but created art, music and sound effects, I've gained a new perspective on other games out there and have found a new appreciation for the art that is put into them. <br/>
+This was an incredible adventure and I hope you enjoy the game, because it is your enjoyment that makes it worth it. <br/><br/>
+
+-Daniel
