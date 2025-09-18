@@ -120,8 +120,9 @@ The full track has been fully produced, mixed and mastered and can be listened f
 
 ## - Sound effects
 Although I had some experience creating music, I never really created sound effects, especially for a game. <br/>
-Instead of browsing the Internet to find some cheap FX, I decided to create my own. And so I grabbed a microphone, a deck of cards and started recording some card flips and card drawing sounds. <br/>
-There a total 4 drawing card sounds and 4 playing card sounds. <br/> <br/>
+Instead of browsing the Internet to find some cheap FX, I decided to create my own. <br/>
+And so I grabbed a microphone, a deck of cards and started recording some card flips and card drawing sounds. <br/>
+There a total of 4 drawing card sounds and 4 playing card sounds. <br/> <br/>
 
 There are also some sound effects that were entirely made using FL Studio: <br/>
 - Clicking sound: A hit-hat
