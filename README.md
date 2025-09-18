@@ -57,10 +57,23 @@ I wanted to create a "dumb" bot, in the sense that, the computer isn't aware of 
 
 The computer has always a 2% chance of instantly calling Dutch at the beginning of its turn, regardless of its current hand, unless of course the player already called Dutch.<br/> The computer will then check if its hand is empty. If not, it will check if it can play any cards in its hand before drawing a card. Afterwards it will check again and conclude its turn.<br/> <br/>
 
-It is a rather simple script, and I specifically made it so since it was my first time designing an AI in a gaming environment. <br/>
+It is a rather simple script, and I specifically made it so since it was my first time designing an AI in a gaming environment. <br/><br/>
+
+I was also thinking that I could implement a simple machine learning model so the computer could determine what cards to play, when to call dutch and have memory in regards to the player's cards. <br/>
+Perhaps I will implement this ability in the future, or perhaps not. <br/>
 
 ## - game_engine.js
+This Javascript file contains all the event listeners for the player, which makes the game runnable and playable. <br/>
+It also contains the start game function <start_game()> that deals 4 randoms card to the player and the computer respectively. <br/><br/>
+<img width="979" height="662" alt="Screenshot 2025-09-17 212202" src="https://github.com/user-attachments/assets/33c454f8-efec-4eac-8f55-36dda149c189" />
 
+My first obstacle when I had to translate my initial "console-only" code to a browser based game was the game loop. <br/>
+I couldn't find a way to create the game loop using loops since there were to many inputs that the user could give at anytime.
+And so I've settled using event listeners. <br/><br/>
+
+Every pressable button, cards, or interactive prompt has an event listener attached to it. The game basically is ran by the user. <br/>
+The computer only plays when the player finishes their turn and then proceeds with its script. <br/>
+Finally the game checks whether the computer or the player have called Dutch and concludes the game.
 # -- Art --
 
 # -- Music --
