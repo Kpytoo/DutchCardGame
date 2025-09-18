@@ -11,7 +11,7 @@ I've always wanted to program games so I thought that this would be a great star
 At the time, I was learning some HTML/CSS/Javascript from The Odin Project (check them out -> https://www.theodinproject.com/) and decided to tackle this project using the latter languages.
 
 ## - Game rules
-Check out the gameRules.txt file to read up on the game rules!
+Check out the *gameRules.txt* file to read up on the game rules!
 
 ## - Making a browser game!
 My first attempt, or better yet a "draft", was a simple console variation of the game using only Javascript. <br/>
