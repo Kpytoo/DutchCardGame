@@ -79,6 +79,8 @@ The computer only plays when the player finishes their turn and then proceeds wi
 Finally the game checks whether the computer or the player has called Dutch and concludes the game.
 
 # -- Art --
+
+## - GIMP
 All the art was done using GIMP (check it out here: https://www.gimp.org/). <br/>
 This was my first time experimenting with pixel art and I'm honestly very proud with how these cards came out. <br/> <br/>
 <img width="200" height="264" alt="hearts_ace" src="https://github.com/user-attachments/assets/beaf04af-3883-4807-99b1-ad8cde97f90d" />
@@ -107,5 +109,25 @@ There are in total 55 images which includes 52 cards, 2 jokers, and the back sid
 You can check them out in the CARDS folder.
 
 # -- Music --
+This project contains one main theme song and multiple card sound effects. <br/>
+The application used was FL Studio (check it out here: https://www.image-line.com/) <br/>
+
+## - Main theme song
+Since I have some experience with music, I decided that I wanted to add some to my game! <br/>
+I tried to go for this lounge-esk jazzy track that is groovy but not too distracting. <br/>
+With the use of a simple bass pattern, simple piano chords playing 7th chords using a pentatonic blue scales, and some percussions, I was able to achieve my goal. <br/>
+The full track can be listened from the Audio folder or on my Youtube Channel found here (https://www.youtube.com/watch?v=y4IvQflFR4g) <br/>
+
+## - Sound effects
+Although I had some experience creating music, I never really created sound effects, especially for a game. <br/>
+Instead of browsing the Internet to find some cheap FX, I decided to create my own. And so I grabbed a microphone, a deck of cards and started recording some card flips and card drawing sounds. <br/>
+There a total 4 drawing card sounds and 4 playing card sounds. <br/> <br/>
+
+There are also some sound effects that were entirely made using FL Studio: <br/>
+- Clicking sound: A hit-hat
+- Calling Dutch: My voice saying "Dutch" using a vocoder
+- Wrong card selection: A high pitch synth sound
+- End game results: A guitar chord
+
 
 # -- Retrospective --
