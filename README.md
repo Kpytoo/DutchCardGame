@@ -81,10 +81,26 @@ Finally the game checks whether the computer or the player has called Dutch and 
 # -- Art --
 All the art was done using GIMP (check it out here: https://www.gimp.org/). <br/>
 This was my first time experimenting with pixel art and I'm honestly very proud with how these cards came out. <br/> <br/>
-<img width="200" height="264" alt="diamonds_ace" src="https://github.com/user-attachments/assets/6921fd73-3138-4902-899a-995f9cb05026" />
-<img width="200" height="264" alt="clubs_king" src="https://github.com/user-attachments/assets/db92cd56-4cb0-49ec-b38d-e47441349d22" />
-<img width="200" height="264" alt="spades_ten" src="https://github.com/user-attachments/assets/4add34ec-7890-4f89-92bb-a7e91f514301" />
-<img width="200" height="264" alt="hearts_jack" src="https://github.com/user-attachments/assets/aa3c4ad5-f02c-4a13-806e-c1bb97a9455b" />
+<img width="200" height="264" alt="hearts_ace" src="https://github.com/user-attachments/assets/beaf04af-3883-4807-99b1-ad8cde97f90d" />
+<img width="200" height="264" alt="hearts_king" src="https://github.com/user-attachments/assets/4ed9ce8a-0d70-419d-ad88-4e41aace40a0" />
+<img width="200" height="264" alt="hearts_queen" src="https://github.com/user-attachments/assets/a025d8d4-3aee-4de0-b799-fc490af90ae3" />
+<img width="200" height="264" alt="hearts_jack" src="https://github.com/user-attachments/assets/6b3fd5af-eef1-4b24-8755-e99a250055c0" />
+<img width="200" height="264" alt="spades_ace" src="https://github.com/user-attachments/assets/5da6e08d-e2c8-4c75-b3e0-e694e4cd44a1" />
+<img width="200" height="264" alt="spades_king" src="https://github.com/user-attachments/assets/d9f94ffc-2597-48ca-b784-4b5e247b415f" />
+<img width="200" height="264" alt="spades_queen" src="https://github.com/user-attachments/assets/ad6fd86e-9316-40e5-b3ba-3a556ad67569" />
+<img width="200" height="264" alt="spades_jack" src="https://github.com/user-attachments/assets/aa16e8a0-494d-4e17-b71d-09d331c63fc1" />
+<img width="200" height="264" alt="diamonds_ace" src="https://github.com/user-attachments/assets/3158051f-e586-4e86-a636-74f2659c0530" />
+<img width="200" height="264" alt="diamonds_king" src="https://github.com/user-attachments/assets/f14e5ea6-049f-4ab3-8aed-0fc317451467" />
+<img width="200" height="264" alt="diamonds_queen" src="https://github.com/user-attachments/assets/0d54a2e2-eb6f-4900-8df5-59af4a13d468" />
+<img width="200" height="264" alt="diamonds_jack" src="https://github.com/user-attachments/assets/ac262de7-2649-48ca-9a04-fe13a59726b3" />
+<img width="200" height="264" alt="clubs_ace" src="https://github.com/user-attachments/assets/14ca9f5e-2d34-4f6c-9538-cccd6cad455b" />
+<img width="200" height="264" alt="clubs_king" src="https://github.com/user-attachments/assets/dc0fe848-d54c-4c17-b47e-2f5dde5bfc8f" />
+<img width="200" height="264" alt="clubs_queen" src="https://github.com/user-attachments/assets/992ea52a-c12e-4547-ae4e-800aaf4b1ebb" />
+<img width="200" height="264" alt="clubs_jack" src="https://github.com/user-attachments/assets/e21f7222-f9be-474c-9d4f-1af46b06415c" />
+<img width="200" height="264" alt="back_side" src="https://github.com/user-attachments/assets/7d133123-a7b6-448e-bd4b-764a48007535" />
+<img width="200" height="264" alt="red_joker" src="https://github.com/user-attachments/assets/1fd435ec-57d4-45a5-91ba-72efb8895fae" />
+<img width="200" height="264" alt="black_joker" src="https://github.com/user-attachments/assets/973705b3-e5b2-4e88-bea8-4533361ee3f6" />
+
 
 I used a canvas of 50px by 66px that was then upscaled to 200px by 264px. <br/>
 There are in total 55 images which includes 52 cards, 2 jokers, and the back side. <br/>
