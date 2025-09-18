@@ -14,7 +14,10 @@ At the time, I was learning some HTML/CSS/Javascript from The Odin Project (chec
 My first attempt, or better yet a "draft", was a simple console variation of the game using only Javascript. <br/>
 It was successful and I could play the game on the browser's console with simple inputs as game commands, such as "1", "2", etc. <br/>
 This version is still accessible if you visit the "dutch_prototype" branch. <br/>
-The big challenge was to translate this code and make it visually playable on one's browser of choice. <br/>
+The big challenge was to translate this code and make it visually playable on one's browser of choice. <br/><br/>
+
+<img width="1097" height="1194" alt="Screenshot 2025-09-17 214645" src="https://github.com/user-attachments/assets/cc3b35fa-a379-4653-a45a-9bf77ddb09ef" />
+
 
 # -- Code --
 The main files for this project are the following: <br/>
@@ -73,8 +76,19 @@ And so I've settled using event listeners. <br/><br/>
 
 Every pressable button, cards, or interactive prompt has an event listener attached to it. The game basically is ran by the user. <br/>
 The computer only plays when the player finishes their turn and then proceeds with its script. <br/>
-Finally the game checks whether the computer or the player have called Dutch and concludes the game.
+Finally the game checks whether the computer or the player has called Dutch and concludes the game.
+
 # -- Art --
+All the art was done using GIMP (check it out here: https://www.gimp.org/). <br/>
+This was my first time experimenting with pixel art and I'm honestly very proud with how these cards came out. <br/> <br/>
+<img width="200" height="264" alt="diamonds_ace" src="https://github.com/user-attachments/assets/6921fd73-3138-4902-899a-995f9cb05026" />
+<img width="200" height="264" alt="clubs_king" src="https://github.com/user-attachments/assets/db92cd56-4cb0-49ec-b38d-e47441349d22" />
+<img width="200" height="264" alt="spades_ten" src="https://github.com/user-attachments/assets/4add34ec-7890-4f89-92bb-a7e91f514301" />
+<img width="200" height="264" alt="hearts_jack" src="https://github.com/user-attachments/assets/aa3c4ad5-f02c-4a13-806e-c1bb97a9455b" />
+
+I used a canvas of 50px by 66px that was then upscaled to 200px by 264px. <br/>
+There are in total 55 images which includes 52 cards, 2 jokers, and the back side. <br/>
+You can check them out in the CARDS folder.
 
 # -- Music --
 
