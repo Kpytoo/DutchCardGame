@@ -132,9 +132,10 @@ There are also some sound effects that were entirely made using FL Studio: <br/>
 
 # -- Retrospective --
 If you've made it this far, I want to say thank you for your time and attention!<br/>
-This project was very fun to make and I've learned a tremendous amount of stuff that I'm sure will help me in future projects. <br/><br/>
+This project was very fun to make and I've learned a tremendous amount of stuff that I'm sure will help me in future projects.
 
-To have had not only programmed this game, but created art, music and sound effects, I've gained a new perspective on other games out there and have found a new appreciation for the art that is put into them. <br/>
+## - Final words
+To have had not only programmed this game, but created art, music and sound effects, I've gained a new perspective on other games out there and have found a new appreciation for the work that is put into them. <br/>
 This was an incredible adventure and I hope you enjoy the game, because it is your enjoyment that makes it worth it. <br/><br/>
 
 -Daniel
