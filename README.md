@@ -109,7 +109,7 @@ There are in total 55 images which includes 52 cards, 2 jokers, and the back sid
 You can check them out in the CARDS folder.
 
 # -- Music --
-This project contains one main theme song and multiple card sound effects. <br/>
+This project contains one main theme song and multiple sound effects. <br/>
 The application used was FL Studio (check it out here: https://www.image-line.com/) <br/>
 
 ## - Main theme song
