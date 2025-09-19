@@ -859,7 +859,7 @@ let computer_end_turn_set_variables = () => {
 
 //Every turn, the computer has 2% chance of randomly calling Dutch, except if the player has already called Dutch
 let computer_dutch_call_chance = () => {
-    if(!player.dutch && (random_number(100) < -2)){ //Check if player hasn't called Dutch and Get a random number between 0-99, if the number is between 0-2, computer calls Dutch
+    if(!player.dutch && (random_number(100) < 2)){ //Check if player hasn't called Dutch and Get a random number between 0-99, if the number is between 0-2, computer calls Dutch
         audio_calling_dutch();
         document.querySelector("div.computer_dutch").style.display = "initial";
         computer.dutch = true; //Notate that the computer has called Dutch
